@@ -1,73 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>EN-joy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>EN-joy</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-</head>
+  <body>
+    <div class="container-fluid">
+      <header class="header">
+        <div id="burger-menu" class="burger-menu">
+          <a href="#" id="burg-btn" class="burger-menu-btn">
+            <span class="burger-menu-lines"></span>
+          </a>
+          <nav id="burg-nav" class="burger-menu-nav">
+            <ul class="menu__list">
+              <li class="main-page__link">
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-home"></span>Главная</a
+                >
+              </li>
+              <li>
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-education"></span>Изучать
+                  слова</a
+                >
+              </li>
+              <li>
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-book"></span>Словарь<span
+                    class="glyphicon glyphicon-menu-down"
+                  ></span
+                ></a>
+                <ul class="dictionary dropdown">
+                  <li>
+                    <a href="#" class="burger-menu-link">Изучаемые слова</a>
+                  </li>
+                  <li>
+                    <a href="#" class="burger-menu-link">Сложные слова</a>
+                  </li>
+                  <li>
+                    <a href="#" class="burger-menu-link">Удалённые слова</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-knight"></span
+                  >Тренировка<span class="glyphicon glyphicon-menu-down"></span
+                ></a>
+                <ul class="games dropdown">
+                  <li><a href="#" class="burger-menu-link">SpeakIt</a></li>
+                  <li>
+                    <a href="#" class="burger-menu-link">English puzzle</a>
+                  </li>
+                  <li><a href="#" class="burger-menu-link">Саванна</a></li>
+                  <li><a href="#" class="burger-menu-link">Аудиовызов</a></li>
+                  <li><a href="#" class="burger-menu-link">Спринт</a></li>
+                  <li><a href="#" class="burger-menu-link">Своя игра</a></li>
+                </ul>
+              </li>
+              <li class="settings">
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-cog"></span>Настройки</a
+                >
+              </li>
+              <li class="statistics">
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-stats"></span>Статистика</a
+                >
+              </li>
+              <li class="promo-page">
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-star-empty"></span
+                  >Промо-страница</a
+                >
+              </li>
+              <li class="about-us">
+                <a href="#" class="burger-menu-link"
+                  ><span class="glyphicon glyphicon-user"></span>Наша команда</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <div id="overlay" class="burger-menu-overlay"></div>
+        </div>
+        <div class="logo">
+          <h1>
+            EN-Joy
+          </h1>
+          <span class="glyphicon glyphicon-leaf"></span>
+        </div>
+        <button id="Logout__button">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </button>
+      </header>
 
-<body>
-	<div class="container-fluid">
-		<header class="header">
-			<div id="burger-menu" class="burger-menu">
-				<a href="#" id="burg-btn" class="burger-menu-btn">
-					<span class="burger-menu-lines"></span>
-				</a>
-				<nav id="burg-nav" class="burger-menu-nav ">
-					<ul class="menu__list">
-						<li class="main-page__link"><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-home"></span>Главная</a></li>
-						<li><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-education "></span>Изучать слова</a></li>
-						<li><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-book"></span>Словарь<span
-									class="glyphicon glyphicon-menu-down"></span></a>
-							<ul class="dictionary dropdown">
-								<li><a href="#" class="burger-menu-link">Изучаемые слова</a></li>
-								<li><a href="#" class="burger-menu-link">Сложные слова</a></li>
-								<li><a href="#" class="burger-menu-link">Удалённые слова</a></li>
-							</ul>
-						</li>
-						<li><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-knight"></span>Тренировка<span
-									class="glyphicon glyphicon-menu-down"></span></a>
-							<ul class="games dropdown">
-								<li><a href="#" class="burger-menu-link">SpeakIt</a></li>
-								<li><a href="#" class="burger-menu-link">English puzzle</a></li>
-								<li><a href="#" class="burger-menu-link">Саванна</a></li>
-								<li><a href="#" class="burger-menu-link">Аудиовызов</a></li>
-								<li><a href="#" class="burger-menu-link">Спринт</a></li>
-								<li><a href="#" class="burger-menu-link">Своя игра</a></li>
-							</ul>
-						</li>
-						<li class="settings"><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-cog "></span>
-								Настройки</a></li>
-						<li class="statistics"><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-stats"></span>Статистика</a></li>
-						<li class="promo-page"><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-star-empty"></span>Промо-страница</a></li>
-						<li class="about-us"><a href="#" class="burger-menu-link"><span
-									class="glyphicon glyphicon-user"></span>Наша команда</a></li>
-					</ul>
-				</nav>
-				<div id="overlay" class="burger-menu-overlay"></div>
-			</div>
-			<h1 class="logo">EN-Joy<span class="glyphicon glyphicon-leaf"></span></h1>
-			<button id="Logout__button"><span class="glyphicon glyphicon-log-out"></span></button>
-		</header>
-		<main class="main">
-			<div class="wrapper">
-				<div class="content">
-					<h2>Main Page</h2>
-				</div>
-			</div>
-		</main>
-	</div>
-
-</body>
-
+      <main class="main">
+        <div class="wrapper">
+          <div class="content">
+            <h2>Main Page</h2>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>

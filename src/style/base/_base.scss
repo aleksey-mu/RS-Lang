@@ -1,6 +1,6 @@
-@import url($web-font-path);
+@import url($font-main);
 .container-fluid{
-    font-family: "Lato", Arial, sans-serif;
+    font-family: 'Manrope', Arial, sans-serif;
     padding: 0;
     background-color: $color-light; 
     height: 100vh;

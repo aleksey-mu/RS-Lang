@@ -1,11 +1,10 @@
 header {
   position: sticky;
   top: 0;
-  height: 70px;
   box-shadow: 0px 2px 6px #2d3241;
   display: flex;
-  justify-content: space-between;
-  background-color: $color-darker-blue;
+  justify-content: center;
+  background-color: $color-header-bg;
   z-index: 30;
 }
 .menu__list {
@@ -29,40 +28,49 @@ header {
 .burger-menu-btn:hover .burger-menu-lines {
   filter: brightness(0.7);
 }
-.burger-menu-lines,
-.burger-menu-lines::before,
-.burger-menu-lines::after {
-  position: absolute;
-  width: 25px;
-  height: 3px;
-  background-color: $color-dark-blue;
+.burger-menu-lines {
+  &,
+  &::before,
+  &::after {
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: $color-header-link;
+  }
 }
+
 .burger-menu-lines {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &::before {
+    content: "";
+    top: -7px;
+  }
+
+  &::after {
+    content: "";
+    top: 7px;
+  }
 }
-.burger-menu-lines::before {
-  content: "";
-  top: -7px;
-}
-.burger-menu-lines::after {
-  content: "";
-  top: 7px;
-}
+
 .burger-menu-active .burger-menu-lines {
   background-color: transparent;
+
+  &::before {
+    top: 0;
+    transform: rotate(45deg);
+    transition: 0.5s;
+  }
+
+  &::after {
+    top: 0;
+    transform: rotate(-45deg);
+    transition: 0.5s;
+  }
 }
-.burger-menu-active .burger-menu-lines::before {
-  top: 0;
-  transform: rotate(45deg);
-  transition: 0.5s;
-}
-.burger-menu-active .burger-menu-lines::after {
-  top: 0;
-  transform: rotate(-45deg);
-  transition: 0.5s;
-}
+
 .burger-menu-nav {
   padding-top: 70px;
   position: fixed;
@@ -81,20 +89,20 @@ header {
   transition: 0.5s;
 }
 .burger-menu-link {
-  padding: 10px 50px;
-  color: $color-dark-blue;
+  margin: 10px 50px;
+  color: $color-header-link;
   font-size: 20px;
   font-weight: 700;
   text-decoration: none;
+
+  &:hover {
+    color: $color-header-link-highlight;
+    transition: 0.2s;
+  }
 }
 .main-page__link a {
   font-size: 24px;
   color: $color-brand;
-}
-
-.burger-menu-link:hover {
-  color: $color-blue;
-  transition: 0.2s;
 }
 .active {
   font-size: 26px;
@@ -116,27 +124,37 @@ header {
 }
 
 .logo {
-  margin: 20px auto;
-  color: $color-yellow;
+  display: flex;
+  font-size: 36px;
+  align-items: center;
+  color: $color-logo;
+  & h1 {
+    margin: 15px 0;
+  }
 }
 
 #Logout__button {
-  color: $color-dark-blue;
+  color: $color-header-link;
   width: 25px;
   height: 25px;
   font-size: 25px;
   background: initial;
   border: none;
   position: absolute;
-  top: 15px;
+  top: 17px;
   right: 20px;
+  transition: all 0.1s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
-#Logout__button:hover {
-  color: $color-dark-blue;
-  transform: scale(1.2);
-}
+
 .menu__list span {
   margin-right: 10px;
+}
+.main-page__link span {
+  font-size: 20px;
 }
 
 ul li ul {
