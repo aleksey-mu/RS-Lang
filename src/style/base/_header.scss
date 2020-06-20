@@ -172,8 +172,11 @@ header {
 
 .menu__list span {
   margin-right: 10px;
+  -webkit-text-stroke: 1px $color-header-link;
+    color: $color-header-bg;    
 }
-.main-page__link span {
+.main-page__link span { 
+    color: $color-brand;
   font-size: 20px;
 }
 
