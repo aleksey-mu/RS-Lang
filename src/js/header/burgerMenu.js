@@ -12,22 +12,21 @@ export default class BurgerMenu {
       this.switchMenu();
     });
     document.querySelectorAll("span.glyphicon-plus-sign").forEach((el) => {
-        el.addEventListener("click", () => {
-          el.parentElement
-            .querySelector("ul.dropdown")
-            .classList.toggle("burger-menu-dropdown-hider");
-        });
+      el.addEventListener("click", () => {
+        el.parentElement
+          .querySelector("ul.dropdown")
+          .classList.toggle("burger-menu-dropdown-hider");
       });
+    });
 
     this.burglinks.addEventListener("click", (ev) => {
       if (!ev.target.classList.contains("glyphicon-plus-sign")) {
         this.burglinks
           .querySelectorAll("a.burger-menu-link")
           .forEach(() => this.switchMenu());
-      } 
+      }
     });
-    this.burgOverlay.addEventListener('click', () => this.switchMenu());
-
+    this.burgOverlay.addEventListener("click", () => this.switchMenu());
   }
 
   switchMenu() {
