@@ -1,1 +1,17 @@
+@import './games/speakIt/mainStyle';
+@import './games/speakIt/card';
+@import './games/speakIt/diffSelector';
+@import './games/speakIt/buttons';
+@import './games/speakIt/microphoneIcon';
+@import './games/speakIt/result';
+@import './games/speakIt/intro';
 
+body {
+	font-family: Helvetica, sans-serif;
+	font-size: 10px;
+	background: #ffecd9;
+}
+
+.speak-it-start {
+	font-size: 40px;
+}
