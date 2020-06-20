@@ -1,12 +1,12 @@
 @import url($font-main);
-.container-fluid{
-    font-family: 'Manrope', Arial, sans-serif;
-    padding: 0;
-    background-color: $color-light; 
-    height: 100vh;
-    width: 100vw;   
+.container-fluid {
+  font-family: "Manrope", Arial, sans-serif;
+  padding: 0;
+  background-color: $color-light;
+  height: 100vh;
+  width: 100vw;
 }
-.wrapper{   
-    max-width: 1200px;
-    margin: 0 auto;    
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
 }
