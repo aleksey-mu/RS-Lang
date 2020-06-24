@@ -49,7 +49,10 @@ alt="blank"
       <div class="circle pulse"></div>
       <div class="circle"><i class="fas fa-microphone"></i><polygon points="40,30 65,50 40,70"></polygon></div>
   </div>
-<div class="translate-container">Press card to see translate</div>
+
+<div class="translate-wrapper">
+<div class="translate-container">Перевод слова</div>
+</div>
 
 </div>
 

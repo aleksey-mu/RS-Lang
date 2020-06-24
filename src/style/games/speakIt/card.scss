@@ -42,6 +42,13 @@
 	text-align: center;
 }
 
+.correct-word {
+	box-shadow: 0 0 10px rgba(39, 224, 33, 1);
+}
+.incorrect-word {
+	box-shadow: 0 0 10px rgba(224, 71, 33, 0.856);
+}
+
 .card-guessed {
 	opacity: 0.75;
 	box-shadow: 0 0 10px rgba(39, 224, 33, 1);

@@ -14,16 +14,18 @@
 	object-fit: cover;
 }
 
-.translate-container {
+.translate-wrapper {
 	margin: 20px auto;
-	height: 25px;
+	height: 35px;
 	width: 240px;
-	font-size: 2em;
 	text-align: center;
 	background: whitesmoke;
 	border: 1px solid grey;
 	border-radius: 10px;
-	// width: 80%;
+}
+
+.translate-container {
+	font-size: 2em;
 }
 
 .fa-check {
