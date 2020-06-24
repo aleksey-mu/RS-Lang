@@ -1,0 +1,23 @@
+%word-positioning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin: 50px;
+}
+
+%flex-all-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@function rem($pixels, $context: $mainFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return $pixels / $context * 1rem;
+}

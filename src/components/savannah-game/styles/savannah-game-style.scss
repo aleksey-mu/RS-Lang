@@ -1,0 +1,222 @@
+@import "utils/savannah-game-vars";
+@import "utils/savannah-game-mixins";
+@import "utils/savannah-game-gem-animation-styles";
+
+.savannah-game {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: $fontColor;
+  font-size: $mainFontSize;
+  font-weight: $mainFontWeight;
+  line-height: $mainLineHeight;
+  background-image: url("/img/savannah-game/savannah-background.svg");
+  background-position-x: center;
+  transition-duration: 1s;
+  transition-property: background-position-y;
+  
+  .container {
+    display: flex;
+    width: inherit;
+  }
+  
+  .game-header {
+    position: relative;
+    justify-content: space-between;
+    height: $headerHeight;
+    margin-top: $headerMarginTop;
+    
+    .left-panel, .right-panel, .health-bar {
+      display: flex;
+      
+      .health-bar {
+        .health {
+          @extend %flex-all-centered;
+          margin: 5px 1px;
+
+          .icon-broken, .icon-unbroken {
+            width: 100%;
+            height: auto;
+          }
+
+          .icon-broken {
+            opacity: 0.2;
+          }
+        }
+      }
+    }
+
+    .music-button, .quit-button {
+      margin: 5px 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .game-middle-container, .game-footer {
+    position: relative;
+    justify-content: center;
+  }
+  
+  .game-middle-container {
+    align-items: center;
+    height: calc(100% - #{$headerHeight} - #{$footerHeight} - #{$headerMarginTop});
+
+    .start-description {
+      @extend %flex-all-centered;
+      flex-direction: column;
+
+      .heading {
+        font-size: $headingFontSize;
+      }
+
+      .description {
+        text-align: center;
+      }
+
+      .start-button, .settings-button {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      div {
+        margin: 40px;
+      }
+    }
+
+    .countdown {
+      .gem-circle {
+        @extend %flex-all-centered;
+        position: relative;
+        height: rem(150px);
+        width: rem(150px);
+
+        .countdown-number {
+          font-size: 50px;
+        }
+      }
+    }
+  }
+  
+  .game-footer {
+    height: $footerHeight;
+    box-sizing: border-box;
+ 
+    .status-management {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .status-bar {
+        width: rem(250px);
+        height: rem(20px);
+        border-radius: 5px;
+      }
+    }
+
+    .keyboard-info {
+      text-align: center;
+    }
+  }
+
+  .word-rus, .word-eng {
+    @extend %word-positioning;
+      
+    .word-text {
+      max-width: rem(180px);
+      margin: 10px;
+      text-align: center;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto; 
+    }
+  }
+
+  .word-rus {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .drop-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .drop-animation {
+    -webkit-animation-name: drop-animation;
+    -webkit-animation-duration: 4s;
+    animation-name: drop-animation;
+    animation-duration: 4s;
+  }
+
+  .modal-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    @extend %flex-all-centered;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    .modal-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      
+      div {
+        margin: 15px;
+      }
+      
+      .quit-button {
+        position: absolute;
+        right: -40px;
+        top: -40px;
+        height: 20px;
+        width: 20px;
+      }
+      
+      .ok-button, .cancel-button, .quit-button {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .display-none {
+    display: none !important;
+  }
+
+  @-webkit-keyframes drop-animation {
+    from {
+      top: 0;
+    }
+    to {
+      top: 50%;
+    }
+  }
+
+  @keyframes drop-animation {
+    from {
+      top: 0;
+    }
+    to {
+      top: 50%;
+    }
+  }
+  
+  img {
+    width: auto;
+    height: 100%;
+  }
+}
