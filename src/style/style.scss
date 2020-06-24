@@ -5,11 +5,16 @@
 @import './games/speakIt/microphoneIcon';
 @import './games/speakIt/result';
 @import './games/speakIt/intro';
+@import './bootstrap.min.css';
 
 body {
 	font-family: Helvetica, sans-serif;
 	font-size: 10px;
 	background: #ffecd9;
+}
+
+.hidden {
+	display: none;
 }
 
 .speak-it-start {

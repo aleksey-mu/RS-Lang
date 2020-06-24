@@ -2,14 +2,15 @@
 /* eslint-disable no-loop-func */
 
 import getCardsSet from './getCardsSet';
+import appProperties from '../../appProperties';
 
 export default function gameInit() {
 	const CARDSCONTAINER = document.querySelector('.cards-container');
-	const DIFFICULTYSELECTORS = document.querySelectorAll('.diff-selector');
+	const DIFFICULTYSELECTORS = document.querySelectorAll('.diff-selectors');
 	const IMAGECONTAINER = document.querySelector('.image-container');
 	const TRANSLATECONTAINER = document.querySelector('.translate-container');
-	const STARTBUTTON = document.querySelector('.start-btn button');
-	const RESULTBUTTON = document.querySelector('.result-btn button');
+	const STARTBUTTON = document.querySelector('.start-btn');
+	const RESULTBUTTON = document.querySelector('.result-btn');
 	const RESULTMODAL = document.querySelector('.result-wrapper');
 	const CLOSEMODAL = document.querySelector('.close-modal-btn button');
 	const CORRECTSTACK = document.querySelector('.correct-words__words');
@@ -20,7 +21,6 @@ export default function gameInit() {
 
 	let cardsWords = null;
 	let activeCard = null;
-	let activeDifficulty = document.querySelector('.diff-active');
 	// let wordsDifficulty = 0;
 	// let currentWordsSet = null;
 	let turnMicOff = false;
@@ -90,12 +90,24 @@ export default function gameInit() {
 	// 	cardsGeneretor(recievedData);
 	// };
 
+	// const init = () => {
+	// 	DIFFICULTYSELECTORS.forEach((selector) => {
+	// 		selector.addEventListener('click', (el) => {
+	// 			activeDifficulty.classList.remove('diff-active');
+	// 			activeDifficulty = el.target;
+	// 			el.target.classList.add('diff-active');
+	// 			CARDSCONTAINER.innerHTML = '';
+	// 			cardsGeneretor();
+	// 		});
+	// 	});
+	// 	cardsGeneretor();
+	// };
 	const init = () => {
 		DIFFICULTYSELECTORS.forEach((selector) => {
 			selector.addEventListener('click', (el) => {
-				activeDifficulty.classList.remove('diff-active');
-				activeDifficulty = el.target;
-				el.target.classList.add('diff-active');
+				const activeDifficulty = el.target;
+				appProperties.difficulty = activeDifficulty.innerText;
+				console.log(appProperties.difficulty);
 				CARDSCONTAINER.innerHTML = '';
 				cardsGeneretor();
 			});
@@ -151,6 +163,8 @@ export default function gameInit() {
 	});
 
 	STARTBUTTON.addEventListener('click', () => {
+		STARTBUTTON.classList.add('hidden');
+		RESULTBUTTON.classList.remove('hidden');
 		turnMicOff = false;
 		if (activeCard) {
 			activeCard.classList.remove('active-card');

@@ -1,22 +1,46 @@
 const gameHTML = `
 <div class="intro-module">
-<div class="intro-text">Welcome to SpeakIt!</div>
-<div class="intro-btn"><button>Click to start</button></div>
+
+<div class="intro-text">Добро пожаловать в SpeakIt!</div>
+<div class="intro-description"><h4>Цель этой игры — произнести в микрофон все слова, которые вы видите на экране. Нажмите кнопку "Cтарт", чтобы включить распознавание речи. В строке под изображением будет показываться, какое слово распозналось при произношении.</h4></div>
+<div class="intro-description"><h4>Перед игрой Вы можете прослушать произношение слова, увидеть его перевод и визуализацию, нажав на карточку.</h4></div>
+<div class="intro-btn"><button type="button" class="speak-it-start btn btn-primary">Начать</button></div>
+
 </div>
 <div class="diff-selector-container">
-<div class="diff-selector-text">Select difficulty:</div>
-<div class="diff-selectors">
-  <div class="diff-selector diff-active">1</div>
-  <div class="diff-selector">2</div>
-  <div class="diff-selector">3</div>
-  <div class="diff-selector">4</div>
-  <div class="diff-selector">5</div>
-  <div class="diff-selector">6</div>
+<div class="diff-selector-text">Выбор сложности:</div>
+
+<div class="diff-selectors btn-group btn-group-toggle" data-toggle="buttons">
+<label class="btn btn-primary active">
+  <input type="radio" name="options" id="option1" autocomplete="off" checked=""> 1
+</label>
+<label class="btn btn-primary">
+  <input type="radio" name="options" id="option2" autocomplete="off"> 2
+</label>
+<label class="btn btn-primary">
+  <input type="radio" name="options" id="option3" autocomplete="off"> 3
+</label>
+<label class="btn btn-primary">
+  <input type="radio" name="options" id="option4" autocomplete="off"> 4
+</label>
+<label class="btn btn-primary">
+  <input type="radio" name="options" id="option5" autocomplete="off"> 5
+</label>
+<label class="btn btn-primary">
+  <input type="radio" name="options" id="option6" autocomplete="off"> 6
+</label>
 </div>
+
+
+
 </div>
 
 <div class="image-container">
-<img class="word-image" src="img/blank.jpg" alt="">
+<img
+class="word-image"
+src="img/games/speakIt/blank.jpg"
+alt="blank"
+/>
 </div>
 
 <div class="voice-answer-wrapper">
@@ -33,10 +57,10 @@ const gameHTML = `
 </div>
 
 <div class="start-btn">
-<button>Start</button>
+<button class="btn btn-primary">Старт</button>
 </div>
-<div class="result-btn">
-<button>Result</button>
+<div class="result-btn hidden">
+<button class="btn btn-primary">Закончить</button>
 </div>
 
 <div class="result-wrapper">
