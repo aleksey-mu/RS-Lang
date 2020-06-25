@@ -1,4 +1,9 @@
+import '../style/style.scss';
+import BurgerMenu from './header/burgerMenu';
 import Router from './router/router';
+
+const myBurgerMenu = new BurgerMenu();
+myBurgerMenu.init();
 
 function mainPage() {
   document.body.style.background = 'lightblue';
