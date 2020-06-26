@@ -6,22 +6,17 @@ const myBurgerMenu = new BurgerMenu();
 myBurgerMenu.init();
 
 function mainPage() {
-  document.body.style.background = 'lightblue';
+  document.querySelector('.container-fluid').style.background = 'yellow';
 }
-function trainingPage () {
-  document.body.style.background = 'yellow';
+function wordsPage () {
+  document.querySelector('.container-fluid').style.background = 'green';
 }
 
-const router = new Router({mainPage, trainingPage});
+const router = new Router({mainPage, wordsPage});
 router.init();
 
-
-document.body.addEventListener('click', (e) => {
-  router.linkHandler(e);
-});
-window.addEventListener('popstate', (e) => {
-  router.popstateHandler(e);
-});
+document.getElementById('burg-nav').addEventListener('click', router.linkHandler.bind(router));
+window.addEventListener('popstate', router.popstateHandler.bind(router));
 
 window.addEventListener('load', () => {
   const path = window.location.hash.slice(1);

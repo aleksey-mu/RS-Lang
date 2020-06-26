@@ -22,7 +22,7 @@ export default class Router {
     Object.keys(this.routes).forEach((route) => {
       const methodName = this.routes[route];
       this.routesData.push({
-        pattern: new RegExp(`${route.replace(/:\w+/g, '(\\w+)')}$`),
+        pattern: new RegExp(`^${route.replace(/:\w+/g, '(\\w+)')}$`),
         callback: this.controllers[methodName]
       });
     });  
@@ -43,8 +43,8 @@ export default class Router {
     if (e.target.tagName === 'A') {
       e.preventDefault();
       this.nav(e.target.href);   
-      window.location.hash = e.target.pathname;      
-    }  
+      window.location.hash = e.target.pathname;  
+    }   
   }
 
   popstateHandler() {
