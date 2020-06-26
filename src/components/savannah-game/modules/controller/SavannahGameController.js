@@ -1,3 +1,6 @@
+const defaultTimeout = 10000;
+// const defaultAfterAnswerDelay = 1000;
+
 class SavannahGameController {
   constructor(model, view) {
     this.model = model
@@ -6,7 +9,6 @@ class SavannahGameController {
     this.model.registerObserver('currentPage', this.view.getRenderPage(
       this.getToCountdown(),
       this.getQuitButtonHandler(),
-      () => {console.log('music')},
       this.getCountdownEndHandler(),
       this.getSettingsButtonHandler(),
     ));
@@ -14,15 +16,20 @@ class SavannahGameController {
       this.getQuitButtonModalWindowHandler(),
       this.getCloseGameButtonHandler(),
       this.getSaveSettingsButtonHandler(),
+      this.model.statistics,
+      this.model.gameResult,
     ));
     this.model.registerObserver('isGameOpen', this.view.getCloseGame());
     this.model.registerObserver('currentLives', this.view.getRenderHealthBar());
     this.model.registerObserver('currentRound', this.view.getRenderStatusBar());
     this.model.registerObserver('currentRound', this.view.getRenderBackground());
+    this.model.registerObserver('currentRound', this.getAnswerTimeoutHandler());
     this.model.registerObserver('currentRoundWords', this.view.getRenderWords(
       this.getRightAnswerHandler(),
       this.getWrongAnswerHandler(),
     ));
+    this.model.registerObserver('volume', this.view.getRenderMusicButton(this.getMusicButtonHandler()));
+    this.model.registerObserver('gameResult', () => clearTimeout(this.answerTimeout));
   }
 
   getToCountdown() {
@@ -57,6 +64,7 @@ class SavannahGameController {
       this.model.setCurrentLives();
       this.model.setCurrentRoundWords();
       this.model.setRound();
+      this.model.setVolume();
     }
   }
 
@@ -84,18 +92,36 @@ class SavannahGameController {
     }
   }
 
+  getAnswerTimeoutHandler() {
+    return () => {
+      this.answerTimeout = setTimeout(() => {
+        this.getWrongAnswerHandler()();
+      }, defaultTimeout);
+    }
+  }
+
   getRightAnswerHandler() {
     return () => {
-      this.model.setCurrentRoundWords();
+      clearTimeout(this.answerTimeout);
+      this.model.statistics.guessedWords.push(this.model.currentRoundWords.translate);
       this.model.setRound(this.model.getRound() + 1);
+      this.model.setCurrentRoundWords();
     }
   }
 
   getWrongAnswerHandler() {
     return () => {
+      clearTimeout(this.answerTimeout);
+      this.model.statistics.notGuessedWords.push(this.model.currentRoundWords.translate);
       this.model.setCurrentLives(this.model.getCurrentLives() - 1);
-      this.model.setCurrentRoundWords();
       this.model.setRound(this.model.getRound() + 1);
+      this.model.setCurrentRoundWords();
+    }
+  }
+
+  getMusicButtonHandler() {
+    return () => {
+      this.model.setVolume();
     }
   }
 }

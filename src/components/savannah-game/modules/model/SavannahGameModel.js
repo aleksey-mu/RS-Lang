@@ -6,6 +6,12 @@ class SavannahGameModel {
     this.currentLivesObservers = [];
     this.currentRoundObservers = [];
     this.currentRoundWordsObservers = [];
+    this.volumeObservers = [];
+    this.gameResultObservers = [];
+    this.statistics = {
+      guessedWords: [],
+      notGuessedWords: [],
+    }
   }
 
   registerObserver(property, observer) {
@@ -17,20 +23,20 @@ class SavannahGameModel {
     if (this.currentPage === value) return;
     if (!value) return;
     this.currentPage = value;
-    this.currentPageObservers.map((listener) =>listener(value));
+    this.currentPageObservers.map((observer) =>observer(this.currentPage));
   }
 
   setModalWindow(value) {
     if (this.modalWindow === value) return;
     if (!value) return;
     this.modalWindow = value;
-    this.modalWindowObservers.map((listener) =>listener(value));
+    this.modalWindowObservers.map((observer) =>observer(this.modalWindow));
   }
 
   setIsGameOpen(value) {
     if (this.modalWindow === value) return;
     this.isGameOpen = value;
-    this.isGameOpenObservers.map((listener) => listener(value));
+    this.isGameOpenObservers.map((observer) => observer(this.isGameOpen));
   }
 
   setGameWords(words) {
@@ -40,7 +46,8 @@ class SavannahGameModel {
 
   setCurrentLives(lives = 5) {
     this.currentLives = lives;
-    this.currentLivesObservers.map((listener) =>listener(lives));
+    if (this.currentLives <= 0) this.setGameResult('loss');
+    this.currentLivesObservers.map((observer) =>observer(this.currentLives));
   }
 
   getCurrentLives() {
@@ -48,18 +55,38 @@ class SavannahGameModel {
   }
 
   setCurrentRoundWords() {
-    this.currentRoundWords = this.gameWords.pop();
-    this.currentRoundWordsObservers.map((listener) =>listener(this.currentRoundWords));
+    if (this.gameResult) return;
+    if (this.gameWords.length === 0) {
+      if (this.currentLives > 0) {
+        this.setGameResult('win');
+      }
+      return;
+    }
+    const [right, translate, wrongs] = this.gameWords.pop();
+    this.currentRoundWords = { right, translate, wrongs };
+    this.currentRoundWordsObservers.map((observer) =>observer(this.currentRoundWords));
   }
 
   setRound(round = 0) {
+    if (this.gameResult) return;
     this.currentRound = round;
-    this.currentRoundObservers.map((listener) =>listener((this.currentRound / this.maxRounds) * 100));
-    console.log(this);
+    this.currentRoundObservers.map((observer) =>observer((this.currentRound / this.maxRounds) * 100));
   }
 
   getRound() {
     return this.currentRound;
+  }
+
+  setVolume() {
+    this.volume = this.volume === 'on' ? 'off' : 'on';
+    this.volumeObservers.map((observer) => observer(this.volume));
+  }
+
+  setGameResult(value) {
+    this.gameResult = value;
+    this.gameResultObservers.map((observer) => observer(this.gameResult));
+    this.setCurrentPage('end');
+    this.setModalWindow('statistics');
   }
 }
 

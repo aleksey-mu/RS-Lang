@@ -90,9 +90,10 @@ class SavannahGameModalWindow {
     this.container.appendChild(modalContainer);
   }
 
-  renderStatistics(okButtonListener) {
+  renderStatistics(okButtonListener, statistics, result) {
+    console.log(statistics, result);
     this.clear();
-    const data = document.createTextNode('Статистика');
+    const data = document.createTextNode(`Статистика\nУгаданные слова: ${statistics.guessedWords}\nНеугаданные слова: ${statistics.notGuessedWords}\n Результат: ${result}`);
     const modalContainer = this.renderBasicElements(data);
     modalContainer.appendChild(this.renderOkButton(okButtonListener, 'ВЫХОД'));
     this.container.appendChild(modalContainer);

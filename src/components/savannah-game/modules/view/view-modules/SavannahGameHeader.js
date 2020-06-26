@@ -1,7 +1,7 @@
 class SavannahGameHeader {
-  constructor(healthAmount, healtIconPath = '', emptyHealthIconPath = '', musicIconPath = '', quitIconPath = '', musicButtonListener, quitButtonListener) {
+  constructor(healthAmount, healtIconPath = '', emptyHealthIconPath = '', musicIconPath = '', musicOffIconPath = ' ', quitIconPath = '', quitButtonListener) {
     this.healthAmount = healthAmount;
-    this.iconMapping = {
+    this.healthIconMapping = {
       healtIconPath: {
         src: healtIconPath,
         alt: 'health',
@@ -13,7 +13,14 @@ class SavannahGameHeader {
         class: 'icon-broken',
       },
     }
-    this.musicIconPath = musicIconPath;
+    this.musicIconMapping = {
+      on: {
+        src: musicIconPath,
+      },
+      off: {
+        src: musicOffIconPath,
+      }
+    }
     this.quitIconPath = quitIconPath;
 
     this.container = document.createElement('div');
@@ -27,7 +34,6 @@ class SavannahGameHeader {
 
     this.musicButton = document.createElement('div');
     this.musicButton.classList.add('music-button');
-    this.musicButton.addEventListener('click', musicButtonListener);
 
     this.healtBar = document.createElement('div');
     this.healtBar.classList.add('health-bar');
@@ -48,22 +54,26 @@ class SavannahGameHeader {
     return this.container;
   }
 
-  renderMusicButton() {
+  renderMusicButton(volumeStatus, musicButtonHandler) {
+    [...this.musicButton.childNodes].map((node) => node.remove());
+
     return new Promise((resolve, reject) => {
       const musicIcon = document.createElement('img');
-
-      musicIcon.setAttribute('src', this.musicIconPath);
+      const musicIconPath = this.musicIconMapping[volumeStatus].src;
+  
+      musicIcon.setAttribute('src', musicIconPath);
       musicIcon.setAttribute('alt', 'music icon');
-
+      musicIcon.addEventListener('click', musicButtonHandler);
+  
       musicIcon.onload = () => {
         resolve(musicIcon)
       };
-
+  
       musicIcon.onerror = () => {
         reject(new Error('cant load music icon'));
       };
     }).then((icon) => {
-      this.musicButton.appendChild(icon);
+        this.musicButton.appendChild(icon);
     });
   }
 
@@ -71,9 +81,9 @@ class SavannahGameHeader {
     return new Promise((resolve, reject) => {
       const health = document.createElement('div');
       const healthIcon = document.createElement('img');
-      const iconPath = this.iconMapping[icon].src;
-      const iconAlt = this.iconMapping[icon].alt;
-      const iconClass = this.iconMapping[icon].class;
+      const iconPath = this.healthIconMapping[icon].src;
+      const iconAlt = this.healthIconMapping[icon].alt;
+      const iconClass = this.healthIconMapping[icon].class;
 
       health.appendChild(healthIcon);
       health.classList.add('health');

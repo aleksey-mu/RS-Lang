@@ -7,6 +7,7 @@ import SavannahGameModalWindow from './view-modules/SavannahGameModalWindow.js';
 const healthIconPath = '/img/savannah-game/health-icon.png';
 const emptyHealtIconPath = '/img/savannah-game/health-icon.png';
 const musicIconPath = '/img/savannah-game/music-icon.svg';
+const musicOffIconPath = '/img/savannah-game/music-icon-off.svg';
 const quitIconPath = '/img/savannah-game/quit-icon.svg';
 
 class SavannahGameView {
@@ -23,9 +24,9 @@ class SavannahGameView {
     this.gameContainer.setAttribute('style', `background-position-y: ${offset}%;`);
   }
 
-  renderGameElements(quitButtonHandler, musicButtonHandler) {
+  renderGameElements(quitButtonHandler) {
     this.clear();
-    this.gameHeader = new SavannahGameHeader(5, healthIconPath, emptyHealtIconPath, musicIconPath, quitIconPath, musicButtonHandler, quitButtonHandler);
+    this.gameHeader = new SavannahGameHeader(5, healthIconPath, emptyHealtIconPath, musicIconPath, musicOffIconPath, quitIconPath, quitButtonHandler);
     this.gameMiddleContainer = new SavannahGameMiddleContainer();
     this.gameFooter = new SavannahGameFooter();
     this.gameDropElement = new SavannahGameDropElement();
@@ -50,17 +51,21 @@ class SavannahGameView {
     this.gameFooter.renderKeyboardControlInfo();
   }
 
-  renderRoundPage(quitButtonHandler, musicButtonHandler) {
+  renderRoundPage(quitButtonHandler) {
     this.renderBackground();
-    this.renderGameElements(quitButtonHandler, musicButtonHandler);
+    this.renderGameElements(quitButtonHandler);
 
-    this.gameHeader.renderMusicButton();
     this.gameHeader.renderQuitButton();
     this.gameFooter.renderGem();
   }
 
+  renderEndPage() {
+    this.gameMiddleContainer.clearContainer();
+    this.gameDropElement.clearContainer();
+  }
+
   getRenderWords(rightAnswerHandler, wrongAnswerHandler) {
-    return ([right, translate, wrongs]) => {
+    return ({ right, translate, wrongs }) => {
       this.gameMiddleContainer.renderTranslateOptions(right, wrongs, rightAnswerHandler, wrongAnswerHandler);
 
       this.gameDropElement.render().remove();
@@ -89,7 +94,7 @@ class SavannahGameView {
     }
   }
 
-  getRenderPage(startButtonHandler, quitButtonHandler, musicButtonHandler, countdownHandler, settingButtonHandler) {
+  getRenderPage(startButtonHandler, quitButtonHandler, countdownHandler, settingButtonHandler) {
     return (value) => {
       switch (value) {
         case 'start':
@@ -99,7 +104,10 @@ class SavannahGameView {
           this.renderCountdownPage(quitButtonHandler, countdownHandler);
           return;
         case 'round':
-          this.renderRoundPage(quitButtonHandler, musicButtonHandler);
+          this.renderRoundPage(quitButtonHandler);
+          return;
+        case 'end':
+          this.renderEndPage();
           return;
         default:
           throw new Error('wrong page state');
@@ -112,7 +120,8 @@ class SavannahGameView {
     this.gameContainer.appendChild(this.modalWindow.render());
   }
 
-  getRenderModalWindow(quitModalWindowHandler, gameCloseHandler, saveSettingsButtonHandler) {
+  getRenderModalWindow(quitModalWindowHandler, gameCloseHandler, saveSettingsButtonHandler, statistics, result) {
+    console.log(statistics, result);
     return (value) => {
       switch (value) {
         case 'close alert':
@@ -127,7 +136,7 @@ class SavannahGameView {
           return;
         case 'statistics':
           this.renderModalWindow(quitModalWindowHandler);
-          this.modalWindow.renderStatistics(gameCloseHandler);
+          this.modalWindow.renderStatistics(gameCloseHandler, statistics, result);
           this.modalWindow.show();
           return;
         case 'close':
@@ -145,6 +154,12 @@ class SavannahGameView {
       if (value) return;
       this.clear();
       this.gameContainer.classList.remove('savannah-game');
+    }
+  }
+  
+  getRenderMusicButton(musicButtonHandler) {
+    return (value) => {
+      this.gameHeader.renderMusicButton(value, musicButtonHandler);
     }
   }
 }
