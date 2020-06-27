@@ -12,14 +12,13 @@ function wordsPage () {
   document.querySelector('.container-fluid').style.background = 'green';
 }
 
-const router = new Router({mainPage, wordsPage});
+const loadPage = {
+  mainPage,
+  wordsPage,
+}
+
+const router = new Router(loadPage);
 router.init();
 
-document.getElementById('burg-nav').addEventListener('click', router.linkHandler.bind(router));
-window.addEventListener('popstate', router.popstateHandler.bind(router));
 
-window.addEventListener('load', () => {
-  const path = window.location.hash.slice(1);
-  router.nav(path);
-});
 

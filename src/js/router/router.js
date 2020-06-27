@@ -25,7 +25,14 @@ export default class Router {
         pattern: new RegExp(`^${route.replace(/:\w+/g, '(\\w+)')}$`),
         callback: this.controllers[methodName]
       });
-    });  
+      
+    }); 
+    document.getElementById('burg-nav').addEventListener('click', this.linkHandler.bind(this));
+    window.addEventListener('popstate', this.popstateHandler.bind(this));
+    window.addEventListener('load', () => {
+      const path = window.location.hash.slice(1);
+      this.nav(path);
+    }); 
   }
 
   nav (path){
