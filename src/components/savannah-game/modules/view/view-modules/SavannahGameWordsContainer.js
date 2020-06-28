@@ -12,14 +12,18 @@ const createWordTranslateElement = (word, listener) => {
 };
 
 const shuffleElements = (elements) => {
-  const newOrder = elements.slice();
+  const newOrder = new Array(elements.length)
+    .fill('').map((el, index) => index);
 
   for (let i = newOrder.length - 1; i > 0; i -= 1) {
     const pseudoRandom = Math.floor(Math.random()*(i + 1));
     [newOrder[pseudoRandom], newOrder[i]] = [newOrder[i], newOrder[pseudoRandom]];
   }
 
-  return newOrder;
+  return elements.map((el, index) => {
+    el.setAttribute('style', `order: ${newOrder[index]};`);
+    return el;
+  });
 };
 
 class SavannahGameWordsContainer {
@@ -69,7 +73,7 @@ class SavannahGameWordsContainer {
 
     const description = document.createElement('div');
     description.classList.add('description');
-    description.innerText = 'Тренировка Саванна развивает словарный запас. \nЧем больше слов ты знаешь, тем больше очков опыта получишь.';
+    description.innerText = 'Тренировка Саванна проверяет словарный запас. \nПо умолчанию в игре используются изученные слова, но вы можете это поменять в настройках.';
 
     this.container.appendChild(startContainer);
     [heading, description, settingsButton, startButton].map((elements) => startContainer.appendChild(elements));
