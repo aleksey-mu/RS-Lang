@@ -31,7 +31,7 @@ const gemInnerHtml = `
 class SavannahGameFooter {
   constructor() {
     this.container = document.createElement('div');
-    this.container.classList.add('game-footer', 'container');
+    this.container.classList.add('game-footer', 'savannah-game-container');
     
     this.statusManagement = document.createElement('div');
     this.statusManagement.classList.add('status-management');

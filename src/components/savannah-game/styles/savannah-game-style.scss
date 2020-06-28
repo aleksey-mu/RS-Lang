@@ -3,9 +3,14 @@
 @import "utils/savannah-game-gem-animation-styles";
 
 .savannah-game {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 31;
   display: flex;
   flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   color: $fontColor;
   font-size: $mainFontSize;
   font-weight: $mainFontWeight;
@@ -15,7 +20,7 @@
   transition-duration: 1s;
   transition-property: background-position-y;
   
-  .container {
+  .savannah-game-container {
     display: flex;
     width: inherit;
   }

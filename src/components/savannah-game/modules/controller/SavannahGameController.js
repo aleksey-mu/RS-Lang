@@ -124,6 +124,10 @@ class SavannahGameController {
       this.model.setVolume();
     }
   }
+
+  init() {
+    this.model.setCurrentPage('start');
+  }
 }
 
 export default SavannahGameController;

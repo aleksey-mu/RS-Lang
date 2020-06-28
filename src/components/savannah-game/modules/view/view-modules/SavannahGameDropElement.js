@@ -1,7 +1,7 @@
 class SavannahGameDropElement {
   constructor() {
     this.container = document.createElement('div');
-    this.container.classList.add('drop-element', 'container', 'drop-animation');
+    this.container.classList.add('drop-element', 'savannah-game-container', 'drop-animation');
   }
 
   clearContainer() {

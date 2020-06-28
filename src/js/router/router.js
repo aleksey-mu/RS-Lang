@@ -8,6 +8,7 @@ export default class Router {
       "/training/:tag/:perPage/": "trainingPage",
       "/training/:tag/:perPage/page/:page": "trainingPage",
       "/training/:id": "trainingPage",
+      "/training/savannah/": "trainingSavannahPage",
       "": "mainPage",
       "/main/": "mainPage",
       "/promo/": "promoPage",

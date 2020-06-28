@@ -29,7 +29,7 @@ const shuffleElements = (elements) => {
 class SavannahGameWordsContainer {
   constructor() {
     this.container = document.createElement('div');
-    this.container.classList.add('game-middle-container', 'container');
+    this.container.classList.add('game-middle-container', 'savannah-game-container');
   }
 
   render() {

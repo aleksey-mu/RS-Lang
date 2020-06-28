@@ -24,7 +24,7 @@ class SavannahGameHeader {
     this.quitIconPath = quitIconPath;
 
     this.container = document.createElement('div');
-    this.container.classList.add('game-header', 'container');
+    this.container.classList.add('game-header', 'savannah-game-container');
 
     this.leftPanel = document.createElement('div');
     this.leftPanel.classList.add('left-panel');

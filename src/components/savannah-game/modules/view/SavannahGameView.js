@@ -12,8 +12,10 @@ const quitIconPath = '/img/savannah-game/quit-icon.svg';
 
 class SavannahGameView {
   constructor(selector) {
-    this.gameContainer = document.querySelector(selector);
+    this.mainContainer = document.querySelector(selector);
+    this.gameContainer = document.createElement('div');
     this.gameContainer.classList.add('savannah-game');
+    this.mainContainer.appendChild(this.gameContainer);
   }
 
   clear() {
@@ -153,7 +155,7 @@ class SavannahGameView {
     return (value) => {
       if (value) return;
       this.clear();
-      this.gameContainer.classList.remove('savannah-game');
+      this.gameContainer.remove();
     }
   }
   
