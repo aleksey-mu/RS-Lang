@@ -1,5 +1,7 @@
 class SavannahGameModel {
-  constructor() {
+  constructor(locationHash) {
+    this.locationHash = locationHash;
+
     this.currentPageObservers = [];
     this.modalWindowObservers = [];
     this.isGameOpenObservers = [];
@@ -34,14 +36,14 @@ class SavannahGameModel {
   }
 
   setIsGameOpen(value) {
-    if (this.modalWindow === value) return;
+    if (this.isGameOpen === value) return;
     this.isGameOpen = value;
     this.isGameOpenObservers.map((observer) => observer(this.isGameOpen));
   }
 
   setGameWords(words) {
     this.gameWords = words;
-    this.maxRounds = words.length - 1;
+    this.maxRounds = words.length;
   }
 
   setCurrentLives(lives = 5) {

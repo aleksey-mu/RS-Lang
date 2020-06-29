@@ -6,11 +6,14 @@ class SavannahGameController {
     this.model = model
     this.view = view;
 
+    this.closeGameButtonListeners = [];
+
     this.model.registerObserver('currentPage', this.view.getRenderPage(
       this.getToCountdown(),
       this.getQuitButtonHandler(),
       this.getCountdownEndHandler(),
       this.getSettingsButtonHandler(),
+      this.getLocationHashChecker(),
     ));
     this.model.registerObserver('modalWindow', this.view.getRenderModalWindow(
       this.getQuitButtonModalWindowHandler(),
@@ -19,7 +22,7 @@ class SavannahGameController {
       this.model.statistics,
       this.model.gameResult,
     ));
-    this.model.registerObserver('isGameOpen', this.view.getCloseGame());
+    this.model.registerObserver('isGameOpen', this.view.getCloseGame(this.getLocationHashChecker()));
     this.model.registerObserver('currentLives', this.view.getRenderHealthBar());
     this.model.registerObserver('currentRound', this.view.getRenderStatusBar());
     this.model.registerObserver('currentRound', this.view.getRenderBackground());
@@ -83,6 +86,7 @@ class SavannahGameController {
   getCloseGameButtonHandler() {
     return () => {
       this.model.setIsGameOpen(false);
+      this.closeGameButtonListeners.map((h) => h());
     }
   }
 
@@ -125,8 +129,21 @@ class SavannahGameController {
     }
   }
 
+  getLocationHashChecker() {
+    return () => {
+      if (window.location.hash !== this.model.locationHash) {
+        this.model.setIsGameOpen(false);
+        console.log('hash changed', window.location.hash);
+      }
+    }
+  }
+
   init() {
     this.model.setCurrentPage('start');
+  }
+
+  onGameClose(func) {
+    this.closeGameButtonListeners.push(func);
   }
 }
 

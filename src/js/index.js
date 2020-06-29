@@ -13,8 +13,14 @@ function wordsPage () {
   document.querySelector('.container-fluid').style.background = 'green';
 }
 function trainingSavannahPage () {
-  const savannahGame = new SavannahGame('#savannah-game');
+  const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/');
+
+  const toMainPage = () => {
+    window.location.hash = '/main/';
+  }
+
   savannahGame.init();
+  savannahGame.onGameClose(toMainPage);
 }
 
 const loadPage = {

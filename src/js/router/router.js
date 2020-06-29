@@ -51,7 +51,7 @@ export default class Router {
     if (e.target.tagName === 'A') {
       e.preventDefault();
       this.nav(e.target.href);   
-      window.location.hash = e.target.pathname;  
+      window.location.hash = e.target.pathname;
     }   
   }
 

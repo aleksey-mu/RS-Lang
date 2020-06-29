@@ -51,6 +51,7 @@ class SavannahGameView {
     
     this.gameMiddleContainer.renderCountdown(onCountdownEnd);
     this.gameFooter.renderKeyboardControlInfo();
+    this.gameHeader.renderQuitButton();
   }
 
   renderRoundPage(quitButtonHandler) {
@@ -96,10 +97,11 @@ class SavannahGameView {
     }
   }
 
-  getRenderPage(startButtonHandler, quitButtonHandler, countdownHandler, settingButtonHandler) {
+  getRenderPage(startButtonHandler, quitButtonHandler, countdownHandler, settingButtonHandler, locationHashChecker) {
     return (value) => {
       switch (value) {
         case 'start':
+          window.addEventListener('hashchange', locationHashChecker);
           this.renderStartPage(startButtonHandler, settingButtonHandler, quitButtonHandler);
           return;
         case 'countdown':
@@ -151,11 +153,12 @@ class SavannahGameView {
     }
   }
 
-  getCloseGame() {
+  getCloseGame(locationHashChecker) {
     return (value) => {
       if (value) return;
       this.clear();
       this.gameContainer.remove();
+      window.removeEventListener('hashchange', locationHashChecker);
     }
   }
   
