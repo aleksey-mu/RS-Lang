@@ -124,7 +124,7 @@ class SavannahGameView {
     this.gameContainer.appendChild(this.modalWindow.render());
   }
 
-  getRenderModalWindow(quitModalWindowHandler, gameCloseHandler, saveSettingsButtonHandler, statistics, result) {
+  getRenderModalWindow(quitModalWindowHandler, gameCloseHandler, saveSettingsButtonHandler, settingsCheckboxHandler, settingsDifficultyHandler, settingsRoundHandler, statistics, settings, result) {
     console.log(statistics, result);
     return (value) => {
       switch (value) {
@@ -135,7 +135,7 @@ class SavannahGameView {
           return;
         case 'settings':
           this.renderModalWindow(quitModalWindowHandler);
-          this.modalWindow.renderSettings(saveSettingsButtonHandler);
+          this.modalWindow.renderSettings(saveSettingsButtonHandler, settingsCheckboxHandler, settingsDifficultyHandler, settingsRoundHandler, settings);
           this.modalWindow.show();
           return;
         case 'statistics':

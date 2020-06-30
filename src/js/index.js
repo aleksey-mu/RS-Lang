@@ -13,7 +13,7 @@ function wordsPage () {
   document.querySelector('.container-fluid').style.background = 'green';
 }
 function trainingSavannahPage () {
-  const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/');
+  const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/', []);
 
   const toMainPage = () => {
     window.location.hash = '/main/';

@@ -19,7 +19,11 @@ class SavannahGameController {
       this.getQuitButtonModalWindowHandler(),
       this.getCloseGameButtonHandler(),
       this.getSaveSettingsButtonHandler(),
+      this.getSettingsCheckboxOnchange(),
+      this.getSettingsDifficultyOnchande(),
+      this.getSettingsRoundOnchange(),
       this.model.statistics,
+      this.model.settings,
       this.model.gameResult,
     ));
     this.model.registerObserver('isGameOpen', this.view.getCloseGame(this.getLocationHashChecker()));
@@ -133,8 +137,30 @@ class SavannahGameController {
     return () => {
       if (window.location.hash !== this.model.locationHash) {
         this.model.setIsGameOpen(false);
-        console.log('hash changed', window.location.hash);
       }
+    }
+  }
+
+  getSettingsCheckboxOnchange() {
+    return (event) => {
+      this.model.settings.useLearnedWords = event.target.checked;
+      console.log(this.model.settings.useLearnedWords);
+    }
+  }
+
+  getSettingsDifficultyOnchande() {
+    return (event) => {
+      const options = [...event.target.childNodes];
+      const value = parseInt(options[event.target.selectedIndex].value, 10);
+      this.model.settings.difficulty = value;
+    }
+  }
+
+  getSettingsRoundOnchange() {
+    return (event) => {
+      const options = [...event.target.childNodes];
+      const value = parseInt(options[event.target.selectedIndex].value, 10);
+      this.model.settings.round = value;
     }
   }
 

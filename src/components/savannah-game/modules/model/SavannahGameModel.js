@@ -1,6 +1,17 @@
+const defaultGameRounds = 10;
+const defaultDifficulty = 1;
+const defaultSettingsRound = 1;
+
 class SavannahGameModel {
-  constructor(locationHash) {
+  constructor(locationHash, learnedWords) {
     this.locationHash = locationHash;
+    this.settings = {
+      learnedWords,
+      isLearnedWordsEnough: learnedWords > defaultGameRounds,
+      useLearnedWords: learnedWords > defaultGameRounds,
+      difficulty: defaultDifficulty,
+      round: defaultSettingsRound,
+    }
 
     this.currentPageObservers = [];
     this.modalWindowObservers = [];
