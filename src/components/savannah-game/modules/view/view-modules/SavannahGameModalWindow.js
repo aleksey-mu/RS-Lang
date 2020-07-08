@@ -64,7 +64,10 @@ class SavannahGameModalWindow {
       if (event.target.checked) {
         this.diffcultySelect.setAttribute('disabled', '');
         this.roundSelect.setAttribute('disabled', '');
+        return;
       }
+      this.diffcultySelect.removeAttribute('disabled', '');
+      this.roundSelect.removeAttribute('disabled', '');
     });
     this.checkboxLabel = document.createElement('label');
     this.checkboxLabel.innerText = 'Использовать изученные слова';
@@ -88,7 +91,7 @@ class SavannahGameModalWindow {
     for (let i = 1; i <= diffculties; i += 1) {
       const option = document.createElement('option');
       option.innerText = i;
-      if (i === settings.difficulty) option.setAttribute('selected', 'selected');
+      if (i === settings.difficulty + 1) option.setAttribute('selected', 'selected');
       this.diffcultySelect.appendChild(option);
     }
 
@@ -106,7 +109,7 @@ class SavannahGameModalWindow {
     for (let i = 1; i <= rounds; i += 1) {
       const option = document.createElement('option');
       option.innerText = i;
-      if (i === settings.round) option.setAttribute('selected', 'selected');
+      if (i === settings.round + 1) option.setAttribute('selected', 'selected');
       this.roundSelect.appendChild(option);
     }
 
@@ -118,9 +121,9 @@ class SavannahGameModalWindow {
     this.modalDataHeading.classList.add('modal-data-heading');
     this.modalDataHeading.innerText = 'Настройки';
 
-    this.renderCheckbox(settings, checkboxHandler)
     this.renderDifficultySettings(settings, difficultyHandler);
     this.renderRoundSettings(settings, roundHandler);
+    this.renderCheckbox(settings, checkboxHandler);
 
     this.difficultyAndRoundContainer = document.createElement('div');
     this.difficultyAndRoundContainer.appendChild(this.diffcultyLabel);
@@ -152,7 +155,6 @@ class SavannahGameModalWindow {
   }
 
   renderSettings(okButtonListener, checkboxHandler, difficultyHandler, roundHandler, settings) {
-    console.log(settings);
     this.clear();
     const data = this.renderSettingsData(settings, checkboxHandler, difficultyHandler, roundHandler);
     const modalContainer = this.renderBasicElements(data);

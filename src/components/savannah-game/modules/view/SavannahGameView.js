@@ -78,6 +78,15 @@ class SavannahGameView {
     }
   }
 
+  renderLoadingPage(quitButtonHandler) {
+    this.renderBackground();
+    this.renderGameElements(quitButtonHandler);
+    
+    this.gameMiddleContainer.renderLoading();
+    this.gameFooter.renderKeyboardControlInfo();
+    this.gameHeader.renderQuitButton();
+  }
+
   getRenderBackground() {
     return (value) => {
       const newBackgoundPosition = 100 - value;
@@ -113,6 +122,9 @@ class SavannahGameView {
         case 'end':
           this.renderEndPage();
           return;
+        case 'loading':
+          this.renderLoadingPage(quitButtonHandler);
+          return;
         default:
           throw new Error('wrong page state');
       }
@@ -125,7 +137,7 @@ class SavannahGameView {
   }
 
   getRenderModalWindow(quitModalWindowHandler, gameCloseHandler, saveSettingsButtonHandler, settingsCheckboxHandler, settingsDifficultyHandler, settingsRoundHandler, statistics, settings, result) {
-    console.log(statistics, result);
+    console.log(statistics, result, settings);
     return (value) => {
       switch (value) {
         case 'close alert':

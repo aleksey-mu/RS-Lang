@@ -9,7 +9,7 @@ class SavannahGameController {
     this.closeGameButtonListeners = [];
 
     this.model.registerObserver('currentPage', this.view.getRenderPage(
-      this.getToCountdown(),
+      this.getToLoading(),
       this.getQuitButtonHandler(),
       this.getCountdownEndHandler(),
       this.getSettingsButtonHandler(),
@@ -18,7 +18,7 @@ class SavannahGameController {
     this.model.registerObserver('modalWindow', this.view.getRenderModalWindow(
       this.getQuitButtonModalWindowHandler(),
       this.getCloseGameButtonHandler(),
-      this.getSaveSettingsButtonHandler(),
+      () => {},
       this.getSettingsCheckboxOnchange(),
       this.getSettingsDifficultyOnchande(),
       this.getSettingsRoundOnchange(),
@@ -42,20 +42,15 @@ class SavannahGameController {
   getToCountdown() {
     return () => {
       this.model.setCurrentPage('countdown');
-      this.model.setGameWords([
-        ['right', 'translate1', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate2', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate3', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate4', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate5', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate6', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate7', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate8', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate9', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate10', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate11', ['wrong', 'wrong', 'wrong']],
-        ['right', 'translate12', ['wrong', 'wrong', 'wrong']],
-      ]);
+    }
+  }
+
+  getToLoading() {
+    return () => {
+      this.model.setCurrentPage('loading');
+      this.model.setGameWords().then(() => {
+        this.model.setCurrentPage('countdown');
+      });
     }
   }
 
@@ -91,12 +86,6 @@ class SavannahGameController {
     return () => {
       this.model.setIsGameOpen(false);
       this.closeGameButtonListeners.map((h) => h());
-    }
-  }
-
-  getSaveSettingsButtonHandler() {
-    return () => {
-      this.model.settings = '';
     }
   }
 
@@ -151,7 +140,7 @@ class SavannahGameController {
   getSettingsDifficultyOnchande() {
     return (event) => {
       const options = [...event.target.childNodes];
-      const value = parseInt(options[event.target.selectedIndex].value, 10);
+      const value = parseInt(options[event.target.selectedIndex].value, 10) - 1;
       this.model.settings.difficulty = value;
     }
   }
@@ -159,7 +148,7 @@ class SavannahGameController {
   getSettingsRoundOnchange() {
     return (event) => {
       const options = [...event.target.childNodes];
-      const value = parseInt(options[event.target.selectedIndex].value, 10);
+      const value = parseInt(options[event.target.selectedIndex].value, 10) - 1;
       this.model.settings.round = value;
     }
   }

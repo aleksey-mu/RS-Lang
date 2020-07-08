@@ -13,6 +13,69 @@ function wordsPage () {
   document.querySelector('.container-fluid').style.background = 'green';
 }
 function trainingSavannahPage () {
+  // const testWords1 = [
+  //   {
+  //     id: 1,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 2,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 3,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 4,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 5,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 6,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 7,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 8,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 9,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 10,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 11,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  //   {
+  //     id: 12,
+  //     word: 'right',
+  //     wordTranslate: 'tanslate',
+  //   },
+  // ];
+
   const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/', []);
 
   const toMainPage = () => {

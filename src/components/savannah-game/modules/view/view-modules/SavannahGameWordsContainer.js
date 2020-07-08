@@ -44,7 +44,7 @@ class SavannahGameWordsContainer {
     this.clearContainer();
 
     const rightTranslateElement = createWordTranslateElement(rightTranslate, rightAnswerListener);
-    const wrongTranslateElements = [...wrongTranslates].map((word) => createWordTranslateElement(word, wrongAnswerListener));
+    const wrongTranslateElements = [...wrongTranslates].map(({ word }) => createWordTranslateElement(word, wrongAnswerListener));
 
     const shuffleTranslateElements = shuffleElements([rightTranslateElement, ...wrongTranslateElements]);
 
@@ -109,6 +109,23 @@ class SavannahGameWordsContainer {
 
     countdown.appendChild(countDownAnimation);
     this.container.appendChild(countdown);
+  }
+
+  renderLoading() {
+    this.clearContainer();
+
+    const loading = document.createElement('div');
+    const loadingHtml = `
+      <div class="gem-parts-3"></div>
+      <div class="gem-parts-2"></div>
+      <div class="gem-parts-1"></div>`;
+
+    
+    loading.classList.add('countdown');
+    loading.classList.add('gem-circle');
+    loading.innerHTML = loadingHtml;
+
+    this.container.appendChild(loading);
   }
 }
 
