@@ -114,18 +114,22 @@ class SavannahGameWordsContainer {
   renderLoading() {
     this.clearContainer();
 
-    const loading = document.createElement('div');
-    const loadingHtml = `
+    const countdown = document.createElement('div');
+    const countdownNumber = document.createElement('div');
+    const countDownAnimation = document.createElement('div');
+    const countdownHtml = `
       <div class="gem-parts-3"></div>
       <div class="gem-parts-2"></div>
       <div class="gem-parts-1"></div>`;
 
-    
-    loading.classList.add('countdown');
-    loading.classList.add('gem-circle');
-    loading.innerHTML = loadingHtml;
+    countdown.classList.add('countdown');
+    countdownNumber.classList.add('countdown-number');
+    countDownAnimation.classList.add('gem-circle');
+    countDownAnimation.innerHTML = countdownHtml;
+    countDownAnimation.appendChild(countdownNumber);
 
-    this.container.appendChild(loading);
+    countdown.appendChild(countDownAnimation);
+    this.container.appendChild(countdown);
   }
 }
 

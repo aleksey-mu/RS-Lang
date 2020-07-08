@@ -133,7 +133,6 @@ class SavannahGameController {
   getSettingsCheckboxOnchange() {
     return (event) => {
       this.model.settings.useLearnedWords = event.target.checked;
-      console.log(this.model.settings.useLearnedWords);
     }
   }
 

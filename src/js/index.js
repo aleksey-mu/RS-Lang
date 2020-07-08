@@ -13,7 +13,7 @@ function wordsPage () {
   document.querySelector('.container-fluid').style.background = 'green';
 }
 function trainingSavannahPage () {
-  // const testWords1 = [
+  const testWords1 = [];
   //   {
   //     id: 1,
   //     word: 'right',
@@ -76,7 +76,7 @@ function trainingSavannahPage () {
   //   },
   // ];
 
-  const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/', []);
+  const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/', testWords1);
 
   const toMainPage = () => {
     window.location.hash = '/main/';
