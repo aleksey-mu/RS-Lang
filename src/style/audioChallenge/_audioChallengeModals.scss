@@ -1,0 +1,63 @@
+.ACoverlay {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  transition: 0.3s all;
+}
+.ACmodal {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  max-width: 600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50; 
+  box-shadow: 0 3px 10px -0.5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 40px;
+  border-radius: 3px;
+  background-color: #fff;
+  transition: 0.3s all;
+}
+
+/* Стили для активных классов подложки и окна */
+
+.ACmodal.ModalActive,
+.ACoverlay.ModalActive {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Стили для кнопки закрытия */
+
+.modal__cross {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  fill: #444;
+  cursor: pointer;
+}
+
+.difficulty, .round{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    & p{
+        margin-right: 5px;
+
+    }
+    & select{
+        width: 50px;
+    }
+}
+
