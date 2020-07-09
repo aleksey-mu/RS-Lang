@@ -89,6 +89,7 @@ class SavannahGameModel {
     this.currentLivesObservers = [];
     this.currentRoundObservers = [];
     this.currentRoundWordsObservers = [];
+    this.lastAnswerStatusObservers = [];
     this.volumeObservers = [];
     this.gameResultObservers = [];
     this.statistics = {
@@ -158,6 +159,11 @@ class SavannahGameModel {
 
   getCurrentLives() {
     return this.currentLives;
+  }
+
+  setLastAnswerStatus(value) {
+    this.lastAnswerStatus = value;
+    this.lastAnswerStatusObservers.map((observer) => observer(this.lastAnswerStatus, this.volume));
   }
 
   setCurrentRoundWords() {

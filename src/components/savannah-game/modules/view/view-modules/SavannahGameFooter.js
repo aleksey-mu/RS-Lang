@@ -59,6 +59,14 @@ class SavannahGameFooter {
     this.gem.innerHTML = gemInnerHtml;
   }
 
+  removeAnimationFromGem() {
+    this.gem.querySelector('.gem-circle').setAttribute('style', 'opacity: 0;');
+  }
+
+  addAnimationToGem() {
+    this.gem.querySelector('.gem-circle').removeAttribute('style');
+  }
+
   renderStatusBar(percent = 0) {
     this.statusBar.removeAttribute('style');
     this.statusBar.setAttribute('style', `background: linear-gradient(to right, rgba(255,255,255, 1) ${percent}%, rgba(255,255,255, 0.2) ${percent}%);`);

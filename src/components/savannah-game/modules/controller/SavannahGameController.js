@@ -1,5 +1,5 @@
 const defaultTimeout = 10000;
-// const defaultAfterAnswerDelay = 1000;
+const defaultAfterAnswerDelay = 1000;
 
 class SavannahGameController {
   constructor(model, view) {
@@ -7,6 +7,13 @@ class SavannahGameController {
     this.view = view;
 
     this.closeGameButtonListeners = [];
+    this.keyboardEvents = [];
+
+    this.makeKeyboardListener('1');
+    this.makeKeyboardListener('2');
+    this.makeKeyboardListener('3');
+    this.makeKeyboardListener('4');
+    console.log(this.keyboardEvents);
 
     this.model.registerObserver('currentPage', this.view.getRenderPage(
       this.getToLoading(),
@@ -37,6 +44,12 @@ class SavannahGameController {
     ));
     this.model.registerObserver('volume', this.view.getRenderMusicButton(this.getMusicButtonHandler()));
     this.model.registerObserver('gameResult', () => clearTimeout(this.answerTimeout));
+    this.model.registerObserver('lastAnswerStatus', this.view.getPlayAnswerStatus());
+    this.model.registerObserver('lastAnswerStatus', this.view.getRemoveDropElement());
+    this.model.registerObserver('lastAnswerStatus', this.view.getAddAnimationToGem());
+    this.model.registerObserver('currentRoundWords', this.view.getAddKeyboardControl(...this.keyboardEvents));
+    this.model.registerObserver('lastAnswerStatus', this.view.getRemoveKeyboardControl(...this.keyboardEvents));
+    this.model.registerObserver('lastAnswerStatus', this.view.getHighlightCorrectAnswer());
   }
 
   getToCountdown() {
@@ -58,6 +71,18 @@ class SavannahGameController {
     return () => {
       this.model.setModalWindow('close alert');
     }
+  }
+
+  makeKeyboardListener(digit) {
+    const keyboardListener = (event) => {
+      if (event.code === `Digit${digit}`) {
+        const word = this.view.mainContainer.querySelector(`div[data-order="${digit}"]`);
+        if (word.dataset.answer === 'correct') this.getRightAnswerHandler()();
+        else this.getWrongAnswerHandler()();
+      }
+    };
+
+    this.keyboardEvents.push(keyboardListener);
   }
 
   getCountdownEndHandler() {
@@ -102,7 +127,10 @@ class SavannahGameController {
       clearTimeout(this.answerTimeout);
       this.model.statistics.guessedWords.push(this.model.currentRoundWords.translate);
       this.model.setRound(this.model.getRound() + 1);
-      this.model.setCurrentRoundWords();
+      this.model.setLastAnswerStatus('right');
+      setTimeout(() => {
+        this.model.setCurrentRoundWords();
+      }, defaultAfterAnswerDelay);
     }
   }
 
@@ -112,7 +140,10 @@ class SavannahGameController {
       this.model.statistics.notGuessedWords.push(this.model.currentRoundWords.translate);
       this.model.setCurrentLives(this.model.getCurrentLives() - 1);
       this.model.setRound(this.model.getRound() + 1);
-      this.model.setCurrentRoundWords();
+      this.model.setLastAnswerStatus('wrong');
+      setTimeout(() => {
+        this.model.setCurrentRoundWords();
+      }, defaultAfterAnswerDelay);
     }
   }
 

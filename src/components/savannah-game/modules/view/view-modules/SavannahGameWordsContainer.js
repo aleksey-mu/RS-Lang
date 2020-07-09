@@ -22,6 +22,7 @@ const shuffleElements = (elements) => {
 
   return elements.map((el, index) => {
     el.setAttribute('style', `order: ${newOrder[index]};`);
+    el.setAttribute('data-order', newOrder[index] + 1);
     return el;
   });
 };
@@ -45,6 +46,9 @@ class SavannahGameWordsContainer {
 
     const rightTranslateElement = createWordTranslateElement(rightTranslate, rightAnswerListener);
     const wrongTranslateElements = [...wrongTranslates].map(({ word }) => createWordTranslateElement(word, wrongAnswerListener));
+
+    rightTranslateElement.setAttribute('data-answer', 'correct');
+    wrongTranslateElements.map((el) => el.setAttribute('data-answer', 'wrong'));
 
     const shuffleTranslateElements = shuffleElements([rightTranslateElement, ...wrongTranslateElements]);
 
@@ -73,7 +77,7 @@ class SavannahGameWordsContainer {
 
     const description = document.createElement('div');
     description.classList.add('description');
-    description.innerText = 'Тренировка Саванна проверяет словарный запас. \nПо умолчанию в игре используются изученные слова, но вы можете это поменять в настройках.';
+    description.innerText = 'Тренировка Саванна проверяет словарный запас. \nПо умолчанию в игре используются изученные слова, но вы можете поменять это в настройках.';
 
     this.container.appendChild(startContainer);
     [heading, description, settingsButton, startButton].map((elements) => startContainer.appendChild(elements));

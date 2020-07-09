@@ -26,6 +26,27 @@ class SavannahGameView {
     this.gameContainer.setAttribute('style', `background-position-y: ${offset}%;`);
   }
 
+  /* eslint-disable class-methods-use-this */
+  getRemoveKeyboardControl(...keyboardListeners) {
+    return () => {
+      keyboardListeners.map((l) => document.removeEventListener('keydown', l));
+    }
+  }
+
+  /* eslint-disable class-methods-use-this */
+  getAddKeyboardControl(...keyboardListeners) {
+    return () => {
+      keyboardListeners.map((l) => document.addEventListener('keydown', l));
+    }
+  }
+
+  getHighlightCorrectAnswer() {
+    return () => {
+      const word = this.mainContainer.querySelector('div[data-answer="correct"]');
+      word.classList.add('right-answer');
+    }
+  }
+
   renderGameElements(quitButtonHandler) {
     this.clear();
     this.gameHeader = new SavannahGameHeader(5, healthIconPath, emptyHealtIconPath, musicIconPath, musicOffIconPath, quitIconPath, quitButtonHandler);
@@ -75,6 +96,14 @@ class SavannahGameView {
       this.gameDropElement = new SavannahGameDropElement();
       this.gameContainer.prepend(this.gameDropElement.render());
       this.gameDropElement.renderDropElement(translate);
+
+      this.gameFooter.removeAnimationFromGem();
+    }
+  }
+
+  getAddAnimationToGem() {
+    return (value) => {
+      if (value === 'right') this.gameFooter.addAnimationToGem();
     }
   }
 
@@ -165,12 +194,38 @@ class SavannahGameView {
     }
   }
 
+  getRemoveDropElement() {
+    return () => {
+      this.gameDropElement.render().remove();
+    }
+  }
+
   getCloseGame(locationHashChecker) {
     return (value) => {
       if (value) return;
       this.clear();
       this.gameContainer.remove();
       window.removeEventListener('hashchange', locationHashChecker);
+    }
+  }
+
+  getPlayAnswerStatus() {
+    const playMapping = {
+      'right': () => console.log('play right'),
+      'wrong': () => console.log('play wrong'),
+    }
+
+    return (value, musicStatus) => {
+      console.log(this, value, musicStatus);
+      switch (musicStatus) {
+        case 'on':
+          playMapping[value]();
+          return;
+        case 'off':
+          return;
+        default:
+          throw new Error('wrong music status');
+      }
     }
   }
   

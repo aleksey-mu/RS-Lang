@@ -140,6 +140,11 @@
     }
   }
 
+  .right-answer {
+    background-color: green;
+    opacity: 0.5;
+  }
+
   .word-rus {
     &:hover {
       cursor: pointer;
