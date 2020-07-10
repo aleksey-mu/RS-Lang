@@ -34,6 +34,8 @@ class SavannahGameController {
       this.model.gameResult,
     ));
     this.model.registerObserver('isGameOpen', this.view.getCloseGame(this.getLocationHashChecker()));
+    this.model.registerObserver('isGameOpen', () => clearTimeout(this.answerTimeout));
+    this.model.registerObserver('isGameOpen', this.view.getRemoveKeyboardControl(...this.keyboardEvents));
     this.model.registerObserver('currentLives', this.view.getRenderHealthBar());
     this.model.registerObserver('currentRound', this.view.getRenderStatusBar());
     this.model.registerObserver('currentRound', this.view.getRenderBackground());
@@ -44,6 +46,7 @@ class SavannahGameController {
     ));
     this.model.registerObserver('volume', this.view.getRenderMusicButton(this.getMusicButtonHandler()));
     this.model.registerObserver('gameResult', () => clearTimeout(this.answerTimeout));
+    this.model.registerObserver('gameResult', this.view.getPlayGameResultStatus());
     this.model.registerObserver('lastAnswerStatus', this.view.getPlayAnswerStatus());
     this.model.registerObserver('lastAnswerStatus', this.view.getRemoveDropElement());
     this.model.registerObserver('lastAnswerStatus', this.view.getAddAnimationToGem());

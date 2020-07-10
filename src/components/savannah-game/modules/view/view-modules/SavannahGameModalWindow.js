@@ -154,11 +154,11 @@ class SavannahGameModalWindow {
     return modalContainer;
   }
 
-  renderSettings(checkboxHandler, difficultyHandler, roundHandler, settings) {
+  renderSettings(saveSettingsButtonHandler, checkboxHandler, difficultyHandler, roundHandler, settings) {
     this.clear();
     const data = this.renderSettingsData(settings, checkboxHandler, difficultyHandler, roundHandler);
     const modalContainer = this.renderBasicElements(data);
-    modalContainer.appendChild(this.renderOkButton(() => {}, 'OK'));
+    modalContainer.appendChild(this.renderOkButton(saveSettingsButtonHandler, 'OK'));
     modalContainer.appendChild(this.renderQuitButton());
     this.container.appendChild(modalContainer);
   }

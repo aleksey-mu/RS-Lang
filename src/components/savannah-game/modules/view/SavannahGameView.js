@@ -3,12 +3,22 @@ import SavannahGameFooter from './view-modules/SavannahGameFooter.js';
 import SavannahGameMiddleContainer from './view-modules/SavannahGameWordsContainer.js';
 import SavannahGameDropElement from './view-modules/SavannahGameDropElement.js';
 import SavannahGameModalWindow from './view-modules/SavannahGameModalWindow.js';
+import '../../../../audio/savannah-game/Correct-answer.mp3';
+import '../../../../audio/savannah-game/Wrong-answer-sound-effect.mp3';
+import '../../../../audio/savannah-game/ring.mp3';
+import '../../../../audio/savannah-game/win.wav';
+import '../../../../audio/savannah-game/lose.wav';
 
 const healthIconPath = '/img/savannah-game/health-icon.png';
 const emptyHealtIconPath = '/img/savannah-game/health-icon.png';
 const musicIconPath = '/img/savannah-game/music-icon.svg';
 const musicOffIconPath = '/img/savannah-game/music-icon-off.svg';
 const quitIconPath = '/img/savannah-game/quit-icon.svg';
+const audioCorrectPath = '/audio/Correct-answer.mp3';
+const audioWrongPath = '/audio/Wrong-answer-sound-effect.mp3';
+const audioGongPath = '/audio/ring.mp3';
+const audioWinPath = 'audio/win.mp3';
+const audioLosePath = 'audio/lose.mp3';
 
 class SavannahGameView {
   constructor(selector) {
@@ -16,6 +26,7 @@ class SavannahGameView {
     this.gameContainer = document.createElement('div');
     this.gameContainer.classList.add('savannah-game');
     this.mainContainer.appendChild(this.gameContainer);
+    this.audio = new Audio();
   }
 
   clear() {
@@ -143,6 +154,7 @@ class SavannahGameView {
           this.renderStartPage(startButtonHandler, settingButtonHandler, quitButtonHandler);
           return;
         case 'countdown':
+          this.playAudio(audioGongPath);
           this.renderCountdownPage(quitButtonHandler, countdownHandler);
           return;
         case 'round':
@@ -166,7 +178,6 @@ class SavannahGameView {
   }
 
   getRenderModalWindow(quitModalWindowHandler, gameCloseHandler, saveSettingsButtonHandler, settingsCheckboxHandler, settingsDifficultyHandler, settingsRoundHandler, statistics, settings, result) {
-    console.log(statistics, result, settings);
     return (value) => {
       switch (value) {
         case 'close alert':
@@ -175,6 +186,7 @@ class SavannahGameView {
           this.modalWindow.show();
           return;
         case 'settings':
+          console.log(settings);
           this.renderModalWindow(quitModalWindowHandler);
           this.modalWindow.renderSettings(saveSettingsButtonHandler, settingsCheckboxHandler, settingsDifficultyHandler, settingsRoundHandler, settings);
           this.modalWindow.show();
@@ -209,14 +221,36 @@ class SavannahGameView {
     }
   }
 
+  playAudio(src) {
+    this.audio.remove();
+    this.audio = new Audio(src);
+    this.gameContainer.appendChild(this.audio);
+    console.log(this.audio);
+    this.audio.play();
+  }
+
+  getPlayGameResultStatus() {
+    return (gameResult) => {
+      switch (gameResult) {
+        case 'win':
+          this.playAudio(audioWinPath);
+          return;
+        case 'loss':
+          this.playAudio(audioLosePath)
+          return;
+        default:
+          throw new Error('wrong music status');
+      }
+    }
+  }
+
   getPlayAnswerStatus() {
     const playMapping = {
-      'right': () => console.log('play right'),
-      'wrong': () => console.log('play wrong'),
+      'right': () => this.playAudio(audioCorrectPath),
+      'wrong': () => this.playAudio(audioWrongPath),
     }
 
     return (value, musicStatus) => {
-      console.log(this, value, musicStatus);
       switch (musicStatus) {
         case 'on':
           playMapping[value]();
