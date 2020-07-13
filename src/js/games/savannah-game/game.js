@@ -3,7 +3,7 @@ import Model from './modules/model/SavannahGameModel.js';
 import Controller from './modules/controller/SavannahGameController.js';
 
 class SavannahGame {
-  constructor(selector, locationHash, learnedWords) {
+  constructor(selector, locationHash, learnedWords = []) {
     this.game = new Controller(new Model(locationHash, learnedWords), new View(selector));
   }
 

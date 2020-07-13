@@ -3,22 +3,17 @@ import SavannahGameFooter from './view-modules/SavannahGameFooter.js';
 import SavannahGameMiddleContainer from './view-modules/SavannahGameWordsContainer.js';
 import SavannahGameDropElement from './view-modules/SavannahGameDropElement.js';
 import SavannahGameModalWindow from './view-modules/SavannahGameModalWindow.js';
-import '../../../../audio/savannah-game/Correct-answer.mp3';
-import '../../../../audio/savannah-game/Wrong-answer-sound-effect.mp3';
-import '../../../../audio/savannah-game/ring.mp3';
-import '../../../../audio/savannah-game/win.wav';
-import '../../../../audio/savannah-game/lose.wav';
 
-const healthIconPath = '/img/savannah-game/health-icon.png';
-const emptyHealtIconPath = '/img/savannah-game/health-icon.png';
-const musicIconPath = '/img/savannah-game/music-icon.svg';
-const musicOffIconPath = '/img/savannah-game/music-icon-off.svg';
-const quitIconPath = '/img/savannah-game/quit-icon.svg';
-const audioCorrectPath = '/audio/Correct-answer.mp3';
-const audioWrongPath = '/audio/Wrong-answer-sound-effect.mp3';
-const audioGongPath = '/audio/ring.mp3';
-const audioWinPath = 'audio/win.wav';
-const audioLosePath = 'audio/lose.wav';
+const healthIconPath = '/img/games/savannah-game/health-icon.png';
+const emptyHealtIconPath = '/img/games/savannah-game/health-icon.png';
+const musicIconPath = '/img/games/savannah-game/music-icon.svg';
+const musicOffIconPath = '/img/games/savannah-game/music-icon-off.svg';
+const quitIconPath = '/img/games/savannah-game/quit-icon.svg';
+const audioCorrectPath = '/audio/savannah-correct-answer.mp3';
+const audioWrongPath = '/audio/savannah-wrong-answer.mp3';
+const audioGongPath = '/audio/savannah-start.mp3';
+const audioWinPath = '/audio/savannah-win.wav';
+const audioLosePath = '/audio/savannah-lose.wav';
 
 class SavannahGameView {
   constructor(selector) {
@@ -221,6 +216,7 @@ class SavannahGameView {
 
   playAudio(src) {
     this.audio = new Audio(src);
+    this.audio.volume = 0.2;
     this.audio.play();
   }
 

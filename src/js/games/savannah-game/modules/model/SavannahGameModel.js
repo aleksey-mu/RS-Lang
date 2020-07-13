@@ -44,7 +44,6 @@ const getRandomFakeWords = (maxRound, difficulty = getRandomNumbers(0, maxApiWor
   return Promise.all(requests)
     .then((data) => data.reduce((acc, el) => [...el, ...acc], []))
     .then((words) => words.reduce((acc, word) => {
-      console.log(words.length);
       const lastElement = acc[acc.length - 1];
       if (acc.length >= maxRound && lastElement.length >= defaultFakeWordsInRound) return acc;
       if (lastElement.length < defaultFakeWordsInRound) lastElement.push(word);
@@ -139,7 +138,6 @@ class SavannahGameModel {
         getGameWordsByDifficultyAndRound(this.settings.difficulty, this.settings.round, this.maxRounds)
           .then((words) => {
             this.gameWords = words;
-            console.log(this.gameWords);
             resolve(this.gameWords);
           }).catch((e) => {
             reject(e);
