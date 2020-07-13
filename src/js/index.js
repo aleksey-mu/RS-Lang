@@ -1,18 +1,22 @@
 import '../style/style.scss';
 import BurgerMenu from './header/burgerMenu';
 import Router from './router/router';
+import gameInit from './games/speakIt/speakItInit';
 import SavannahGame from '../components/savannah-game/game.js';
 
 const myBurgerMenu = new BurgerMenu();
 myBurgerMenu.init();
 
 function mainPage() {
-  document.querySelector('.container-fluid').style.background = 'yellow';
+	document.querySelector('main').innerHTML = '<h2>Main Page</h2>';
 }
-function wordsPage () {
-  document.querySelector('.container-fluid').style.background = 'green';
+function wordsPage() {
+	document.querySelector('.container-fluid').style.background = 'green';
 }
-function trainingSavannahPage () {
+function trainSpeakItPage() {
+	gameInit();
+}
+function trainingSavannahPage() {
   const testWords1 = [];
   //   {
   //     id: 1,
@@ -86,14 +90,13 @@ function trainingSavannahPage () {
   savannahGame.onGameClose(toMainPage);
 }
 
+
 const loadPage = {
-  mainPage,
-  wordsPage,
+	mainPage,
+	wordsPage,
+  trainSpeakItPage,
   trainingSavannahPage,
-}
+};
 
 const router = new Router(loadPage);
 router.init();
-
-
-
