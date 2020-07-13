@@ -1,46 +1,50 @@
+import GameCardComponent from "./GameCardComponent";
+
 export default class StartScreenComponent {
   constructor() {
     this.root = document.createElement('div');
   }
 
   init() {
-    this.root.className = 'start-screen-sprint';
+    this.root.className = 'cards';
 
-    const CARD = `<div class="score">
-                    <h3 class="center"><span class="glyphicon glyphicon-grain" aria-hidden="true"></span> Score: <span class="label label-default">200</span></h3>
-                  </div>
-                  <div class="container">
-                      <div class="lp-countdown lp-countdown-md line col-sm-4 col-xs-12">
-                        <div class="lp-countdown-block">
-                          <div class="lp-countdown-counter">25</div>
-                          <div class="lp-countdown-label">SECONDS</div>
-                        </div>
-                      </div>
-                      <div class="card col-sm-5 col-xs-12" data-label="+ 20">
-                        <div class="card__container">
-                          <p class="card__body card-image">
-                            <span class="glyphicon glyphicon glyphicon-road" aria-hidden="true"></span>
-                          </p>
-                          <h1 class="card__header">
-                            play
-                          </h1>
-                          <h3 class="card__body">
-                            играть
-                          </h3>  
-                          <div class="answer-buttons">
-                            <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false">
-                              Неверно
-                            </button>
-                            <button type="button" class="btn btn-success" aria-haspopup="true" aria-expanded="false">
-                              Верно
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                  </div>`;
+    const START_SCREEN = `<div class="container">
+                              <div class="card col-sm-5 col-xs-12 col-sm-offset-3 current-point" data-label="Да/нет">
+                                <div class="card__container">
+                                  <p class="card__body card-image">
+                                    <span class="icon-bird"></span>
+                                  </p>
+                                  <h2 class="card__header">
+                                    Это правильный перевод слова?
+                                  </h2>
+                                  <h4 class="card__body">
+                                    Быстро отвечайте "да" или "нет". У вас есть всего 60 секунд. За серию правильных ответов получайте дополнительные баллы.
+                                  </h4> 
+                                  <h4 class="card__body">Бейте собственные рекорды!</h4>
+                                  <div class="start-button">
+                                    <button type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+                                      Старт
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>`;
 
-    this.root.insertAdjacentHTML('beforeend', CARD);
+    this.root.insertAdjacentHTML('beforeend', START_SCREEN);
+
+    this.startGame();
 
     return this.root;
+  }
+
+  startGame() {
+    this.root.querySelector('.btn-primary').onclick = () => {
+      this.hideStartScreen();
+      this.root.insertAdjacentElement('beforeend', new GameCardComponent().init());
+    }
+  }
+
+  hideStartScreen() {
+    this.root.querySelector('.container').innerHTML = '';
   }
 }

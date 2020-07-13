@@ -31,11 +31,6 @@ body.sprint-background {
 
 .card .card__header{
   margin-bottom: 1rem;
-  font-family: 'Playfair Display', serif;
-}
-
-.card .card__body{
-  font-family: 'Roboto', sans-serif;
 }
 
 .card::before{
@@ -59,7 +54,6 @@ body.sprint-background {
   background: $color-header-link;
   color: white;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
   box-shadow: 4px 4px 15px rgba(26, 35, 126, 0.2);
 }
 
@@ -113,7 +107,9 @@ body.sprint-background {
 
 h1.card__header,
 p.card__body,
-h3.card__body {
+h3.card__body,
+h2.card__header,
+h4.card__body {
   text-align: center;
 }
 
@@ -123,4 +119,67 @@ h3.card__body {
 
 .card-image {
   font-size: 35px;
+}
+
+.backlight-wrong-answer:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  -webkit-filter: blur(5vw);
+  -moz-filter: blur(5vw);
+  -ms-filter: blur(5vw);
+  filter: blur(8vw);
+  background: linear-gradient(270deg, #e60b1f, #ec9223);
+  background-size: 200% 200%;
+  animation: animateGlow 10s ease infinite;
+}
+
+.backlight-right-answer:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  -webkit-filter: blur(5vw);
+  -moz-filter: blur(5vw);
+  -ms-filter: blur(5vw);
+  filter: blur(8vw);
+  background: linear-gradient(270deg, #286129, #4c8c8c);
+  background-size: 200% 200%;
+  animation: animateGlow 10s ease infinite;
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.start-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.icon-bird {
+  display: block;
+  background: url(../img/games/sprint/peace.svg) no-repeat;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
 }
