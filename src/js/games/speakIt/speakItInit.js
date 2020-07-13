@@ -64,7 +64,7 @@ export default function gameInit() {
 				CORRECT_STACK.insertAdjacentHTML(
 					'beforeend',
 					`
-      <div><i class="fas fa-check"></i><span class="result-word">${wordText} ${wordTranscription}</span></div>
+      <div><span class="result-word">${wordText} ${wordTranscription}</span></div>
       `
 				);
 
@@ -76,7 +76,7 @@ export default function gameInit() {
 				INCORRECT_STACK.insertAdjacentHTML(
 					'beforeend',
 					`
-      <div><i class="fas fa-times"></i><span class="result-word">${wordText} ${wordTranscription}</span></div>
+      <div><span class="result-word">${wordText} ${wordTranscription}</span></div>
       `
 				);
 
