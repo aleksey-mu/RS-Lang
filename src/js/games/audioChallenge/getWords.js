@@ -1,8 +1,10 @@
 import GamePage from "./createGamePage";
+// import ACgameSettings from "./audioChallengeSettings";
 
 export default class GetWords{
     constructor(){
         this.GamePage = new GamePage();
+        // this.ACgameSettings = new ACgameSettings();
     }
    
     async getWordsSet(round, difficulty) {           
@@ -13,7 +15,8 @@ export default class GetWords{
         const json = await res.json();
         const recievedJSON = JSON.stringify(json, null, 1);
         const recievedData = JSON.parse(recievedJSON);
-        this.GamePage.createGameElements(recievedData);       
+        this.GamePage.createGameElements(recievedData);  
+        // this.ACgameSettings.init();     
     }
 
     async getWordDetalization (word) {

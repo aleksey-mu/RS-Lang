@@ -1,31 +1,32 @@
-import GetWords from "./getWords";
+// import GetWords from "./getWords";
 // import GamePage from "./createGamePage";
 
 export default class ACgameSettings {
-    constructor() {
-        this.GetWords = new GetWords();
-      // this.difficulty = 0;
-    }
+//   constructor() {
+//     this.GetWords = new GetWords();
+//     // this.difficulty = 0;
+//   }
 
   init() {
     // document.addEventListener("DOMContentLoaded", () => {
-      this.createSettingsModal();
-      document
-        .querySelector("#gameSettingsBtn")
-        .addEventListener("click", (e) => {
-          e.preventDefault();
-          this.openModal();
-        });
-      this.ModalCloseBtn = document.querySelector(".modal__cross");
-      this.ModalCloseBtn.addEventListener("click", (e) => {
+    this.createSettingsModal();
+    document
+      .querySelector("#gameSettingsBtn")
+      .addEventListener("click", (e) => {
         e.preventDefault();
-        this.closeModal();
+
+        this.openModal();
       });
-      this.ModalOverlay = document.querySelector(".ACoverlay");
-      this.ModalOverlay.addEventListener("click", () => {
-        this.closeModal();
-      });
-      this.applySettings();
+    this.ModalCloseBtn = document.querySelector(".modal__cross");
+    this.ModalCloseBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.closeModal();
+    });
+    this.ModalOverlay = document.querySelector(".ACoverlay");
+    this.ModalOverlay.addEventListener("click", () => {
+      this.closeModal();
+    });
+    // this.applySettings();
     // });
   }
 
@@ -91,51 +92,7 @@ viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-
 <div class="ACoverlay AC-overlay-modal"></div>`;
     document.querySelector("body").append(this.SettingsModal);
   }
-
-  getSelectedSettings() {
-    this.DifficultySelect = document.querySelector("select.difficulty-level");
-    this.DifficultySelect.addEventListener("change", () => {
-      const indexSelected = this.DifficultySelect.selectedIndex;
-      this.optionDifficulty = this.DifficultySelect.querySelectorAll("option")[
-        indexSelected
-      ].value;
-    });
-    this.RoundSelect = document.querySelector("select.round-level");
-    this.RoundSelect.addEventListener("change", () => {
-      const indexSelected = this.RoundSelect.selectedIndex;
-      this.optionRound = this.RoundSelect.querySelectorAll("option")[
-        indexSelected
-      ].value;
-    });
-
-    if (typeof this.optionRound === "undefined") this.optionRound = 1;
-    if (typeof this.optionDifficulty === "undefined") this.optionDifficulty = 1;
-    this.round = this.optionRound;
-    this.difficulty = this.optionDifficulty;
-    // localStorage.setItem('round', this.round);
-    // localStorage.setItem('difficulty', this.difficulty);
-    // window.location.reload();
-    // this.gameSettings = {
-    //     round: this.round,
-    //     difficulty: this.difficulty
-    // };
-     this.GetWords.getWordsSet(this.round, this.difficulty);
-    // return this.gameSettings;
-  }
-
-  applySettings() {
-    this.ApplyBtn = document.querySelector("#ACmodalApplyBtn");
-    this.ACmodeSelect = document.querySelector("#ACmodeSelect");
-    this.ApplyBtn.addEventListener("click", () => {
-      //   e.preventDefault();
-      if (this.ACmodeSelect.checked) {
-        console.log("checkbox selected");
-      } else {
-        this.getSelectedSettings();
-      }
-    });
-  }
-
+  
   openModal() {
     this.ACmodalSettings = document.querySelector(".ACsettingsModal");
     this.ACoverlayModal = document.querySelector(".AC-overlay-modal");
@@ -144,7 +101,10 @@ viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-
   }
 
   closeModal() {
+    // if(typeof this.ACmodalSettings !== 'undefined'){
     this.ACmodalSettings.classList.remove("ModalActive");
     this.ACoverlayModal.classList.remove("ModalActive");
+    // this.SettingsModal.remove();
+    // }
   }
 }
