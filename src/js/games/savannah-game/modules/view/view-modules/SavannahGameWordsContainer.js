@@ -23,6 +23,8 @@ const shuffleElements = (elements) => {
   return elements.map((el, index) => {
     el.setAttribute('style', `order: ${newOrder[index]};`);
     el.setAttribute('data-order', newOrder[index] + 1);
+    const wordText = el.querySelector('.word-text');
+    wordText.innerText = `${newOrder[index] + 1}. ${wordText.innerText}`;
     return el;
   });
 };
