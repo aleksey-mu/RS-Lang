@@ -17,8 +17,8 @@ const quitIconPath = '/img/savannah-game/quit-icon.svg';
 const audioCorrectPath = '/audio/Correct-answer.mp3';
 const audioWrongPath = '/audio/Wrong-answer-sound-effect.mp3';
 const audioGongPath = '/audio/ring.mp3';
-const audioWinPath = 'audio/win.mp3';
-const audioLosePath = 'audio/lose.mp3';
+const audioWinPath = 'audio/win.wav';
+const audioLosePath = 'audio/lose.wav';
 
 class SavannahGameView {
   constructor(selector) {
@@ -26,7 +26,6 @@ class SavannahGameView {
     this.gameContainer = document.createElement('div');
     this.gameContainer.classList.add('savannah-game');
     this.mainContainer.appendChild(this.gameContainer);
-    this.audio = new Audio();
   }
 
   clear() {
@@ -54,7 +53,7 @@ class SavannahGameView {
   getHighlightCorrectAnswer() {
     return () => {
       const word = this.mainContainer.querySelector('div[data-answer="correct"]');
-      word.classList.add('right-answer');
+      if (word) word.classList.add('right-answer');
     }
   }
 
@@ -186,7 +185,6 @@ class SavannahGameView {
           this.modalWindow.show();
           return;
         case 'settings':
-          console.log(settings);
           this.renderModalWindow(quitModalWindowHandler);
           this.modalWindow.renderSettings(saveSettingsButtonHandler, settingsCheckboxHandler, settingsDifficultyHandler, settingsRoundHandler, settings);
           this.modalWindow.show();
@@ -222,21 +220,22 @@ class SavannahGameView {
   }
 
   playAudio(src) {
-    this.audio.remove();
     this.audio = new Audio(src);
-    this.gameContainer.appendChild(this.audio);
-    console.log(this.audio);
     this.audio.play();
   }
 
   getPlayGameResultStatus() {
-    return (gameResult) => {
-      switch (gameResult) {
-        case 'win':
-          this.playAudio(audioWinPath);
+    const playMapping = {
+      'win': () => this.playAudio(audioWinPath),
+      'loss': () => this.playAudio(audioLosePath),
+    }
+
+    return (gameResult, musicStatus) => {
+      switch (musicStatus) {
+        case 'on':
+          playMapping[gameResult]();
           return;
-        case 'loss':
-          this.playAudio(audioLosePath)
+        case 'off':
           return;
         default:
           throw new Error('wrong music status');

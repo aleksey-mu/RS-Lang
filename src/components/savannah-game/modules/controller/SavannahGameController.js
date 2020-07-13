@@ -13,7 +13,6 @@ class SavannahGameController {
     this.makeKeyboardListener('2');
     this.makeKeyboardListener('3');
     this.makeKeyboardListener('4');
-    console.log(this.keyboardEvents);
 
     this.model.registerObserver('currentPage', this.view.getRenderPage(
       this.getToLoading(),

@@ -21,7 +21,6 @@ const getRandomNumbers = (min, max, exceptions = [], count = 1) => {
 
 const getWordsFromApi = (page, group) => {
   const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${group}&group=${page}`;
-  console.log(url, group, page);
   return fetch(url).then((response) => {
     if (!response.ok) throw new Error(response.statusText);
     return response.json();
@@ -63,7 +62,6 @@ const getGameLearnedWords = (learnedWords, maxRound) => {
 };
 
 const getGameWordsByDifficultyAndRound = (settingsDifficulty, settingsRound, maxRound) => {
-  console.log(settingsRound, settingsDifficulty);
   const rightWords = getWordsFromApi(settingsDifficulty, settingsRound);
   const wrongWords = getRandomFakeWords(maxRound, settingsDifficulty, settingsRound);
   return Promise.all([rightWords, wrongWords]).then((data) => {
@@ -138,7 +136,6 @@ class SavannahGameModel {
         });
       } else {
         this.maxRounds = apiWordsInGroup;
-        console.log(this);
         getGameWordsByDifficultyAndRound(this.settings.difficulty, this.settings.round, this.maxRounds)
           .then((words) => {
             this.gameWords = words;
@@ -196,7 +193,7 @@ class SavannahGameModel {
 
   setGameResult(value) {
     this.gameResult = value;
-    this.gameResultObservers.map((observer) => observer(this.gameResult));
+    this.gameResultObservers.map((observer) => observer(this.gameResult, this.volume));
     this.setCurrentPage('end');
     this.setModalWindow('statistics');
   }
