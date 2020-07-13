@@ -1,11 +1,17 @@
 import Helper from "./Helper";
-import * as ICONS from './Icons.json';
 import FinishScreenComponent from "./FinishScreenComponent";
 
 export default class StartScreenComponent {
   constructor() {
     this.root = document.createElement('div');
-    this.timeLeft = 3;
+    this.timeLeft = 15;
+    this.words = [];
+    this.translates = [];
+    this.answers = [];
+    this.score = 0;
+    this.sequenceOfQuestions = [];
+    this.rightAnswersCounter = 0;
+    this.pointsStat = []
   }
 
   init() {
@@ -17,7 +23,7 @@ export default class StartScreenComponent {
                   <div class="container">
                       <div class="lp-countdown lp-countdown-md line col-sm-4 col-xs-12">
                         <div class="lp-countdown-block">
-                          <div class="lp-countdown-counter">3</div>
+                          <div class="lp-countdown-counter">157</div>
                           <div class="lp-countdown-label">SECONDS</div>
                         </div>
                       </div>
@@ -86,8 +92,10 @@ export default class StartScreenComponent {
           setTimeout(() => {
             this.root.querySelector('.card__container').classList.remove('backlight-right-answer')
           }, 800);
-          this.changeScore();
-          this.addPoint();
+          this.rightAnswersCounter += 1;
+          // this.changeScore();
+          this.changeCurrentPoint();
+          this.saveStats(currentWord, currentTranslate, true);
         }
         else if(content.filter((el) => el.word === currentWord)[0].wordTranslate !== currentTranslate && answer === 'danger') {
           console.log(`True answer! currentWord: ${currentWord}, currentTranslate: ${currentTranslate}, 
@@ -96,8 +104,10 @@ export default class StartScreenComponent {
           setTimeout(() => {
             this.root.querySelector('.card__container').classList.remove('backlight-right-answer')
           }, 800);
-          this.changeScore();
-          this.addPoint();
+          this.rightAnswersCounter += 1;
+          // this.changeScore();
+          this.changeCurrentPoint();
+          this.saveStats(currentWord, currentTranslate, true);
         }
         else {
           console.log(`False answer! currentWord: ${currentWord}, currentTranslate: ${currentTranslate}, 
@@ -106,26 +116,48 @@ export default class StartScreenComponent {
           setTimeout(() => {
             this.root.querySelector('.card__container').classList.remove('backlight-wrong-answer')
           }, 800);
+          this.rightAnswersCounter = 0;
           this.changeCurrentPoint();
+          this.saveStats(currentWord, currentTranslate, false);
         }
       })
       .catch((error) => {
         throw new Error(`${error}: Problems with API`);
       });
-  }
+      console.log(this.words);
+      console.log(this.translates);
+      console.log(this.answers);
+    }
 
-  changeScore() {
-    this.root.querySelector('.label-score').innerHTML = Number(this.root.querySelector('.label-score').innerHTML) + 20;
+  changeScore(n) {
+    this.score += n;
+    this.root.querySelector('.label-score').innerHTML = this.score;
+    this.pointsStat.push(n);
   }
 
   changeCurrentPoint() {
-    this.root.querySelector('.current-point').dataset.label = '❌';
+    if(this.rightAnswersCounter < 4) {
+      this.root.querySelector('.current-point').dataset.label = '✅ + 10';
+      this.changeScore(10);
+    }
+    if(this.rightAnswersCounter === 4) {
+      this.root.querySelector('.current-point').dataset.label = '🔥 + 50';
+      this.changeScore(50);
+    }
+    if(this.rightAnswersCounter > 4) {
+      this.root.querySelector('.current-point').dataset.label = '✅ + 20';
+      this.changeScore(20);
+    }
+    if(this.rightAnswersCounter === 0) {
+      this.root.querySelector('.current-point').dataset.label = '❌';
+    }
   }
 
-  addPoint() {
-    this.root.querySelector('.current-point').dataset.label = '✅ + 10';
+  saveStats(currentWord, currentTranslate, answer) {
+    this.words.push(currentWord);
+    this.translates.push(currentTranslate);
+    this.answers.push(answer);
   }
-
 
   changeCard() {
     let num = 0;
@@ -140,7 +172,7 @@ export default class StartScreenComponent {
           this.fetchWord(num + 1, num + 2);
           num += 1;
         }
-        this.changeIcon();
+        this.sequenceOfQuestions.push(false);
     }
     this.root.querySelector('.btn-success').onclick = () => {
       this.verifyAnswer('success');
@@ -153,19 +185,12 @@ export default class StartScreenComponent {
         this.fetchWord(num + 1, num + 2);
         num += 1;
       }
-      this.changeIcon();
+      this.sequenceOfQuestions.push(true);
     }
 
     if(num > 20) {
       console.log('Finish level');
     }
-  }
-
-  changeIcon() {
-    const randomIcon = ICONS.iconName[Helper.getRandomArbitrary(0, ICONS.iconName.length)];
-    console.log(Helper.getRandomArbitrary(0, ICONS.iconName.length));
-    this.root.querySelector('.random-icon').className = this.root.querySelector('.random-icon').className
-      .replace(new RegExp('glyphicon-[a-z-]{1,}'), `glyphicon-${randomIcon}`);
   }
 
   /* eslint class-methods-use-this: ["error", { "exceptMethods": ["startTimer"] }] */
@@ -182,11 +207,24 @@ export default class StartScreenComponent {
   }
 
   gameOver() {
+    this.score = this.root.querySelector('.label-score').innerHTML;
     this.hideGameCards();
-    this.root.insertAdjacentElement('beforeend', new FinishScreenComponent().init());
+    this.root.insertAdjacentElement('beforeend', 
+      new FinishScreenComponent(
+        this.score, 
+        this.words, 
+        this.translates, 
+        this.answers, 
+        this.sequenceOfQuestions, 
+        this.pointsStat)
+        .init());
+    console.log(`sequenceOfQuestions: ${this.sequenceOfQuestions}`);
   }
 
   hideGameCards() {
     this.root.innerHTML = '';
   }
+
+
+  
 }

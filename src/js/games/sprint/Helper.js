@@ -8,4 +8,14 @@ export default class Helper {
   static getRandomArbitrary(min, max) {
     return Math.ceil(Math.random() * (max - min) + min);
   }
+
+  static answersToRussian(answer) {
+    let str = '';
+    if(answer === true) {
+      str = 'Верно';
+    } else {
+      str = 'Неверно';
+    }
+    return str;
+  }
 }
