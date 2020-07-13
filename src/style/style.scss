@@ -1,3 +1,10 @@
+@import 'base/constants';
+@import 'base/base';
+@import 'base/header';
+
+@import 'base/loadAnimation';
+@import 'base/loadingBar';
+
 @import './games/speakIt/mainStyle';
 @import './games/speakIt/card';
 @import './games/speakIt/diffSelector';
@@ -5,12 +12,13 @@
 @import './games/speakIt/microphoneIcon';
 @import './games/speakIt/result';
 @import './games/speakIt/intro';
-@import './bootstrap.min.css';
 
 body {
-	font-family: Helvetica, sans-serif;
 	font-size: 10px;
-	background: #ffecd9;
+}
+
+.btn-primary {
+	font-size: 2rem;
 }
 
 .hidden {

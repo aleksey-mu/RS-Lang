@@ -11,5 +11,4 @@ export default async function getCardsSet() {
 	const recievedJSON = JSON.stringify(json, null, 1);
 	const recievedData = JSON.parse(recievedJSON);
 	return recievedData;
-	// cardsGeneretor(recievedData);
 }

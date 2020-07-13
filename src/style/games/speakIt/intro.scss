@@ -1,11 +1,11 @@
 .intro-module {
 	position: fixed;
-	top: 0;
+	top: $size-header-height;
 	left: 0;
 	height: 100%;
 	width: 100%;
 	font-size: 2.5em;
-	background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+	background-image: linear-gradient(135deg, #fdfcfbd3 0%, #c3d8e2 100%);
 	z-index: 3;
 	display: flex;
 	flex-direction: column;
