@@ -25,10 +25,7 @@ const getWordsFromApi = (page, group) => {
     if (!response.ok) throw new Error(response.statusText);
     return response.json();
   })
-  .then((data) => data.map((wordData) => {
-    const { id, word, wordTranslate } = wordData;
-    return { id, word, wordTranslate };
-  }));
+  .then((data) => data.map((wordData) => wordData));
 };
 
 const getRandomFakeWords = (maxRound, difficulty = getRandomNumbers(0, maxApiWordsPage)[0], settingsRound = getRandomNumbers(0, maxApiWordsGroup)[0]) => {
@@ -55,8 +52,8 @@ const getRandomFakeWords = (maxRound, difficulty = getRandomNumbers(0, maxApiWor
 const getGameLearnedWords = (learnedWords, maxRound) => {
   return getRandomFakeWords(maxRound)
     .then((words) => words.map((fakeWords, index) => {
-      const { word, wordTranslate, id } = learnedWords[index];
-      return [word, wordTranslate, fakeWords, id];
+      const { word, wordTranslate } = learnedWords[index];
+      return [word, wordTranslate, fakeWords, learnedWords[index]];
     }, []));
 };
 
@@ -65,7 +62,10 @@ const getGameWordsByDifficultyAndRound = (settingsDifficulty, settingsRound, max
   const wrongWords = getRandomFakeWords(maxRound, settingsDifficulty, settingsRound);
   return Promise.all([rightWords, wrongWords]).then((data) => {
     const [right, wrong] = data;
-    return right.map(({ word, wordTranslate, id }, index) => [word, wordTranslate, wrong[index], id]);
+    return right.map((el, index) => {
+      const { word, wordTranslate } = el;
+      return [word, wordTranslate, wrong[index], el];
+    });
   });
 };
 
@@ -169,8 +169,8 @@ class SavannahGameModel {
       }
       return;
     }
-    const [right, translate, wrongs, id] = this.gameWords.pop();
-    this.currentRoundWords = { right, translate, wrongs , id};
+    const [right, translate, wrongs, wordObject] = this.gameWords.pop();
+    this.currentRoundWords = { right, translate, wrongs , wordObject};
     this.currentRoundWordsObservers.map((observer) =>observer(this.currentRoundWords));
   }
 

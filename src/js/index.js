@@ -23,8 +23,13 @@ function trainingSavannahPage() {
     window.location.hash = '/main/';
   }
 
+  const getStatistic = (statistic) => {
+    console.log(statistic);
+  }
+
   savannahGame.init();
   savannahGame.onGameClose(toMainPage);
+  savannahGame.onGameEnd(getStatistic);
 }
 
 

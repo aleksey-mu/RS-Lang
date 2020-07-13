@@ -127,7 +127,7 @@ class SavannahGameController {
   getRightAnswerHandler() {
     return () => {
       clearTimeout(this.answerTimeout);
-      this.model.statistics.guessedWords.push(this.model.currentRoundWords.translate);
+      this.model.statistics.guessedWords.push(this.model.currentRoundWords.wordObject);
       this.model.setRound(this.model.getRound() + 1);
       this.model.setLastAnswerStatus('right');
       setTimeout(() => {
@@ -139,7 +139,7 @@ class SavannahGameController {
   getWrongAnswerHandler() {
     return () => {
       clearTimeout(this.answerTimeout);
-      this.model.statistics.notGuessedWords.push(this.model.currentRoundWords.translate);
+      this.model.statistics.notGuessedWords.push(this.model.currentRoundWords.wordObject);
       this.model.setCurrentLives(this.model.getCurrentLives() - 1);
       this.model.setRound(this.model.getRound() + 1);
       this.model.setLastAnswerStatus('wrong');
@@ -191,6 +191,12 @@ class SavannahGameController {
 
   onGameClose(func) {
     this.closeGameButtonListeners.push(func);
+  }
+
+  onGameEnd(func) {
+    this.model.registerObserver('gameResult', () => {
+      func(this.model.statistics);
+    });
   }
 }
 

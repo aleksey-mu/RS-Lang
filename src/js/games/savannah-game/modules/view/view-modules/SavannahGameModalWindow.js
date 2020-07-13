@@ -173,10 +173,11 @@ class SavannahGameModalWindow {
     this.container.appendChild(modalContainer);
   }
 
-  renderStatistics(okButtonListener, statistics, result) {
-    console.log(statistics, result);
+  renderStatistics(okButtonListener, statistics) {
     this.clear();
-    const data = document.createTextNode(`Статистика\nУгаданные слова: ${statistics.guessedWords}\nНеугаданные слова: ${statistics.notGuessedWords}\n Результат: ${result}`);
+    const guessedWords = statistics.guessedWords.map((el) => el.wordTranslate);
+    const notGuessedWords = statistics.notGuessedWords.map((el) => el.wordTranslate);
+    const data = document.createTextNode(`Статистика\nУгаданные слова: ${guessedWords}\nНеугаданные слова: ${notGuessedWords}`);
     const modalContainer = this.renderBasicElements([data]);
     modalContainer.appendChild(this.renderOkButton(okButtonListener, 'ВЫХОД'));
     this.container.appendChild(modalContainer);
