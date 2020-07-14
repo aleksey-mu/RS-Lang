@@ -1,0 +1,428 @@
+@import "utils/savannah-game-vars";
+@import "utils/savannah-game-mixins";
+@import "utils/savannah-game-gem-animation-styles";
+
+.savannah-game {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  z-index: 29;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  color: $fontColor;
+  font-size: $mainFontSize;
+  font-weight: $mainFontWeight;
+  line-height: $mainLineHeight;
+  background-image: url("/img/games/savannah-game/savannah-background.svg");
+  background-position-x: center;
+  transition-duration: 1s;
+  transition-property: background-position-y;
+
+  @media screen and (max-width: $desktopWidth) {
+    font-size: $mainFontSize - 1px;
+  }
+  @media screen and (max-width: $smDesktopWidth) {
+    font-size: $mainFontSize - 2px;
+  }
+  @media screen and (max-width: $tableWidth) {
+    font-size: $mainFontSize - 3px;
+  }
+  @media screen and (max-width: $smTableWidth) {
+    font-size: $mainFontSize - 4px;
+  }
+  @media screen and (max-width: $phoneWidth) {
+    font-size: $mainFontSize - 5px
+  }
+  @media screen and (max-width: $smPhoneWidth) {
+    font-size: $mainFontSize - 6px;
+  }  
+  
+  .savannah-game-container {
+    display: flex;
+    width: inherit;
+  }
+  
+  .savannah-game-header {
+    position: relative;
+    justify-content: space-between;
+    height: $headerHeight;
+    margin-top: $headerMarginTop;
+    
+    .savannah-left-panel, .savannah-right-panel, .savannah-health-bar {
+      display: flex;
+      
+      .savannah-health-bar {
+        .savannah-health {
+          @extend %flex-all-centered;
+          margin: 5px 1px;
+
+          .savannah-icon-broken, .savannah-icon-unbroken {
+            width: 100%;
+            height: auto;
+          }
+
+          .savannah-icon-broken {
+            opacity: 0.2;
+          }
+        }
+      }
+    }
+
+    .savannah-music-button, .savannah-quit-button {
+      margin: 5px 30px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .savannah-game-middle-container {
+    position: relative;
+    justify-content: center;
+  }
+  
+  .savannah-game-middle-container {
+    align-items: center;
+    height: calc(100% - #{$headerHeight} - #{$footerHeight} - #{$headerMarginTop});
+    flex-wrap: wrap;
+
+    .savannah-start-description {
+      @extend %flex-all-centered;
+      flex-direction: column;
+      font-size: $descriptionFontSize;
+      @media screen and (max-width: $desktopWidth) {
+        font-size: $descriptionFontSize - 2px;
+      }
+      @media screen and (max-width: $smDesktopWidth) {
+        font-size: $descriptionFontSize - 4px;
+      }
+      @media screen and (max-width: $tableWidth) {
+        font-size: $descriptionFontSize - 6px;
+      }
+      @media screen and (max-width: $smTableWidth) {
+        font-size: $descriptionFontSize - 7px;
+      }
+      @media screen and (max-width: $phoneWidth) {
+        font-size: $descriptionFontSize - 8px
+      }
+      @media screen and (max-width: $smPhoneWidth) {
+        font-size: $descriptionFontSize - 9px;
+      }  
+
+
+      .savannah-heading {
+        font-size: $headingFontSize;
+        text-align: center;
+        @media screen and (max-width: $desktopWidth) {
+          font-size: $headingFontSize - 2px;
+        }
+        @media screen and (max-width: $smDesktopWidth) {
+          font-size: $headingFontSize - 4px;
+        }
+        @media screen and (max-width: $tableWidth) {
+          font-size: $headingFontSize - 6px;
+        }
+        @media screen and (max-width: $smTableWidth) {
+          font-size: $headingFontSize - 8px;
+        }
+        @media screen and (max-width: $phoneWidth) {
+          font-size: $headingFontSize - 10px
+        }
+        @media screen and (max-width: $smPhoneWidth) {
+          font-size: $headingFontSize - 12px;
+        }  
+      }
+
+      .savannah-description {
+        text-align: center;
+      }
+
+      .savannah-start-button, .savannah-settings-button {
+        width: $buttonWidth;
+
+        @media screen and (max-width: $phoneWidth) {
+          width: 100%;
+          margin: 10px;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      div {
+        margin: 20px;
+      }
+    }
+
+    .savannah-word-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .savannah-countdown {
+      .savannah-gem-circle {
+        @extend %flex-all-centered;
+        position: relative;
+        height: 150px;
+        width: 150px;
+
+        .savannah-countdown-number {
+          position: relative;
+          left: -12px;
+          top: -12px;
+          font-size: $headingFontSize;
+        }
+      }
+    }
+  }
+  
+  .savannah-game-footer {
+    @extend %flex-all-centered;
+    height: $footerHeight;
+    box-sizing: border-box;
+ 
+    .savannah-status-management {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .savannah-status-bar {
+        width: 250px;
+        height: 20px;
+        border-radius: 5px;
+      }
+    }
+
+    .savannah-keyboard-info {
+      text-align: center;
+    }
+  }
+
+  .savannah-word-rus, .savannah-word-eng {
+    @extend %word-positioning;
+    border-radius: 5px;
+    overflow: hidden;
+
+    @media screen and (max-width: $desktopWidth) {
+      margin: 40px;
+    }
+    @media screen and (max-width: $smDesktopWidth) {
+      margin: 35px;
+    }
+    @media screen and (max-width: $tableWidth) {
+      margin: 30px;
+    }
+    @media screen and (max-width: $smTableWidth) {
+      margin: 25px;
+    }
+    @media screen and (max-width: $phoneWidth) {
+      margin: 20px;
+    }
+    @media screen and (max-width: $smPhoneWidth) {
+      margin: 15px;
+    }
+      
+    .savannah-word-text {
+      width: 180px;
+      margin: 10px;
+      font-size: $mainFontSize;
+      text-align: center;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto; 
+    }
+  }
+
+  .savannah-right-answer {
+    background-color: green;
+    opacity: 0.5;
+  }
+
+  .savannah-word-rus {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .savannah-drop-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+
+    .savannah-word-text {
+      font-size: $headingFontSize;
+      width: 300px;
+    }
+  }
+
+  .savannah-drop-animation {
+    -webkit-animation-name: savannah-drop-animation;
+    -webkit-animation-duration: 10s;
+    animation-name: savannah-drop-animation;
+    animation-duration: 10s;
+  }
+
+  .savannah-modal-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    @extend %flex-all-centered;
+    color: black;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    .savannah-modal-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      border-radius: 5px;
+      margin: 50px;
+
+      .savannah-modal-data-heading {
+        font-size: $headingFontSize;
+        text-align: center;
+      }
+
+      .savannah-modal-data-alert {
+        color: red;
+        text-align: center;
+      }
+
+      .savannah-modal-data-quit-alert {
+        text-align: center;
+      }
+      
+      .savannah-modal-data-checkbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        input {
+          margin-right: 10px;
+        }
+      }
+
+      .savannah-modal-data-select {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        select {
+          margin-left: 10px;
+        }
+      }
+
+
+      div, label {
+        margin: 15px;
+      }
+
+      .savannah-modal-button-container {
+        @media screen and (max-width: $smTableWidth) {
+          display: flex;
+          flex-direction: column;
+          div {
+            margin: 10px;
+          }
+        }
+      }
+      
+      .savannah-quit-button {
+        position: absolute;
+        right: -40px;
+        top: -40px;
+        height: 20px;
+        width: 20px;
+      }
+
+      .savannah-modal-data-statistic {
+        display: flex;
+        flex-direction: column;
+        max-height: 500px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        @media screen and (max-width: $desktopWidth) {
+          max-height: 450px;
+        }
+        @media screen and (max-width: $smDesktopWidth) {
+          max-height: 400px;
+        }
+        @media screen and (max-width: $tableWidth) {
+          max-height: 375px
+        }
+        @media screen and (max-width: $smTableWidth) {
+          max-height: 350px
+        }
+        @media screen and (max-width: $phoneWidth) {
+          max-height: 325px;
+        }
+        @media screen and (max-width: $smPhoneWidth) {
+          max-height: 300px;
+        }  
+
+        .savannah-modal-data-statistic-guessed {
+          .savannah-modal-data-heading {
+            color: green;
+          }
+        }
+
+        .savannah-modal-data-statistic-not-guessed {
+          .savannah-modal-data-heading {
+            color: red;
+          }
+        }
+
+        .savannah-modal-data-statistic-guessed, .savannah-modal-data-statistic-not-guessed {
+          margin: 10px;
+        }
+      }
+    }
+
+    .savannah-ok-button, .savannah-cancel-button, .savannah-quit-button {
+      width: $buttonWidth;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .savannah-display-none {
+    display: none !important;
+  }
+
+  @-webkit-keyframes savannah-drop-animation {
+    from {
+      top: 0;
+    }
+    to {
+      top: 40%;
+    }
+  }
+
+  @keyframes savannah-drop-animation {
+    from {
+      top: 0;
+    }
+    to {
+      top: 40%;
+    }
+  }
+  
+  img {
+    width: auto;
+    height: 100%;
+  }
+}

@@ -147,6 +147,18 @@ const config = {
 					},
 				],
 			},
+			{
+        test: /\.(ogg|mp3|wav|mpe?g)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							outputPath: './audio',
+							name: '[name].[ext]',
+						}
+					},
+				],
+      },
 		],
 	},
 
