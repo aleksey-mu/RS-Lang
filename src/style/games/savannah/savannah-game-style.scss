@@ -19,6 +19,25 @@
   background-position-x: center;
   transition-duration: 1s;
   transition-property: background-position-y;
+
+  @media screen and (max-width: $desktopWidth) {
+    font-size: $mainFontSize - 1px;
+  }
+  @media screen and (max-width: $smDesktopWidth) {
+    font-size: $mainFontSize - 2px;
+  }
+  @media screen and (max-width: $tableWidth) {
+    font-size: $mainFontSize - 3px;
+  }
+  @media screen and (max-width: $smTableWidth) {
+    font-size: $mainFontSize - 4px;
+  }
+  @media screen and (max-width: $phoneWidth) {
+    font-size: $mainFontSize - 5px
+  }
+  @media screen and (max-width: $smPhoneWidth) {
+    font-size: $mainFontSize - 6px;
+  }  
   
   .savannah-game-container {
     display: flex;
@@ -60,7 +79,7 @@
     }
   }
   
-  .savannah-game-middle-container, .savannah-game-footer {
+  .savannah-game-middle-container {
     position: relative;
     justify-content: center;
   }
@@ -74,10 +93,47 @@
       @extend %flex-all-centered;
       flex-direction: column;
       font-size: $descriptionFontSize;
+      @media screen and (max-width: $desktopWidth) {
+        font-size: $descriptionFontSize - 2px;
+      }
+      @media screen and (max-width: $smDesktopWidth) {
+        font-size: $descriptionFontSize - 4px;
+      }
+      @media screen and (max-width: $tableWidth) {
+        font-size: $descriptionFontSize - 6px;
+      }
+      @media screen and (max-width: $smTableWidth) {
+        font-size: $descriptionFontSize - 7px;
+      }
+      @media screen and (max-width: $phoneWidth) {
+        font-size: $descriptionFontSize - 8px
+      }
+      @media screen and (max-width: $smPhoneWidth) {
+        font-size: $descriptionFontSize - 9px;
+      }  
+
 
       .savannah-heading {
         font-size: $headingFontSize;
         text-align: center;
+        @media screen and (max-width: $desktopWidth) {
+          font-size: $headingFontSize - 2px;
+        }
+        @media screen and (max-width: $smDesktopWidth) {
+          font-size: $headingFontSize - 4px;
+        }
+        @media screen and (max-width: $tableWidth) {
+          font-size: $headingFontSize - 6px;
+        }
+        @media screen and (max-width: $smTableWidth) {
+          font-size: $headingFontSize - 8px;
+        }
+        @media screen and (max-width: $phoneWidth) {
+          font-size: $headingFontSize - 10px
+        }
+        @media screen and (max-width: $smPhoneWidth) {
+          font-size: $headingFontSize - 12px;
+        }  
       }
 
       .savannah-description {
@@ -127,6 +183,7 @@
   }
   
   .savannah-game-footer {
+    @extend %flex-all-centered;
     height: $footerHeight;
     box-sizing: border-box;
  
@@ -292,9 +349,28 @@
       .savannah-modal-data-statistic {
         display: flex;
         flex-direction: column;
-        max-height: 400px;
+        max-height: 500px;
         overflow-x: hidden;
         overflow-y: scroll;
+
+        @media screen and (max-width: $desktopWidth) {
+          max-height: 450px;
+        }
+        @media screen and (max-width: $smDesktopWidth) {
+          max-height: 400px;
+        }
+        @media screen and (max-width: $tableWidth) {
+          max-height: 375px
+        }
+        @media screen and (max-width: $smTableWidth) {
+          max-height: 350px
+        }
+        @media screen and (max-width: $phoneWidth) {
+          max-height: 325px;
+        }
+        @media screen and (max-width: $smPhoneWidth) {
+          max-height: 300px;
+        }  
 
         .savannah-modal-data-statistic-guessed {
           .savannah-modal-data-heading {
