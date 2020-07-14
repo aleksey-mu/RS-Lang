@@ -1,10 +1,10 @@
 const createWordTranslateElement = (word, listener) => {
   const wordElement = document.createElement('div');
-  wordElement.classList.add('word-rus');
+  wordElement.classList.add('savannah-word-rus');
   wordElement.addEventListener('click', listener);
 
   const wordText = document.createElement('div');
-  wordText.classList.add('word-text');
+  wordText.classList.add('savannah-word-text');
   wordText.innerText = word;
 
   wordElement.appendChild(wordText);
@@ -23,7 +23,7 @@ const shuffleElements = (elements) => {
   return elements.map((el, index) => {
     el.setAttribute('style', `order: ${newOrder[index]};`);
     el.setAttribute('data-order', newOrder[index] + 1);
-    const wordText = el.querySelector('.word-text');
+    const wordText = el.querySelector('.savannah-word-text');
     wordText.innerText = `${newOrder[index] + 1}. ${wordText.innerText}`;
     return el;
   });
@@ -32,7 +32,7 @@ const shuffleElements = (elements) => {
 class SavannahGameWordsContainer {
   constructor() {
     this.container = document.createElement('div');
-    this.container.classList.add('game-middle-container', 'savannah-game-container');
+    this.container.classList.add('savannah-game-middle-container', 'savannah-game-container');
   }
 
   render() {
@@ -53,36 +53,43 @@ class SavannahGameWordsContainer {
     wrongTranslateElements.map((el) => el.setAttribute('data-answer', 'wrong'));
 
     const shuffleTranslateElements = shuffleElements([rightTranslateElement, ...wrongTranslateElements]);
+    const wordsContainer = document.createElement('div');
+    wordsContainer.classList.add('savannah-word-container');
 
-    shuffleTranslateElements.map((wordElement) => this.container.appendChild(wordElement));
+    shuffleTranslateElements.map((wordElement) => wordsContainer.appendChild(wordElement));
+    this.container.appendChild(wordsContainer);
   }
 
   renderStartScreen(startButtonListener, settingsButtonListener) {
     this.clearContainer();
 
     const startContainer = document.createElement('div');
-    startContainer.classList.add('start-description');
+    startContainer.classList.add('savannah-start-description');
 
     const startButton = document.createElement('div');
-    startButton.classList.add('start-button');
-    startButton.innerText = 'НАЧАТЬ';
+    startButton.classList.add('savannah-start-button', 'btn', 'btn-primary');
+    startButton.innerText = 'Старт';
     startButton.addEventListener('click', startButtonListener);
 
     const settingsButton = document.createElement('div');
-    settingsButton.classList.add('settings-button');
-    settingsButton.innerText = 'НАСТРОЙКИ';
+    settingsButton.classList.add('savannah-settings-button', 'btn', 'btn-primary');
+    settingsButton.innerText = 'Настройки';
     settingsButton.addEventListener('click', settingsButtonListener);
 
     const heading = document.createElement('div');
-    heading.classList.add('heading');
-    heading.innerText = 'САВАННА';
+    heading.classList.add('savannah-heading');
+    heading.innerText = 'Добро пожаловать в САВАННУ!';
 
     const description = document.createElement('div');
-    description.classList.add('description');
+    description.classList.add('savannah-description');
     description.innerText = 'Тренировка Саванна проверяет словарный запас. \nПо умолчанию в игре используются изученные слова, но вы можете поменять это в настройках.';
 
+    const buttonContainer = document.createElement('div');
+    buttonContainer.appendChild(settingsButton);
+    buttonContainer.appendChild(startButton);
+
     this.container.appendChild(startContainer);
-    [heading, description, settingsButton, startButton].map((elements) => startContainer.appendChild(elements));
+    [heading, description, buttonContainer].map((elements) => startContainer.appendChild(elements));
   }
 
   renderCountdown(countdownEndListener) {
@@ -94,13 +101,13 @@ class SavannahGameWordsContainer {
     const countdownNumber = document.createElement('div');
     const countDownAnimation = document.createElement('div');
     const countdownHtml = `
-      <div class="gem-parts-3"></div>
-      <div class="gem-parts-2"></div>
-      <div class="gem-parts-1"></div>`;
+      <div class="savannah-gem-parts-3"></div>
+      <div class="savannah-gem-parts-2"></div>
+      <div class="savannah-gem-parts-1"></div>`;
 
-    countdown.classList.add('countdown');
-    countdownNumber.classList.add('countdown-number');
-    countDownAnimation.classList.add('gem-circle');
+    countdown.classList.add('savannah-countdown');
+    countdownNumber.classList.add('savannah-countdown-number');
+    countDownAnimation.classList.add('savannah-gem-circle');
     countDownAnimation.innerHTML = countdownHtml;
     countDownAnimation.appendChild(countdownNumber);
 
@@ -124,13 +131,13 @@ class SavannahGameWordsContainer {
     const countdownNumber = document.createElement('div');
     const countDownAnimation = document.createElement('div');
     const countdownHtml = `
-      <div class="gem-parts-3"></div>
-      <div class="gem-parts-2"></div>
-      <div class="gem-parts-1"></div>`;
+      <div class="savannah-gem-parts-3"></div>
+      <div class="savannah-gem-parts-2"></div>
+      <div class="savannah-gem-parts-1"></div>`;
 
-    countdown.classList.add('countdown');
-    countdownNumber.classList.add('countdown-number');
-    countDownAnimation.classList.add('gem-circle');
+    countdown.classList.add('savannah-countdown');
+    countdownNumber.classList.add('savannah-countdown-number');
+    countDownAnimation.classList.add('savannah-gem-circle');
     countDownAnimation.innerHTML = countdownHtml;
     countDownAnimation.appendChild(countdownNumber);
 

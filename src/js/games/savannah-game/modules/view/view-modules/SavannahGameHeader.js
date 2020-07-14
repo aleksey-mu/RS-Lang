@@ -5,12 +5,12 @@ class SavannahGameHeader {
       healtIconPath: {
         src: healtIconPath,
         alt: 'health',
-        class: 'icon-unbroken',
+        class: 'savannah-icon-unbroken',
       },
       emptyHealthIconPath: {
         src: emptyHealthIconPath,
         alt: 'empty-health',
-        class: 'icon-broken',
+        class: 'savannah-icon-broken',
       },
     }
     this.musicIconMapping = {
@@ -24,22 +24,22 @@ class SavannahGameHeader {
     this.quitIconPath = quitIconPath;
 
     this.container = document.createElement('div');
-    this.container.classList.add('game-header', 'savannah-game-container');
+    this.container.classList.add('savannah-game-header', 'savannah-game-container');
 
     this.leftPanel = document.createElement('div');
-    this.leftPanel.classList.add('left-panel');
+    this.leftPanel.classList.add('savannah-left-panel');
 
     this.rightPanel = document.createElement('div');
-    this.rightPanel.classList.add('right-panel');
+    this.rightPanel.classList.add('savannah-right-panel');
 
     this.musicButton = document.createElement('div');
-    this.musicButton.classList.add('music-button');
+    this.musicButton.classList.add('savannah-music-button');
 
     this.healtBar = document.createElement('div');
-    this.healtBar.classList.add('health-bar');
+    this.healtBar.classList.add('savannah-health-bar');
 
     this.quitButton = document.createElement('div');
-    this.quitButton.classList.add('quit-button');
+    this.quitButton.classList.add('savannah-quit-button');
     this.quitButton.addEventListener('click', quitButtonListener);
 
 
@@ -86,7 +86,7 @@ class SavannahGameHeader {
       const iconClass = this.healthIconMapping[icon].class;
 
       health.appendChild(healthIcon);
-      health.classList.add('health');
+      health.classList.add('savannah-health');
       healthIcon.classList.add(iconClass);
       healthIcon.setAttribute('src', iconPath);
       healthIcon.setAttribute('alt', iconAlt);

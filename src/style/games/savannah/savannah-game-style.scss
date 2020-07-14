@@ -4,13 +4,13 @@
 
 .savannah-game {
   position: absolute;
-  top: 0;
+  top: 70px;
   left: 0;
-  z-index: 31;
+  z-index: 29;
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 70px);
   color: $fontColor;
   font-size: $mainFontSize;
   font-weight: $mainFontWeight;
@@ -25,33 +25,33 @@
     width: inherit;
   }
   
-  .game-header {
+  .savannah-game-header {
     position: relative;
     justify-content: space-between;
     height: $headerHeight;
     margin-top: $headerMarginTop;
     
-    .left-panel, .right-panel, .health-bar {
+    .savannah-left-panel, .savannah-right-panel, .savannah-health-bar {
       display: flex;
       
-      .health-bar {
-        .health {
+      .savannah-health-bar {
+        .savannah-health {
           @extend %flex-all-centered;
           margin: 5px 1px;
 
-          .icon-broken, .icon-unbroken {
+          .savannah-icon-broken, .savannah-icon-unbroken {
             width: 100%;
             height: auto;
           }
 
-          .icon-broken {
+          .savannah-icon-broken {
             opacity: 0.2;
           }
         }
       }
     }
 
-    .music-button, .quit-button {
+    .savannah-music-button, .savannah-quit-button {
       margin: 5px 30px;
 
       &:hover {
@@ -60,79 +60,121 @@
     }
   }
   
-  .game-middle-container, .game-footer {
+  .savannah-game-middle-container, .savannah-game-footer {
     position: relative;
     justify-content: center;
   }
   
-  .game-middle-container {
+  .savannah-game-middle-container {
     align-items: center;
     height: calc(100% - #{$headerHeight} - #{$footerHeight} - #{$headerMarginTop});
+    flex-wrap: wrap;
 
-    .start-description {
+    .savannah-start-description {
       @extend %flex-all-centered;
       flex-direction: column;
+      font-size: $descriptionFontSize;
 
-      .heading {
+      .savannah-heading {
         font-size: $headingFontSize;
-      }
-
-      .description {
         text-align: center;
       }
 
-      .start-button, .settings-button {
+      .savannah-description {
+        text-align: center;
+      }
+
+      .savannah-start-button, .savannah-settings-button {
+        width: $buttonWidth;
+
+        @media screen and (max-width: $phoneWidth) {
+          width: 100%;
+          margin: 10px;
+        }
+
         &:hover {
           cursor: pointer;
         }
       }
 
       div {
-        margin: 40px;
+        margin: 20px;
       }
     }
 
-    .countdown {
-      .gem-circle {
+    .savannah-word-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .savannah-countdown {
+      .savannah-gem-circle {
         @extend %flex-all-centered;
         position: relative;
-        height: rem(150px);
-        width: rem(150px);
+        height: 150px;
+        width: 150px;
 
-        .countdown-number {
-          font-size: 50px;
+        .savannah-countdown-number {
+          position: relative;
+          left: -12px;
+          top: -12px;
+          font-size: $headingFontSize;
         }
       }
     }
   }
   
-  .game-footer {
+  .savannah-game-footer {
     height: $footerHeight;
     box-sizing: border-box;
  
-    .status-management {
+    .savannah-status-management {
       display: flex;
       align-items: center;
       flex-direction: column;
 
-      .status-bar {
-        width: rem(250px);
-        height: rem(20px);
+      .savannah-status-bar {
+        width: 250px;
+        height: 20px;
         border-radius: 5px;
       }
     }
 
-    .keyboard-info {
+    .savannah-keyboard-info {
       text-align: center;
     }
   }
 
-  .word-rus, .word-eng {
+  .savannah-word-rus, .savannah-word-eng {
     @extend %word-positioning;
+    border-radius: 5px;
+    overflow: hidden;
+
+    @media screen and (max-width: $desktopWidth) {
+      margin: 40px;
+    }
+    @media screen and (max-width: $smDesktopWidth) {
+      margin: 35px;
+    }
+    @media screen and (max-width: $tableWidth) {
+      margin: 30px;
+    }
+    @media screen and (max-width: $smTableWidth) {
+      margin: 25px;
+    }
+    @media screen and (max-width: $phoneWidth) {
+      margin: 20px;
+    }
+    @media screen and (max-width: $smPhoneWidth) {
+      margin: 15px;
+    }
       
-    .word-text {
-      max-width: rem(180px);
+    .savannah-word-text {
+      width: 180px;
       margin: 10px;
+      font-size: $mainFontSize;
       text-align: center;
       overflow-wrap: break-word;
       word-wrap: break-word;
@@ -140,33 +182,38 @@
     }
   }
 
-  .right-answer {
+  .savannah-right-answer {
     background-color: green;
     opacity: 0.5;
   }
 
-  .word-rus {
+  .savannah-word-rus {
     &:hover {
       cursor: pointer;
     }
   }
 
-  .drop-element {
+  .savannah-drop-element {
     position: absolute;
     top: 0;
     left: 0;
     justify-content: center;
     align-items: center;
+
+    .savannah-word-text {
+      font-size: $headingFontSize;
+      width: 300px;
+    }
   }
 
-  .drop-animation {
-    -webkit-animation-name: drop-animation;
+  .savannah-drop-animation {
+    -webkit-animation-name: savannah-drop-animation;
     -webkit-animation-duration: 10s;
-    animation-name: drop-animation;
+    animation-name: savannah-drop-animation;
     animation-duration: 10s;
   }
 
-  .modal-window {
+  .savannah-modal-window {
     position: absolute;
     top: 0;
     left: 0;
@@ -176,52 +223,125 @@
     color: black;
     background-color: rgba(0, 0, 0, 0.5);
     
-    .modal-container {
+    .savannah-modal-container {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       background-color: white;
-      
-      div {
-        margin: 15px;
+      border-radius: 5px;
+      margin: 50px;
+
+      .savannah-modal-data-heading {
+        font-size: $headingFontSize;
+        text-align: center;
+      }
+
+      .savannah-modal-data-alert {
+        color: red;
+        text-align: center;
+      }
+
+      .savannah-modal-data-quit-alert {
+        text-align: center;
       }
       
-      .quit-button {
+      .savannah-modal-data-checkbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        input {
+          margin-right: 10px;
+        }
+      }
+
+      .savannah-modal-data-select {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        select {
+          margin-left: 10px;
+        }
+      }
+
+
+      div, label {
+        margin: 15px;
+      }
+
+      .savannah-modal-button-container {
+        @media screen and (max-width: $smTableWidth) {
+          display: flex;
+          flex-direction: column;
+          div {
+            margin: 10px;
+          }
+        }
+      }
+      
+      .savannah-quit-button {
         position: absolute;
         right: -40px;
         top: -40px;
         height: 20px;
         width: 20px;
       }
-      
-      .ok-button, .cancel-button, .quit-button {
-        &:hover {
-          cursor: pointer;
+
+      .savannah-modal-data-statistic {
+        display: flex;
+        flex-direction: column;
+        max-height: 400px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        .savannah-modal-data-statistic-guessed {
+          .savannah-modal-data-heading {
+            color: green;
+          }
         }
+
+        .savannah-modal-data-statistic-not-guessed {
+          .savannah-modal-data-heading {
+            color: red;
+          }
+        }
+
+        .savannah-modal-data-statistic-guessed, .savannah-modal-data-statistic-not-guessed {
+          margin: 10px;
+        }
+      }
+    }
+
+    .savannah-ok-button, .savannah-cancel-button, .savannah-quit-button {
+      width: $buttonWidth;
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }
 
-  .display-none {
+  .savannah-display-none {
     display: none !important;
   }
 
-  @-webkit-keyframes drop-animation {
+  @-webkit-keyframes savannah-drop-animation {
     from {
       top: 0;
     }
     to {
-      top: 50%;
+      top: 40%;
     }
   }
 
-  @keyframes drop-animation {
+  @keyframes savannah-drop-animation {
     from {
       top: 0;
     }
     to {
-      top: 50%;
+      top: 40%;
     }
   }
   

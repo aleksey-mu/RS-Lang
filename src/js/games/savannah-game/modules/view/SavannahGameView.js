@@ -48,7 +48,7 @@ class SavannahGameView {
   getHighlightCorrectAnswer() {
     return () => {
       const word = this.mainContainer.querySelector('div[data-answer="correct"]');
-      if (word) word.classList.add('right-answer');
+      if (word) word.classList.add('savannah-right-answer');
     }
   }
 

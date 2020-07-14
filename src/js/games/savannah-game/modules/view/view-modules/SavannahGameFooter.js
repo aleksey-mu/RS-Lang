@@ -1,46 +1,46 @@
 const gemInnerHtml = `
-  <div class="gem-move">
-    <div class="gem-bg">
-      <div class="gem-bg-inner"></div>
+  <div class="savannah-gem-move">
+    <div class="savannah-gem-bg">
+      <div class="savannah-gem-bg-inner"></div>
     </div>
-    <div class="gem-img">
-      <i class="gem-img-1 gem-imgs"></i>
-      <i class="gem-img-2 gem-imgs"></i>
-      <i class="gem-img-3 gem-imgs"></i>
-      <i class="gem-img-4 gem-imgs"></i>
+    <div class="savannah-gem-img">
+      <i class="savannah-gem-img-1 savannah-gem-imgs"></i>
+      <i class="savannah-gem-img-2 savannah-gem-imgs"></i>
+      <i class="savannah-gem-img-3 savannah-gem-imgs"></i>
+      <i class="savannah-gem-img-4 savannah-gem-imgs"></i>
     </div>
   </div>
-  <div class="gem-circle">
-    <div class="gem-parts-3"></div>
-    <div class="gem-parts-2"></div>
-    <div class="gem-parts-1"></div>
+  <div class="savannah-gem-circle">
+    <div class="savannah-gem-parts-3"></div>
+    <div class="savannah-gem-parts-2"></div>
+    <div class="savannah-gem-parts-1"></div>
   </div>
   <div>
-    <div class="gem-point-1 gem-point"></div>
-    <div class="gem-point-2 gem-point"></div>
-    <div class="gem-point-3 gem-point"></div>
-    <div class="gem-point-4 gem-point"></div>
-    <div class="gem-point-5 gem-point"></div>
-    <div class="gem-point-6 gem-point"></div>
-    <div class="gem-point-7 gem-point"></div>
-    <div class="gem-point-8 gem-point"></div>
-    <div class="gem-point-9 gem-point"></div>
-    <div class="gem-point-10 gem-point"></div>
+    <div class="savannah-gem-point-1 savannah-gem-point"></div>
+    <div class="savannah-gem-point-2 savannah-gem-point"></div>
+    <div class="savannah-gem-point-3 savannah-gem-point"></div>
+    <div class="savannah-gem-point-4 savannah-gem-point"></div>
+    <div class="savannah-gem-point-5 savannah-gem-point"></div>
+    <div class="savannah-gem-point-6 savannah-gem-point"></div>
+    <div class="savannah-gem-point-7 savannah-gem-point"></div>
+    <div class="savannah-gem-point-8 savannah-gem-point"></div>
+    <div class="savannah-gem-point-9 savannah-gem-point"></div>
+    <div class="savannah-gem-point-10 savannah-gem-point"></div>
   </div>`;
 
 class SavannahGameFooter {
   constructor() {
     this.container = document.createElement('div');
-    this.container.classList.add('game-footer', 'savannah-game-container');
+    this.container.classList.add('savannah-game-footer', 'savannah-savannah-game-container');
     
     this.statusManagement = document.createElement('div');
-    this.statusManagement.classList.add('status-management');
+    this.statusManagement.classList.add('savannah-status-management');
 
     this.gem = document.createElement('div');
-    this.gem.classList.add('gem');
+    this.gem.classList.add('savannah-gem');
 
     this.statusBar = document.createElement('div');
-    this.statusBar.classList.add('status-bar');
+    this.statusBar.classList.add('savannah-status-bar');
 
     this.container.appendChild(this.statusManagement);
     this.statusManagement.appendChild(this.gem);
@@ -60,11 +60,11 @@ class SavannahGameFooter {
   }
 
   removeAnimationFromGem() {
-    this.gem.querySelector('.gem-circle').setAttribute('style', 'opacity: 0;');
+    this.gem.querySelector('.savannah-gem-circle').setAttribute('style', 'opacity: 0;');
   }
 
   addAnimationToGem() {
-    this.gem.querySelector('.gem-circle').removeAttribute('style');
+    this.gem.querySelector('.savannah-gem-circle').removeAttribute('style');
   }
 
   renderStatusBar(percent = 0) {
@@ -73,7 +73,7 @@ class SavannahGameFooter {
   };
 
   renderKeyboardControlInfo() {
-    this.container.innerHTML = '<div class="keyboard-info">Используй клавиши 1, 2, 3 и 4, чтобы дать быстрый ответ</div>';
+    this.container.innerHTML = '<div class="savannah-keyboard-info">Используй клавиши 1, 2, 3 и 4, чтобы дать быстрый ответ</div>';
   }
 }
 
