@@ -17,7 +17,7 @@ function trainSpeakItPage() {
 	gameInit();
 }
 function trainingSavannahPage() {
-  const savannahGame = new SavannahGame('#savannah-game', '#/training/savannah/');
+  const savannahGame = new SavannahGame('.main', '#/training/savannah/');
 
   const toMainPage = () => {
     window.location.hash = '/main/';

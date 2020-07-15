@@ -18,6 +18,7 @@ const audioLosePath = '/audio/savannah-lose.wav';
 class SavannahGameView {
   constructor(selector) {
     this.mainContainer = document.querySelector(selector);
+    [...this.mainContainer.childNodes].map((node) => node.remove());
     this.gameContainer = document.createElement('div');
     this.gameContainer.classList.add('savannah-game');
     this.mainContainer.appendChild(this.gameContainer);
