@@ -24,22 +24,19 @@ function settingsPage() {
 	settingsInit();
 }
 function trainingSavannahPage() {
-	const savannahGame = new SavannahGame(
-		'#savannah-game',
-		'#/training/savannah/'
-	);
+  const savannahGame = new SavannahGame('.main', '#/training/savannah/');
 
-	const toMainPage = () => {
-		window.location.hash = '/main/';
-	};
+  const toMainPage = () => {
+    window.location.hash = '/main/';
+  }
 
-	const getStatistic = (statistic) => {
-		console.log(statistic);
-	};
+  const getStatistic = (statistic) => {
+    console.log(statistic);
+  }
 
-	savannahGame.init();
-	savannahGame.onGameClose(toMainPage);
-	savannahGame.onGameEnd(getStatistic);
+  savannahGame.init();
+  savannahGame.onGameClose(toMainPage);
+  savannahGame.onGameEnd(getStatistic);
 }
 
 function trainingSprintGame() {
