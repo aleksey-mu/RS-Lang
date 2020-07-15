@@ -11,6 +11,7 @@ const appProperties = {
 
 	userToken: null,
 	userRefreshToken: null,
+	isUserAuthorized: false,
 };
 
 export default appProperties;

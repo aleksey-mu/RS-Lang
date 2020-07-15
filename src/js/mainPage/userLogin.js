@@ -22,6 +22,7 @@ export default async function userLogin(userEmail, userPassword) {
 
 			appProperties.userRefreshToken = content.token;
 			appProperties.userToken = content.refreshToken;
+			appProperties.isUserAuthorized = true;
 			console.log(appProperties);
 
 			INFO_FIELD.innerHTML = `
