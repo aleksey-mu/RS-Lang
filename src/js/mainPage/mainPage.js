@@ -1,5 +1,6 @@
 import mainPageHTMLLogin from './mainPage-HTML';
 import userRegistration from './userRegistration';
+import userLogin from './userLogin';
 import LoadingBar from '../helpers/loadingBar';
 
 function inputCheck(userEmail, userPassword) {
@@ -31,6 +32,7 @@ export default function mainPageInit() {
 	MAIN.innerHTML = mainPageHTMLLogin;
 
 	const REGISTER_BTN = document.querySelector('.main-register-btn');
+	const LOGIN_BTN = document.querySelector('.main-login-btn');
 	const INPUT_EMAIL = document.querySelector('#loginEmail');
 	const INPUT_PASSWORD = document.querySelector('#loginPassword');
 	const INFO_FIELD = document.querySelector('.main-info-field');
@@ -39,7 +41,7 @@ export default function mainPageInit() {
 		event.preventDefault();
 		LoadingBar.show();
 
-		const userEmail = INPUT_EMAIL.value;
+		const userEmail = INPUT_EMAIL.value.toLowerCase();
 		const userPassword = INPUT_PASSWORD.value;
 
 		const isInputCorrect = inputCheck(userEmail, userPassword);
@@ -53,6 +55,18 @@ export default function mainPageInit() {
             </div>
             `;
 		}
+		LoadingBar.hide();
+	});
+
+	LOGIN_BTN.addEventListener('click', async (event) => {
+		event.preventDefault();
+		LoadingBar.show();
+
+		const userEmail = INPUT_EMAIL.value.toLowerCase();
+		const userPassword = INPUT_PASSWORD.value;
+
+		await userLogin(userEmail, userPassword);
+
 		LoadingBar.hide();
 	});
 }

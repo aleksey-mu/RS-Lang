@@ -15,7 +15,7 @@ export default async function userRegistration(userEmail, userPassword) {
 				}
 			);
 			if (!rawResponse.ok) {
-				throw new Error('Такой пользователь уже создан.');
+				throw new Error('Такой пользователь уже зарегистрирован.');
 			}
 			const content = await rawResponse.json();
 			console.log(content);
@@ -28,7 +28,7 @@ export default async function userRegistration(userEmail, userPassword) {
 			console.log(error);
 			INFO_FIELD.innerHTML = `
             <div class="main-info-field-error">
-            Такой пользователь уже создан.
+            Такой пользователь уже зарегистрирован.
             </div>
             `;
 		}

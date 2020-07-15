@@ -8,6 +8,9 @@ const appProperties = {
 	wordHelpTranslate: true,
 	wordHelpExample: true,
 	wordHelpTranscription: true,
+
+	userToken: null,
+	userRefreshToken: null,
 };
 
 export default appProperties;
