@@ -9,6 +9,7 @@ export default class Router {
 			'/training/:id': 'trainingPage',
 			'/training/savannah/': 'trainingSavannahPage',
 			'/training/speakit/': 'trainSpeakItPage',
+			'/training/sprint/': 'trainingSprintGame',
 			'': 'mainPage',
 			'/main/': 'mainPage',
 			'/promo/': 'promoPage',

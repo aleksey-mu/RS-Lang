@@ -15,6 +15,10 @@
 @import './games/speakIt/result';
 @import './games/speakIt/intro';
 
+@import "sprintGame/startScreen";
+@import "sprintGame/gameCard";
+@import "sprintGame/finishScreen";
+
 @import './games/savannah/savannah-game-style';
 
 @import './settings/settings.scss';

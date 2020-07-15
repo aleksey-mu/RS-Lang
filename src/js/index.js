@@ -3,6 +3,7 @@ import BurgerMenu from './header/burgerMenu';
 import Router from './router/router';
 import speakItInit from './games/speakIt/speakItInit';
 import SavannahGame from './games/savannah-game/game';
+import PageGameSprintComponent from './games/sprint/PageGameSprintComponent';
 import settingsInit from './settings/settings';
 import mainPageInit from './mainPage/mainPage';
 import {} from './helpers/loadingBar';
@@ -41,12 +42,17 @@ function trainingSavannahPage() {
 	savannahGame.onGameEnd(getStatistic);
 }
 
+function trainingSprintGame() {
+  document.querySelector('.main').insertAdjacentElement('beforeend', new PageGameSprintComponent().init());
+}
+
 const loadPage = {
 	mainPage,
 	wordsPage,
 	trainSpeakItPage,
 	trainingSavannahPage,
-	settingsPage,
+  settingsPage,
+  trainingSprintGame,
 };
 
 const router = new Router(loadPage);
