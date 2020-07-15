@@ -8,7 +8,7 @@ export default class PageGameSprintComponent {
   init() {
     this.root.className = 'game-sprint';
     this.customizeToSprintGame();
-    this.root.insertAdjacentElement('beforeend', new StartScreenComponent().init());
+    this.root.insertAdjacentElement('beforeend', new StartScreenComponent(0).init());
     return this.root;
   }
 

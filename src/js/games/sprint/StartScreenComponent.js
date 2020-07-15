@@ -1,7 +1,8 @@
 import GameCardComponent from "./GameCardComponent";
 
 export default class StartScreenComponent {
-  constructor() {
+  constructor(learningLevel) {
+    this.learningLevel = learningLevel;
     this.root = document.createElement('div');
   }
 
@@ -31,7 +32,6 @@ export default class StartScreenComponent {
                           </div>`;
 
     this.root.insertAdjacentHTML('beforeend', START_SCREEN);
-
     this.startGame();
 
     return this.root;
@@ -40,7 +40,7 @@ export default class StartScreenComponent {
   startGame() {
     this.root.querySelector('.btn-primary').onclick = () => {
       this.hideStartScreen();
-      this.root.insertAdjacentElement('beforeend', new GameCardComponent().init());
+      this.root.insertAdjacentElement('beforeend', new GameCardComponent(this.learningLevel).init());
     }
   }
 

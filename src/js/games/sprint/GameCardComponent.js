@@ -2,16 +2,18 @@ import Helper from "./Helper";
 import FinishScreenComponent from "./FinishScreenComponent";
 
 export default class StartScreenComponent {
-  constructor() {
+  constructor(learningLevel) {
+    this.learningLevel = learningLevel;
     this.root = document.createElement('div');
-    this.timeLeft = 15;
+    this.timeLeft = 60;
     this.words = [];
     this.translates = [];
     this.answers = [];
     this.score = 0;
     this.sequenceOfQuestions = [];
     this.rightAnswersCounter = 0;
-    this.pointsStat = []
+    this.pointsStat = [];
+    this.pageNumber = 1;
   }
 
   init() {
@@ -23,7 +25,7 @@ export default class StartScreenComponent {
                   <div class="container">
                       <div class="lp-countdown lp-countdown-md line col-sm-4 col-xs-12">
                         <div class="lp-countdown-block">
-                          <div class="lp-countdown-counter">157</div>
+                          <div class="lp-countdown-counter">60</div>
                           <div class="lp-countdown-label">SECONDS</div>
                         </div>
                       </div>
@@ -32,12 +34,8 @@ export default class StartScreenComponent {
                           <p class="card__body card-image">
                             <span class="icon-bird" aria-hidden="true"></span>
                           </p>
-                          <h1 class="card__header">
-                            play
-                          </h1>
-                          <h3 class="card__body">
-                            играть
-                          </h3>  
+                          <h1 class="card__header"></h1>
+                          <h3 class="card__body"></h3>  
                           <div class="answer-buttons">
                             <button type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false">
                               Неверно
@@ -51,7 +49,7 @@ export default class StartScreenComponent {
                   </div>`;
 
     this.root.insertAdjacentHTML('beforeend', CARD);
-    this.fetchWord(0, 0);
+    this.fetchWord(0, 0, this.pageNumber);
 
     this.changeCard();
     this.startTimer();
@@ -59,8 +57,8 @@ export default class StartScreenComponent {
     return this.root;
   }
 
-  async fetchWord(orderWord, orderTranslate) {
-    const URL = `https://afternoon-falls-25894.herokuapp.com/words?page=1&group=0`;
+  async fetchWord(orderWord, orderTranslate, pageNumber) {
+    const URL = `https://afternoon-falls-25894.herokuapp.com/words?page=${pageNumber}&group=${this.learningLevel}`;
     await Helper.fetchPost(URL)
       .then((content) => {
         this.addWord(content, orderWord)
@@ -79,39 +77,31 @@ export default class StartScreenComponent {
     this.root.querySelector('h3.card__body').innerHTML = content[order].wordTranslate;
   }
 
-  async verifyAnswer(answer) {
+  async verifyAnswer(answer, pageNumber) {
     const currentWord = this.root.querySelector('h1.card__header').innerHTML;
     const currentTranslate = this.root.querySelector('h3.card__body').innerHTML;
-    const URL = `https://afternoon-falls-25894.herokuapp.com/words?page=1&group=0`;
+    const URL = `https://afternoon-falls-25894.herokuapp.com/words?page=${pageNumber}&group=${this.learningLevel}`;
     await Helper.fetchPost(URL)
       .then((content) => {
         if(content.filter((el) => el.word === currentWord)[0].wordTranslate === currentTranslate && answer === 'success') {
-          console.log(`True answer! currentWord: ${currentWord}, currentTranslate: ${currentTranslate}, 
-            compare with ${content.filter((el) => el.word === currentWord)[0].wordTranslate}`);
           this.root.querySelector('.card__container').classList.add('backlight-right-answer');
           setTimeout(() => {
             this.root.querySelector('.card__container').classList.remove('backlight-right-answer')
           }, 800);
           this.rightAnswersCounter += 1;
-          // this.changeScore();
           this.changeCurrentPoint();
           this.saveStats(currentWord, currentTranslate, true);
         }
         else if(content.filter((el) => el.word === currentWord)[0].wordTranslate !== currentTranslate && answer === 'danger') {
-          console.log(`True answer! currentWord: ${currentWord}, currentTranslate: ${currentTranslate}, 
-            compare with ${content.filter((el) => el.word === currentWord)[0].wordTranslate}`);
           this.root.querySelector('.card__container').classList.add('backlight-right-answer');
           setTimeout(() => {
             this.root.querySelector('.card__container').classList.remove('backlight-right-answer')
           }, 800);
           this.rightAnswersCounter += 1;
-          // this.changeScore();
           this.changeCurrentPoint();
           this.saveStats(currentWord, currentTranslate, true);
         }
         else {
-          console.log(`False answer! currentWord: ${currentWord}, currentTranslate: ${currentTranslate}, 
-            compare with ${content.filter((el) => el.word === currentWord)[0].wordTranslate}`);
           this.root.querySelector('.card__container').classList.add('backlight-wrong-answer');
           setTimeout(() => {
             this.root.querySelector('.card__container').classList.remove('backlight-wrong-answer')
@@ -124,9 +114,6 @@ export default class StartScreenComponent {
       .catch((error) => {
         throw new Error(`${error}: Problems with API`);
       });
-      console.log(this.words);
-      console.log(this.translates);
-      console.log(this.answers);
     }
 
   changeScore(n) {
@@ -136,7 +123,7 @@ export default class StartScreenComponent {
   }
 
   changeCurrentPoint() {
-    if(this.rightAnswersCounter < 4) {
+    if(this.rightAnswersCounter < 4 && this.rightAnswersCounter !== 0) {
       this.root.querySelector('.current-point').dataset.label = '✅ + 10';
       this.changeScore(10);
     }
@@ -144,12 +131,13 @@ export default class StartScreenComponent {
       this.root.querySelector('.current-point').dataset.label = '🔥 + 50';
       this.changeScore(50);
     }
-    if(this.rightAnswersCounter > 4) {
+    if(this.rightAnswersCounter > 4 && this.rightAnswersCounter !== 0) {
       this.root.querySelector('.current-point').dataset.label = '✅ + 20';
       this.changeScore(20);
     }
     if(this.rightAnswersCounter === 0) {
       this.root.querySelector('.current-point').dataset.label = '❌';
+      this.changeScore(0);
     }
   }
 
@@ -161,35 +149,79 @@ export default class StartScreenComponent {
 
   changeCard() {
     let num = 0;
+    this.root.onkeydown = (event) => {
+      switch (event.keyCode) {
+        case 37: {
+          this.verifyAnswer('danger', this.pageNumber);
+          const rand = Boolean(Math.round(Math.random()));
+          if(rand === true) {
+            this.fetchWord(num + 1, num + 1, this.pageNumber);
+            num += 1;
+          }
+          else {
+            this.fetchWord(num + 1, Helper.getRandomArbitrary(0, 20), this.pageNumber);
+            num += 1;
+          }
+          this.sequenceOfQuestions.push(false);
+        }
+            break;
+        case 39: {
+            this.verifyAnswer('success', this.pageNumber);
+            const rand = Boolean(Math.round(Math.random()));
+            if(rand === true) {
+              this.fetchWord(num + 1, num + 1, this.pageNumber);
+              num += 1;
+            }
+            else {
+              this.fetchWord(num + 1, Helper.getRandomArbitrary(0, 20), this.pageNumber);
+              num += 1;
+            }
+            this.sequenceOfQuestions.push(true);
+          }
+            break;
+        default:
+            alert('down');
+            break;
+      }
+      if(num === 20) {
+        this.pageNumber += 1;
+        this.changeCard();
+      }
+    }
       this.root.querySelector('.btn-danger').onclick = () => {
-        this.verifyAnswer('danger');
+        this.verifyAnswer('danger', this.pageNumber);
         const rand = Boolean(Math.round(Math.random()));
         if(rand === true) {
-          this.fetchWord(num + 1, num + 1);
+          this.fetchWord(num + 1, num + 1, this.pageNumber);
           num += 1;
         }
         else {
-          this.fetchWord(num + 1, num + 2);
+          this.fetchWord(num + 1, Helper.getRandomArbitrary(0, 20), this.pageNumber);
           num += 1;
         }
         this.sequenceOfQuestions.push(false);
+        if(num === 20) {
+          this.pageNumber += 1;
+          this.changeCard();
+        }
     }
+    
     this.root.querySelector('.btn-success').onclick = () => {
-      this.verifyAnswer('success');
+      this.verifyAnswer('success', this.pageNumber);
       const rand = Boolean(Math.round(Math.random()));
       if(rand === true) {
-        this.fetchWord(num + 1, num + 1);
+        this.fetchWord(num + 1, num + 1, this.pageNumber);
         num += 1;
       }
       else {
-        this.fetchWord(num + 1, num + 2);
+        this.fetchWord(num + 1, Helper.getRandomArbitrary(0, 20), this.pageNumber);
         num += 1;
       }
       this.sequenceOfQuestions.push(true);
-    }
-
-    if(num > 20) {
-      console.log('Finish level');
+      if(num === 20) {
+        this.pageNumber += 1;
+        this.changeCard();
+      }
     }
   }
 
@@ -218,13 +250,9 @@ export default class StartScreenComponent {
         this.sequenceOfQuestions, 
         this.pointsStat)
         .init());
-    console.log(`sequenceOfQuestions: ${this.sequenceOfQuestions}`);
   }
 
   hideGameCards() {
     this.root.innerHTML = '';
   }
-
-
-  
 }

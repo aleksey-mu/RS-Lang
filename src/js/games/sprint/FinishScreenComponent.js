@@ -23,9 +23,6 @@ export default class FinishScreenComponent {
                   ✅ Верных ответов: ${this.getTrueAnswers()}, 
                   ❌ Ошибок: ${this.getFalseAnswers()}
                   </h3>
-                  <button type="button" class="btn btn-primary btn-play-again" aria-haspopup="true" aria-expanded="false">
-                    Играть еще раз
-                  </button>
                   <h2 class="stats">История игры</h2>
                   <div class="table-responsive sprint-table-wrapper">
                     <table class="table table-condensed table-striped table-hover sprint-table">
@@ -65,7 +62,7 @@ export default class FinishScreenComponent {
                             ${Helper.answersToRussian(this.sequenceOfQuestions[i])} 
                             ${this.showCorrectAnswerIcon(this.answers[i])}
                           </td>
-                          <td>+${this.pointsStat[i]}</td>
+                          <td>${this.pointsStat[i]}</td>
                         </tr>`;
 
     this.root.querySelector('.sprint-table').insertAdjacentHTML('beforeend', answersRow);
