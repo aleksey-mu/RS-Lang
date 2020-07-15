@@ -1,22 +1,11 @@
-// import GetWords from "./getWords";
-// import GamePage from "./createGamePage";
-
 export default class ACgameSettings {
-//   constructor() {
-//     this.GetWords = new GetWords();
-//     // this.difficulty = 0;
-//   }
-
   init() {
-    // document.addEventListener("DOMContentLoaded", () => {
     this.createSettingsModal();
-    document
-      .querySelector("#gameSettingsBtn")
-      .addEventListener("click", (e) => {
-        e.preventDefault();
+    document.querySelector("#ACsetGameBtn").addEventListener("click", (e) => {
+      e.preventDefault();
 
-        this.openModal();
-      });
+      this.openModal();
+    });
     this.ModalCloseBtn = document.querySelector(".modal__cross");
     this.ModalCloseBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -26,12 +15,11 @@ export default class ACgameSettings {
     this.ModalOverlay.addEventListener("click", () => {
       this.closeModal();
     });
-    // this.applySettings();
-    // });
   }
 
   createSettingsModal() {
     this.SettingsModal = document.createElement("div");
+    this.SettingsModal.setAttribute("class", "Setmodal");
     this.SettingsModal.innerHTML = `<div class="ACsettingsModal ACmodal">   
 <svg class="modal__cross js-modal-close" xmlns="http://www.w3.org/2000/svg"  
 viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 
@@ -41,7 +29,7 @@ viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-
   <label for="ACmodeSelect">Использовать слова на изучении</label><br>
 <div class="difficulty">
 <p >Уровень сложности: </p>
-<select class = "difficulty-level">
+<select id = "difficulty-level">
 <option value = "1">1</option>
 <option value = "2">2</option>
 <option value = "3">3</option>
@@ -52,27 +40,27 @@ viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-
 </div>
 <div class="round">
 <p>Раунд:</p>
-<select class = "round-level">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
-<option>13</option>
-<option>14</option>
-<option>15</option>
-<option>16</option>
-<option>17</option>
-<option>18</option>
-<option>19</option>
-<option>20</option>
+<select id = "round-level">
+<option  value = "1">1</option>
+<option  value = "2">2</option>
+<option  value = "3">3</option>
+<option  value = "4">4</option>
+<option  value = "5">5</option>
+<option  value = "6">6</option>
+<option  value = "7">7</option>
+<option  value = "8">8</option>
+<option  value = "9">9</option>
+<option  value = "10">10</option>
+<option  value = "11">11</option>
+<option  value = "12">12</option>
+<option  value = "13">13</option>
+<option  value = "14">14</option>
+<option  value = "15">15</option>
+<option  value = "16">16</option>
+<option  value = "17">17</option>
+<option  value = "18">18</option>
+<option  value = "19">19</option>
+<option value = "20">20</option>
 <option>21</option>
 <option>22</option>
 <option>23</option>
@@ -90,9 +78,9 @@ viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-
 </div>
 </div>
 <div class="ACoverlay AC-overlay-modal"></div>`;
-    document.querySelector("body").append(this.SettingsModal);
+    document.querySelector("main").append(this.SettingsModal);
   }
-  
+
   openModal() {
     this.ACmodalSettings = document.querySelector(".ACsettingsModal");
     this.ACoverlayModal = document.querySelector(".AC-overlay-modal");
@@ -101,10 +89,12 @@ viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-
   }
 
   closeModal() {
-    // if(typeof this.ACmodalSettings !== 'undefined'){
     this.ACmodalSettings.classList.remove("ModalActive");
     this.ACoverlayModal.classList.remove("ModalActive");
-    // this.SettingsModal.remove();
+    // const a = document.querySelectorAll(".Setmodal");
+    // const b = a.length;
+    // while(b>1){
+    // a[b -1].remove();
     // }
   }
 }

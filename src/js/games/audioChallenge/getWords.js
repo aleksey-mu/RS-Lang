@@ -1,4 +1,4 @@
-import GamePage from "./createGamePage";
+// import GamePage from "./createGamePage";
 // import ACgameSettings from "./audioChallengeSettings";
 
 export default class GetWords{

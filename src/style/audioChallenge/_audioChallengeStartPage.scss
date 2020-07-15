@@ -20,6 +20,8 @@
         font-size: 26px;
         text-align: center;
         padding: 0;
+        margin: 10px;
+
     }
     & button:hover{
         border-color: white;
@@ -37,4 +39,10 @@
         background-color:#f7888815;
         padding: 20px;
     }
+    
+}
+.ACstartPageBtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
