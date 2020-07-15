@@ -1,0 +1,31 @@
+.stats {
+  text-align: center;
+}
+
+.sprint-table-wrapper {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.sprint-table {
+  background-color: #d8d4d4;
+}
+
+.btn-play-again {
+  margin-top: 10px;
+}
+
+.head-table {
+  font-weight: bold;
+}
+
+.scrollit {
+  overflow: scroll;
+  height: 400px;
+} 
+
+@media only screen and (max-width: 720px) {
+  .sprint-table-wrapper {
+    max-width: 95%;
+  }
+}

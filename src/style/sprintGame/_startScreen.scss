@@ -1,0 +1,192 @@
+.sprint-background {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  z-index: 29;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  background-image: url('../img/games/sprint/background.jpeg');
+}
+
+.score {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.card {
+  margin-top: 30px;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 4px 4px 15px rgba(#000, 0.15);
+  position : relative;
+  color: #434343;
+}
+
+.card .card__container{
+  padding : 2rem;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.card .card__header{
+  margin-bottom: 1rem;
+}
+
+.card::before{
+  position: absolute;
+  top:2rem;
+  right:-0.5rem;
+  content: '';
+  background: $color-header-link;
+  height: 28px;
+  width: 28px;
+  transform : rotate(45deg);
+}
+
+.card::after{
+  position: absolute;
+  content: attr(data-label);
+  top: 11px;
+  right: -14px;
+  padding: 0.5rem;
+  width: 10rem;
+  background: $color-header-link;
+  color: white;
+  text-align: center;
+  box-shadow: 4px 4px 15px rgba(26, 35, 126, 0.2);
+}
+
+.answer-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.lp-countdown{
+  text-align: center;
+  color: $color-header-link;
+  margin-right: -50px;
+ 
+ .lp-countdown-block{
+   display: inline-block;
+   margin-right: 17px;
+   width: 123px;
+   height: 123px;
+   padding-top: 20px;
+   &:last-of-type{
+     margin-right: 0;
+   }
+   }
+   
+ .lp-countdown-counter{
+   font-size: 50px;
+   font-weight: bold;
+   line-height: 1;
+ }
+ 
+ .lp-countdown-label{
+   font-size: 14px;
+   margin-top: 2px;
+ }
+ 
+ &.line{
+   .lp-countdown-block{
+     .lp-countdown-counter{
+       border-bottom: 2px solid $color-header-link;
+       padding-bottom: 8px;
+     }
+   }
+ }
+ &.box{
+  .lp-countdown-block{
+    border: 2px solid $color-header-link;
+    margin-bottom: 5px;
+  }
+}
+}
+
+h1.card__header,
+p.card__body,
+h3.card__body,
+h2.card__header,
+h4.card__body {
+  text-align: center;
+}
+
+h3.card__body {
+  margin-bottom: 23px;
+}
+
+.card-image {
+  font-size: 35px;
+}
+
+.backlight-wrong-answer:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  -webkit-filter: blur(5vw);
+  -moz-filter: blur(5vw);
+  -ms-filter: blur(5vw);
+  filter: blur(8vw);
+  background: linear-gradient(270deg, #e60b1f, #ec9223);
+  background-size: 200% 200%;
+  animation: animateGlow 10s ease infinite;
+}
+
+.backlight-right-answer:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  -webkit-filter: blur(5vw);
+  -moz-filter: blur(5vw);
+  -ms-filter: blur(5vw);
+  filter: blur(8vw);
+  background: linear-gradient(270deg, #286129, #4c8c8c);
+  background-size: 200% 200%;
+  animation: animateGlow 10s ease infinite;
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.start-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.icon-bird {
+  display: block;
+  background: url(../img/games/sprint/peace.svg) no-repeat;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+}
