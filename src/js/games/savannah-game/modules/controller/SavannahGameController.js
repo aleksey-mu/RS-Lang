@@ -89,6 +89,7 @@ class SavannahGameController {
 
   getCountdownEndHandler() {
     return () => {
+      if (this.model.isGameOpen === false) return;
       this.model.setCurrentPage('round');
       this.model.setCurrentLives();
       this.model.setCurrentRoundWords();
