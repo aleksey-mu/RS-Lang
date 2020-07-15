@@ -3,7 +3,7 @@ import ACgameSettings from "./audioChallengeSettings";
 
 export default class GamePage {
   constructor() {
-    this.gameContainer = document.querySelector(".content");
+    this.gameContainer = document.querySelector(".main");
     this.ACgameSettings = new ACgameSettings();
     // this.GetWords = new GetWords();
   }
@@ -35,21 +35,46 @@ export default class GamePage {
     this.gameHeader.append(this.gameCloseBtn);
   }
 
+async wordInfo(word){
+  // for(let i=0; i< wordData.length; i += 1){
+  this.wordContent =  await this.getWordDetalization (word);
+  console.log(this.wordContent);
+
+  this.wordStorage = {
+    word: this.wordContent[0].text,
+    partOfspeach: this.wordContent[0].meanings[0].partOfSpeechCode,
+    translation: this.wordContent[0].meanings[0].translation.text,
+  }
+  return this.wordStorage;
+  // console.log(this.wordStorage);
+  // }
+}
+ 
+
   createGameMainElem(wordData) {
     document.querySelector(".main").classList.add("audioChallenge-game");
     this.gameMain = document.createElement("div");
     this.gameMain.setAttribute("class", "audioChallenge-game__main");
     this.Data = wordData;
+    // const image = new Image();
+    //   image.src = `data:image/jpg;base64,${this.Data[0].image}`;
+
+    this.wordImage = this.Data[0].image.replace('files/', '');
+    this.wordPronanciation = this.Data[0].audio.replace('files/', '');
+    const audio = new Audio(
+      `https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${this.wordPronanciation}`
+    );
+    
+    audio.addEventListener('loadeddata', () => {
+      audio.play();
+    
+    });
+
     this.word = this.Data[0].word;
     console.log(this.Data[0].word);
     console.log(this.Data[0]);
 
-    // this.wordDataDetail= this.getWordDetalization(this.word);
-    // console.log(this.wordDataDetail.value);
-
-    // this.wordDataDetail = this.GetWords.getWordDetalization(this.word);
-    // this.GetWords.getWordDetalization(this.word);
-    this.gameMainTemplate = ` <img src = "data:image/jpg;base64,${this.Data[0].image}" class = "audioChallenge-game__img " />
+    this.gameMainTemplate = ` <img src="https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${this.wordImage}" class = "audioChallenge-game__img " />
         <div>
           <button id ="soundBtn">
             <span class="glyphicon glyphicon-volume-up"></span>
@@ -128,8 +153,7 @@ export default class GamePage {
   }
 
   clear() {
-    this.gameContainer.innerHTML="";
-    
+    this.gameContainer.innerHTML="";    
     // this.gameMain.remove();
     // this.gameWindow = document.querySelector(".content");
     // this.gameWindow.innerHTML = "";
@@ -145,8 +169,11 @@ export default class GamePage {
     const recievedData = JSON.parse(recievedJSON);
     this.clear();
     this.createGameElements(recievedData); 
-    
-
+    this.wordContainer = {};
+    for(let i = 0; i<recievedData.length; i+=1){
+      this.wordContainer[i] =  this.wordInfo(recievedData[i].word);
+    console.log(this.wordContainer);
+    }
     this.applySettings();     
 }
 

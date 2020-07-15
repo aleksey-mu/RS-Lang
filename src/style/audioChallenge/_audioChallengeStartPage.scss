@@ -1,0 +1,40 @@
+.ACstartPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: inherit;
+    height: 90vh;
+
+     background-image: url('https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif'); ///https://media.giphy.com/media/4QFdKe8O6lVO12HPsT/giphy.gif
+    background-size: cover;
+
+    & button{
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        background-color: $color-brand;
+        border: 2px solid black;
+        border-radius: 5px;
+        color: $color-light;
+        font-size: 26px;
+        text-align: center;
+        padding: 0;
+    }
+    & button:hover{
+        border-color: white;
+        transform: scale(1.1);
+    }
+
+    & p{
+        display: inline-block;
+        max-width: 700px;
+        font-size: 24px;
+        color: $color-light;
+        text-align: center;
+        border: 2px solid black;
+        border-radius: 5px;
+        background-color:#f7888815;
+        padding: 20px;
+    }
+}

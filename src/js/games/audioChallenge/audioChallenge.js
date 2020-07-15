@@ -11,61 +11,50 @@ export default class AudioChallengeGame {
     this.GamePage = new GamePage();
   }
 
-  init() {
+  init() {    
+      this.gameWindow = document.querySelector(".main");
+      this.gameWindow.innerHTML = "";
+  
     // this.GetWords.getWordsSet(this.round, this.difficulty);
     // this.applySettings();
     // this.GamePage.createGameElements(this.round, this.difficulty);
-    this.GamePage.getWordsSet(this.round, this.difficulty);
-    // this.ACgameSettings.init();
+    // this.GamePage.getWordsSet(this.round, this.difficulty);
+    this.gameStartPage();
+    this.ACstartGame();
   }
 
-//   getSelectedSettings() {
-//     this.DifficultySelect = document.querySelector("select.difficulty-level");
-//     this.DifficultySelect.addEventListener("change", () => {
-//       const indexSelected = this.DifficultySelect.selectedIndex;
-//       this.optionDifficulty = this.DifficultySelect.querySelectorAll("option")[
-//         indexSelected
-//       ].value;
-//     });
-//     this.RoundSelect = document.querySelector("select.round-level");
-//     this.RoundSelect.addEventListener("change", () => {
-//       const indexSelected = this.RoundSelect.selectedIndex;
-//       this.optionRound = this.RoundSelect.querySelectorAll("option")[
-//         indexSelected
-//       ].value;
-//     });
+  gameStartPage(){
+    this.StartGameSound = new Audio();
+    this.StartGameSound.src = `./audio/ACStartGame.wav`;
+  //  this.StartGameSound.addEventListener('loadeddata', () => {
+      // let duration = audioElement.duration;
+      // The duration variable now holds the duration (in seconds) of the audio clip 
+       this.StartGameSound.play();
+    // })
+   
 
-//     if (typeof this.optionRound === "undefined") this.optionRound = 1;
-//     if (typeof this.optionDifficulty === "undefined") this.optionDifficulty = 1;
-//     this.round = this.optionRound;
-//     this.difficulty = this.optionDifficulty;
-//     // localStorage.setItem('round', this.round);
-//     // localStorage.setItem('difficulty', this.difficulty);
-//     // window.location.reload();
-//     // this.gameSettings = {
-//     //     round: this.round,
-//     //     difficulty: this.difficulty
-//     // };
-//     this.GetWords.getWordsSet(this.round, this.difficulty);
-//     // return this.gameSettings;
-//   }
+    this.ACstartPage = document.createElement('div');
+    this.ACstartPage.setAttribute('class', 'ACstartPage');
 
-//   applySettings() {
-//     this.ApplyBtn = document.querySelector("#ACmodalApplyBtn");
-//     this.ACmodeSelect = document.querySelector("#ACmodeSelect");
-//     this.ApplyBtn.addEventListener("click", () => {
-//       this.clear();
-//       //   e.preventDefault();
-//       if (this.ACmodeSelect.checked) {
-//         console.log("checkbox selected");
-//       } else {
-//         this.getSelectedSettings();
-//       }
-//     });
-//   }
+    this.gameDiscription = document.createElement('p');
+    this.gameDiscription.setAttribute('class', 'ACgameDiscription');
 
-//   clear() {
-//     this.gameWindow = document.querySelector(".content");
-//     this.gameWindow.innerHTML = "";
-//   }
+    this.gameDiscription.innerText = 'Добро пожаловать в игру АудиоВызов! После начала игры Вы услышите слово на английском. Ваша задача сопаставить услышанное слово с его переводом.'
+    this.ACstartPage.append(this.gameDiscription);
+
+    this.ACstartGameBtn = document.createElement('button');
+    this.ACstartGameBtn.setAttribute('id', 'ACstartGameBtn');
+    this.ACstartGameBtn.innerText = "Начать!"
+
+    this.ACstartPage.append(this.ACstartGameBtn);
+
+    this.gameWindow.append(this.ACstartPage);
+  }
+
+  ACstartGame(){
+    this.ACstartGameBtn.addEventListener('click', () =>{
+      this.GamePage.getWordsSet(this.round, this.difficulty);
+    });
+  }
+
 }
