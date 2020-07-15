@@ -19,6 +19,11 @@
   font-weight: bold;
 }
 
+.scrollit {
+  overflow: scroll;
+  height: 400px;
+} 
+
 @media only screen and (max-width: 720px) {
   .sprint-table-wrapper {
     max-width: 95%;

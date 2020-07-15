@@ -1,0 +1,39 @@
+$peach: #ee786e;
+$sand: #fceeb5;
+
+.diff-selector-container {
+	justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 30px;
+}
+
+.diff-selectors {
+	display: flex;
+	justify-content: space-around;
+}
+
+.diff-selector-text {
+	font-family: Nunito Bold, Helvetica, sans-serif;
+	font-size: 2em;
+	margin-right: 15px;
+}
+
+.diff-selector {
+	font-family: Nunito Bold, Helvetica, sans-serif;
+	padding: 0 4px;
+	margin-right: 7px;
+	font-size: 2em;
+	border: 2px solid black;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+	&:hover {
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+		cursor: pointer;
+	}
+}
+
+.diff-active {
+	background: linear-gradient(to right, $sand 0%, $peach 80%);
+}

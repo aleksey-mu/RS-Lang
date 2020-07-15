@@ -24,7 +24,7 @@ export default class FinishScreenComponent {
                   ❌ Ошибок: ${this.getFalseAnswers()}
                   </h3>
                   <h2 class="stats">История игры</h2>
-                  <div class="table-responsive sprint-table-wrapper">
+                  <div class="table-responsive sprint-table-wrapper scrollit">
                     <table class="table table-condensed table-striped table-hover sprint-table">
                       <tr class="info head-table">
                         <td>Слово</td>

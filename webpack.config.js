@@ -147,6 +147,18 @@ const config = {
 					},
 				],
 			},
+			{
+        test: /\.(ogg|mp3|wav|mpe?g)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							outputPath: './audio',
+							name: '[name].[ext]',
+						}
+					},
+				],
+      },
 		],
 	},
 
@@ -159,7 +171,10 @@ const config = {
 			filename: './index.html',
 		}),
 		new CleanWebpackPlugin(),
-		new CopyWebpackPlugin([{ from: './src/img', to: './img/' }]),
+		new CopyWebpackPlugin([
+			{ from: './src/assets/img', to: './img/' },
+			{ from: './src/assets/audio', to: './audio' },
+		]),
 	],
 
 	devServer: {

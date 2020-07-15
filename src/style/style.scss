@@ -1,7 +1,34 @@
-@import "base/constants";
-@import "base/base";
-@import "base/header";
+@import 'base/constants';
+@import 'base/base';
+@import 'base/header';
+
+@import 'base/loadAnimation';
+@import 'base/loadingBar';
+
+@import './games/speakIt/mainStyle';
+@import './games/speakIt/card';
+@import './games/speakIt/diffSelector';
+@import './games/speakIt/buttons';
+@import './games/speakIt/microphoneIcon';
+@import './games/speakIt/result';
+@import './games/speakIt/intro';
 
 @import "sprintGame/startScreen";
 @import "sprintGame/gameCard";
 @import "sprintGame/finishScreen";
+
+@import './games/savannah/savannah-game-style';
+
+@import './settings/settings.scss';
+
+body {
+	font-size: 10px;
+}
+
+.btn-primary {
+	font-size: 2rem;
+}
+
+.hidden {
+	display: none;
+}
