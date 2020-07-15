@@ -4,11 +4,15 @@ import Router from './router/router';
 import speakItInit from './games/speakIt/speakItInit';
 import SavannahGame from './games/savannah-game/game';
 import settingsInit from './settings/settings';
+import mainPageInit from './mainPage/mainPage';
+import {} from './helpers/loadingBar';
 
 const myBurgerMenu = new BurgerMenu();
 myBurgerMenu.init();
 
-function mainPage() {}
+function mainPage() {
+	mainPageInit();
+}
 function wordsPage() {
 	document.querySelector('.container-fluid').style.background = 'green';
 }

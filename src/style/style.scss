@@ -5,6 +5,8 @@
 @import 'base/loadAnimation';
 @import 'base/loadingBar';
 
+@import 'mainPage/mainPage.scss';
+
 @import './games/speakIt/mainStyle';
 @import './games/speakIt/card';
 @import './games/speakIt/diffSelector';
@@ -27,4 +29,8 @@ body {
 
 .hidden {
 	display: none;
+}
+
+main {
+	font-size: 2rem;
 }

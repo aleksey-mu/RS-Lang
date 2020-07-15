@@ -103,7 +103,7 @@ const settingsHTML = `
 		</div>
         <div class="settings-info-field"></div>
         <div class="settings-save-btn-wrapper">
-        <button type="submit" class="btn btn-primary settings-save-btn text-center">Сохранить</button>
+        <button type="submit" class="btn btn-primary settings-save-btn">Сохранить</button>
         </div>
 	</form>
 </div>
