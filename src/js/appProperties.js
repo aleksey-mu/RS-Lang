@@ -9,6 +9,7 @@ const appProperties = {
 	wordHelpExample: true,
 	wordHelpTranscription: true,
 
+	userId: null,
 	userToken: null,
 	userRefreshToken: null,
 	isUserAuthorized: false,

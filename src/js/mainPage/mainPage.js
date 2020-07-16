@@ -1,5 +1,6 @@
 import mainPageHTMLLogin from './mainPage-HTML';
 import userRegistration from './userRegistration';
+import userGetSetting from '../settings/userSettingsGet';
 import userLogin from './userLogin';
 import LoadingBar from '../helpers/loadingBar';
 import appProperties from '../appProperties';
@@ -31,6 +32,7 @@ function inputCheck(userEmail, userPassword) {
 export default function mainPageInit() {
 	const MAIN = document.querySelector('main');
 	if (appProperties.isUserAuthorized) {
+		MAIN.innerHTML = `<span>Уже авторизовано</span>`;
 		// getMainCards();
 	} else {
 		MAIN.innerHTML = mainPageHTMLLogin;
@@ -70,6 +72,7 @@ export default function mainPageInit() {
 			const userPassword = INPUT_PASSWORD.value;
 
 			await userLogin(userEmail, userPassword);
+			await userGetSetting();
 			LoadingBar.hide();
 
 			if (appProperties.isUserAuthorized) {

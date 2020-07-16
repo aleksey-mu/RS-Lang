@@ -20,8 +20,9 @@ export default async function userLogin(userEmail, userPassword) {
 
 			console.log(content);
 
-			appProperties.userRefreshToken = content.token;
-			appProperties.userToken = content.refreshToken;
+			appProperties.userId = content.userId;
+			appProperties.userToken = content.token;
+			appProperties.userRefreshToken = content.refreshToken;
 			appProperties.isUserAuthorized = true;
 			console.log(appProperties);
 
