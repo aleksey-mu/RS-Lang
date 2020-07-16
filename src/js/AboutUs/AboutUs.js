@@ -107,7 +107,7 @@ export default class AboutUsPage {
 </div>
 </div>					
         </div>`;
-    this.TeamPageWrapper.innerHTML = teamPageTemplate;    
+    this.TeamPageWrapper.innerHTML = teamPageTemplate;
     this.PageContainer.append(this.TeamPageWrapper);
   }
 }
