@@ -7,6 +7,13 @@ export default async function appInit() {
 	if (isUserAuthorized) {
 		LoadingBar.show();
 
+		const LOGOUT_BTN = document.querySelector('#Logout__button');
+		LOGOUT_BTN.classList.remove('hidden');
+		LOGOUT_BTN.addEventListener('click', () => {
+			localStorage.clear();
+			window.location.reload(false);
+		});
+
 		appProperties.isUserAuthorized = true;
 		appProperties.userId = localStorage.getItem('userId');
 		appProperties.userToken = localStorage.getItem('userToken');
