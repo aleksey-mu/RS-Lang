@@ -7,6 +7,7 @@ import PageGameSprintComponent from './games/sprint/PageGameSprintComponent';
 import settingsInit from './settings/settings';
 import mainPageInit from './mainPage/mainPage';
 import {} from './helpers/loadingBar';
+import DictionaryPage from './dictionaryPages/Dictionary';
 
 const myBurgerMenu = new BurgerMenu();
 myBurgerMenu.init();
@@ -43,6 +44,21 @@ function trainingSprintGame() {
   document.querySelector('.main').insertAdjacentElement('beforeend', new PageGameSprintComponent().init());
 }
 
+function dictionaryLearningWordsPage() {
+  const dictionary = new DictionaryPage('.main');
+  dictionary.setPage('learningWords');
+}
+
+function dictionaryComplexWordsPage() {
+  const dictionary = new DictionaryPage('.main');
+  dictionary.setPage('complexWords');
+}
+
+function dictionaryDeletedWordsPage() {
+  const dictionary = new DictionaryPage('.main');
+  dictionary.setPage('deletedWords');
+}
+
 const loadPage = {
 	mainPage,
 	wordsPage,
@@ -50,6 +66,9 @@ const loadPage = {
 	trainingSavannahPage,
   settingsPage,
   trainingSprintGame,
+  dictionaryLearningWordsPage,
+  dictionaryComplexWordsPage,
+  dictionaryDeletedWordsPage,
 };
 
 const router = new Router(loadPage);

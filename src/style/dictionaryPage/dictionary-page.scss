@@ -1,0 +1,52 @@
+.dictionary-pages-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  top: 70px;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background-color: white;
+}
+
+.dictionary-pages-heading {
+  margin: 20px 50px;
+  font-size: 36px;
+}
+
+.dictionary-page-heading-menu {
+  display: flex;
+
+  .burger-menu-link {
+    a {
+      user-select: none;
+    }
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .dictionary-page-heading-menu-active {
+    text-decoration: underline;
+
+    &:hover {
+      color: #0d5bb4;
+      cursor: default;
+    };
+  }
+}
+
+.dictionary-page-learned-words, .dictionary-page-complex-words, .dictionary-page-deleted-words {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: inherit;
+}
+
+a {
+  &:hover {
+    color: #90ccf4;
+    transition: .2s;
+  }
+}

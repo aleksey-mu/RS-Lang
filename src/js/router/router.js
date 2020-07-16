@@ -2,15 +2,18 @@ export default class Router {
 	constructor(controllers) {
 		this.controllers = controllers;
 		this.routes = {
-			'/dictionary/:tag/': 'dictionaryPage',
+      '/dictionary/': 'dictionaryLearningWordsPage',
+      '/dictionary/learning_words/': 'dictionaryLearningWordsPage',
+      '/dictionary/complex_words/': 'dictionaryComplexWordsPage',
+      '/dictionary/deleted_words/': 'dictionaryDeletedWordsPage',
 			'/training/:tag/': 'trainingPage',
 			'/training/:tag/:perPage/': 'trainingPage',
 			'/training/:tag/:perPage/page/:page': 'trainingPage',
 			'/training/:id': 'trainingPage',
 			'/training/savannah/': 'trainingSavannahPage',
 			'/training/speakit/': 'trainSpeakItPage',
-			'/training/sprint/': 'trainingSprintGame',
-			'': 'mainPage',
+      '/training/sprint/': 'trainingSprintGame',
+      '': 'mainPage',
 			'/main/': 'mainPage',
 			'/promo/': 'promoPage',
 			'/statistics/': 'statPage',
