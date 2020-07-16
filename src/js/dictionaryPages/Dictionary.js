@@ -20,7 +20,7 @@ class Dictionary {
 
   createPage(pageName) {
     const page = document.createElement('div');
-    page.classList.add('dictionary-page-learned-words');
+    page.classList.add('dictionary-page-card-words-container');
 
     this[pageName] = page;
     this.dictionaryPagesContainer.appendChild(this[pageName]);
@@ -52,6 +52,18 @@ class Dictionary {
     [...this.dictionaryPageHeadingMenu.childNodes].map((node) => node.remove());
   }
 
+  show() {
+    this.dictionaryPagesContainer.removeAttribute('style');
+  }
+
+  hide() {
+    this.dictionaryPagesContainer.setAttribute('style', 'display: none');
+  }
+
+  setCards(cards) {
+    cards.map((card) => this[this.state.currentPage].appendChild(card.render()));
+  }
+
   setPage(page) {
     this.state.currentPage = page;
     this.render();
@@ -68,7 +80,6 @@ class Dictionary {
 
     this.createPage(this.state.currentPage);
   
-    this[this.state.currentPage].innerText = 1;
     this[headingName].querySelector('.burger-menu-link > a').classList.add('dictionary-page-heading-menu-active');
   }
 }
