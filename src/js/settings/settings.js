@@ -1,11 +1,14 @@
 import appProperties from '../appProperties';
 import settingsHTML from './settings-HTML';
+import sendSetting from './userSettingsSave';
+import LoadingBar from '../helpers/loadingBar';
 
 export default function settingsInit() {
+	LoadingBar.show();
 	const MAIN = document.querySelector('main');
 	MAIN.innerHTML = settingsHTML;
+	LoadingBar.hide();
 
-	const INFO_FIELD = document.querySelector('.settings-info-field');
 	const SAVE_BTN = document.querySelector('.settings-save-btn');
 
 	const WORDS_COUNT_NEW = document.querySelector('#wordsCountNew');
@@ -30,8 +33,9 @@ export default function settingsInit() {
 	WORD_HELP_TRANSCRIPTION_TRUE.checked = appProperties.wordHelpTranscription;
 	WORD_HELP_TRANSCRIPTION_FALSE.checked = !appProperties.wordHelpTranscription;
 
-	SAVE_BTN.addEventListener('click', (event) => {
+	SAVE_BTN.addEventListener('click', async (event) => {
 		event.preventDefault();
+		LoadingBar.show();
 
 		if (WORDS_COUNT_NEW.value > 50) {
 			WORDS_COUNT_NEW.value = 50;
@@ -62,10 +66,8 @@ export default function settingsInit() {
 		appProperties.wordHelpTranscription = WORD_HELP_TRANSCRIPTION_TRUE.checked;
 		console.log('ПОСЛЕ', appProperties);
 
-		INFO_FIELD.innerHTML = `
-        <div class="settings-info-field-success">
-            Сохранено!
-        </div>
-        `;
+		await sendSetting();
+
+		LoadingBar.hide();
 	});
 }

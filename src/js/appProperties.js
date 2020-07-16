@@ -9,9 +9,14 @@ const appProperties = {
 	wordHelpExample: true,
 	wordHelpTranscription: true,
 
+	userId: null,
 	userToken: null,
 	userRefreshToken: null,
 	isUserAuthorized: false,
+
+	wordsTodayLearned: 0,
+
+	lastWordNumber: 0,
 };
 
 export default appProperties;
