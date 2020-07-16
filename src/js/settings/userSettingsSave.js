@@ -46,6 +46,7 @@ export default async function sendSetting() {
 			wordHelpTranslate: appProperties.wordHelpTranslate,
 			wordHelpExample: appProperties.wordHelpExample,
 			wordHelpTranscription: appProperties.wordHelpTranscription,
+			lastWordNumber: appProperties.lastWordNumber,
 		},
 	});
 }

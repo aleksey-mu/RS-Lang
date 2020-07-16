@@ -5,10 +5,7 @@ export default class Router {
 		this.controllers = controllers;
 		this.routes = {
 			'/dictionary/:tag/': 'dictionaryPage',
-			'/training/:tag/': 'trainingPage',
-			'/training/:tag/:perPage/': 'trainingPage',
-			'/training/:tag/:perPage/page/:page': 'trainingPage',
-			'/training/:id': 'trainingPage',
+			'/training/': 'trainingPage',
 			'/training/savannah/': 'trainingSavannahPage',
 			'/training/speakit/': 'trainSpeakItPage',
 			'': 'mainPage',
@@ -36,6 +33,7 @@ export default class Router {
 		window.addEventListener('popstate', this.popstateHandler.bind(this));
 		window.addEventListener('load', async () => {
 			await appInit();
+
 			const path = window.location.hash.slice(1);
 			this.nav(path);
 		});

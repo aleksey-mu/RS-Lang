@@ -13,6 +13,10 @@ const appProperties = {
 	userToken: null,
 	userRefreshToken: null,
 	isUserAuthorized: false,
+
+	wordsTodayLearned: 0,
+
+	lastWordNumber: 0,
 };
 
 export default appProperties;

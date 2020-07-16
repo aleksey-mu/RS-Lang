@@ -2,6 +2,7 @@ import mainPageHTMLLogin from './mainPage-HTML';
 import userRegistration from './userRegistration';
 import userGetSetting from '../settings/userSettingsGet';
 import userLogin from './userLogin';
+import loadMainPageStatus from './loadMainPageStatus';
 import LoadingBar from '../helpers/loadingBar';
 import appProperties from '../appProperties';
 
@@ -29,11 +30,12 @@ function inputCheck(userEmail, userPassword) {
 	return false;
 }
 
-export default function mainPageInit() {
+export default async function mainPageInit() {
 	const MAIN = document.querySelector('main');
 	if (appProperties.isUserAuthorized) {
-		MAIN.innerHTML = `<span>Уже авторизовано</span>`;
-		// getMainCards();
+		LoadingBar.show();
+		await loadMainPageStatus();
+		LoadingBar.hide();
 	} else {
 		MAIN.innerHTML = mainPageHTMLLogin;
 
@@ -73,11 +75,8 @@ export default function mainPageInit() {
 
 			await userLogin(userEmail, userPassword);
 			await userGetSetting();
+			loadMainPageStatus();
 			LoadingBar.hide();
-
-			if (appProperties.isUserAuthorized) {
-				// getMainCards();
-			}
 		});
 	}
 }

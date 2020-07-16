@@ -1,4 +1,5 @@
 import appProperties from '../appProperties';
+import sendSetting from './userSettingsSave';
 
 export default async function getSetting() {
 	const token = appProperties.userToken;
@@ -27,11 +28,13 @@ export default async function getSetting() {
 		appProperties.wordHelpExample = content.optional.wordHelpExample;
 		appProperties.wordHelpTranscription =
 			content.optional.wordHelpTranscription;
+		appProperties.lastWordNumber = content.optional.lastWordNumber;
 
 		console.log(appProperties);
 	} catch (error) {
 		console.log(
 			'Настройки на сервере не найдены, будут применены настройки по умолчанию.'
 		);
+		await sendSetting();
 	}
 }

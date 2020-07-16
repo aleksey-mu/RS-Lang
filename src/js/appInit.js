@@ -1,5 +1,6 @@
 import appProperties from './appProperties';
 import userGetSetting from './settings/userSettingsGet';
+import userRefreshToken from './settings/userRefreshToken';
 import LoadingBar from './helpers/loadingBar';
 
 export default async function appInit() {
@@ -19,6 +20,7 @@ export default async function appInit() {
 		appProperties.userToken = localStorage.getItem('userToken');
 		appProperties.userRefreshToken = localStorage.getItem('userRefreshToken');
 
+		await userRefreshToken();
 		await userGetSetting();
 		console.log('hi');
 	}
