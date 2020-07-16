@@ -5,6 +5,7 @@ import speakItInit from './games/speakIt/speakItInit';
 import SavannahGame from './games/savannah-game/game';
 import settingsInit from './settings/settings';
 import mainPageInit from './mainPage/mainPage';
+import AboutUsPage from './AboutUs/AboutUs';
 import {} from './helpers/loadingBar';
 
 const myBurgerMenu = new BurgerMenu();
@@ -21,6 +22,10 @@ function trainSpeakItPage() {
 }
 function settingsPage() {
 	settingsInit();
+}
+function teamPage() {
+	const AboutUs = new AboutUsPage();
+	AboutUs.init();
 }
 function trainingSavannahPage() {
 	const savannahGame = new SavannahGame(
@@ -47,6 +52,8 @@ const loadPage = {
 	trainSpeakItPage,
 	trainingSavannahPage,
 	settingsPage,
+	teamPage
+
 };
 
 const router = new Router(loadPage);

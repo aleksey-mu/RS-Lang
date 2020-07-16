@@ -1,0 +1,57 @@
+
+.hider{
+    display: none;
+}
+.team-page__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/img/AboutUs/backgr.jpg");
+  & h2 {
+    text-shadow: 1px 1px 15px rgba(150, 150, 150, 0.74);
+    color: $color-header-bg;
+    -webkit-text-stroke: .5px $color-header-link;
+  }
+  &  ul {
+    list-style-image: url("/img/AboutUs/Mark.svg");
+  }
+}
+.team-cards__container {
+    max-width: 1200px;
+display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.member__card {
+    background-color: #ececec93;
+  box-shadow: 0px 0px 16px 0px rgba(62, 50, 50, 0.65);
+  border-radius: 5px;
+  width: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px; 
+}
+.team-member-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team-member__img {
+    border: 1px solid #000;
+    box-shadow:         2px 0px 13px 0px rgba(50, 50, 50, 0.75);
+    border-radius: 5px;
+    width: 250px;
+    height: 250px;
+   
+}
+.team-member-info{
+    & p span{
+        text-shadow: 1px 1px 15px rgba(150, 150, 150, 0.74);
+    color: $color-logo-J;
+    -webkit-text-stroke: .8px $color-header-link;
+    }
+}
