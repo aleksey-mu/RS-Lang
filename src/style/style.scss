@@ -17,17 +17,13 @@
 @import './games/speakIt/result';
 @import './games/speakIt/intro';
 
-@import "sprintGame/startScreen";
-@import "sprintGame/gameCard";
-@import "sprintGame/finishScreen";
+@import 'sprintGame/startScreen';
+@import 'sprintGame/gameCard';
+@import 'sprintGame/finishScreen';
 
 @import './games/savannah/savannah-game-style';
 
 @import './settings/settings.scss';
-
-@import './AboutUs/AboutUs';
-
-@import './PromoPage/PromoPage';
 
 body {
 	font-size: 10px;
@@ -43,4 +39,6 @@ body {
 
 main {
 	font-size: 2rem;
+	margin-left: 15px;
+	margin-right: 15px;
 }

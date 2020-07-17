@@ -10,6 +10,7 @@ export default function settingsInit() {
 	LoadingBar.hide();
 
 	const SAVE_BTN = document.querySelector('.settings-save-btn');
+	const INFO_FIELD = document.querySelector('.settings-info-field');
 
 	const WORDS_COUNT_NEW = document.querySelector('#wordsCountNew');
 	const WORDS_COUNT_ALL = document.querySelector('#wordsCountAll');
@@ -67,6 +68,11 @@ export default function settingsInit() {
 		console.log('ПОСЛЕ', appProperties);
 
 		await sendSetting();
+		INFO_FIELD.innerHTML = `
+        <div class="settings-info-field-success">
+            Сохранено!
+        </div>
+        `;
 
 		LoadingBar.hide();
 	});

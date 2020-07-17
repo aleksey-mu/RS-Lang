@@ -1,9 +1,31 @@
 .words-btn-wrapper {
 	text-align: center;
-	margin: 5px 10px;
 }
 
 .words-overall_progress {
 	text-align: center;
-	margin: 5px 10px;
+}
+
+.words-new-card {
+	box-shadow: 0 0 20px rgb(0, 0, 0);
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 15px;
+	background-image: linear-gradient(to top, #abc3f1 0%, #fffbe3 100%);
+	max-width: 700px;
+	margin: 10px auto;
+}
+
+.words-new-image img {
+	width: 175px;
+	height: 175px;
+	object-fit: cover;
+}
+
+.words-new-image {
+	margin: 10px auto;
+	width: 175px;
+	height: 175px;
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 15px;
+	overflow: hidden;
 }
