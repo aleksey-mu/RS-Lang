@@ -21,6 +21,8 @@ const appProperties = {
 	currentWordObject: null,
 
 	lastDateStudying: null,
+
+	permissionToLearnMore: false,
 };
 
 export default appProperties;
