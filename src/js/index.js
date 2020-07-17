@@ -7,6 +7,7 @@ import AboutUsPage from "./AboutUs/AboutUs";
 import wordsStudyInit from "./wordsStudy/wordsStudy";
 import settingsInit from "./settings/settings";
 import mainPageInit from "./mainPage/mainPage";
+import PromoPage from "./promoPage/promoPage"
 import appProperties from "./appProperties";
 import {} from "./helpers/loadingBar";
 
@@ -42,8 +43,8 @@ function settingsPage() {
   }
 }
 function promoPage() {
-  MAIN_WRAPPER.innerHTML =
-    '<span style="font-size:100px;">&#129298; promo</span>';
+  const Promo = new PromoPage();
+  Promo.init();
 }
 function teamPage() {
   const AboutUs = new AboutUsPage();
