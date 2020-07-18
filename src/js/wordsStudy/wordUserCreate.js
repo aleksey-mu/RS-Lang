@@ -42,6 +42,7 @@ export default async function wordUserCreate(wordCategory) {
 				wordTranslate,
 				audio,
 				word,
+				wordId: appProperties.currentWordObject.id,
 			},
 		},
 	});

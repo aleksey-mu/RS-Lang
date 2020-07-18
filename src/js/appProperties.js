@@ -23,6 +23,8 @@ const appProperties = {
 	lastDateStudying: null,
 
 	permissionToLearnMore: false,
+
+	wordIdToRestore: null,
 };
 
 export default appProperties;

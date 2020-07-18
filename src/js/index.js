@@ -4,6 +4,8 @@ import Router from './router/router';
 import speakItInit from './games/speakIt/speakItInit';
 import SavannahGame from './games/savannah-game/game';
 import PageGameSprintComponent from './games/sprint/PageGameSprintComponent';
+import userWordsSortCategory from './helpers/userWordsSortCategory';
+import userWordRestore from './helpers/userWordRestore';
 
 import wordsStudyInit from './wordsStudy/wordsStudy';
 import settingsInit from './settings/settings';
@@ -95,310 +97,29 @@ function trainingSavannahPage() {
 }
 
 function dictionaryLearningWordsPage() {
-  const testGetLearningWords = () => new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-      ]);
-    }, 1000);
-  });
+	const getLearningWords = async () => {
+		const data = await userWordsSortCategory();
+		return data.normal;
+	};
 
-  initDictionaryPage('learningWords', testGetLearningWords);
+	initDictionaryPage('learningWords', getLearningWords);
 }
 
 function dictionaryComplexWordsPage() {
-  const testGetComplexWords = async () => {
-    const data = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve([
-          {
-            word: 'adventure',
-            wordTranslate: 'приключение',
-            lastStudy: '1594921769349',
-            audio: 'files/02_0021.mp3'
-          },
-          {
-            word: 'evil',
-            wordTranslate: 'злой',
-            lastStudy: '1594921769349',
-            audio: 'files/02_0026.mp3'
-          },
-        ]);
-      }, 1000);
-    });
-    return data;
-  };
-
-
-  initDictionaryPage('complexWords', testGetComplexWords);
+	const getComplexWords = async () => {
+		const data = await userWordsSortCategory();
+		return data.hard;
+	};
+	initDictionaryPage('complexWords', getComplexWords);
 }
 
 function dictionaryDeletedWordsPage() {
-  const testGetDeletedWords = () => new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-                {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-        {
-          word: 'adventure',
-          wordTranslate: 'приключение',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0021.mp3'
-        },
-        {
-          word: 'evil',
-          wordTranslate: 'злой',
-          lastStudy: '1594921769349',
-          audio: 'files/02_0026.mp3'
-        },
-      ]);
-    }, 1000);
-  });
+	const getDeletedWords = async () => {
+		const data = await userWordsSortCategory();
+		return data.delete;
+	};
 
-  const testRestoreCard = () => new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
-  });
-
-  initDictionaryPage('deletedWords', testGetDeletedWords, testRestoreCard);
+	initDictionaryPage('deletedWords', getDeletedWords, userWordRestore);
 }
 
 const loadPage = {
@@ -407,12 +128,12 @@ const loadPage = {
 	trainingPage,
 	trainSpeakItPage,
 	trainingSavannahPage,
-  settingsPage,
-  trainingSprintGame,
-  dictionaryLearningWordsPage,
-  dictionaryComplexWordsPage,
-  dictionaryDeletedWordsPage,
-  promoPage,
+	settingsPage,
+	trainingSprintGame,
+	dictionaryLearningWordsPage,
+	dictionaryComplexWordsPage,
+	dictionaryDeletedWordsPage,
+	promoPage,
 	statPage,
 	teamPage,
 };

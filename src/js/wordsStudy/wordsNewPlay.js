@@ -47,9 +47,7 @@ function checkInput() {
 	const INPUT_WRAPPER = document.querySelector('.words-new-input-wrapper');
 
 	const BTN_CHECK = document.querySelector('.words-btn-check_answer');
-	const BTN_KNOW = document.querySelector(
-		'.words-new-select_word_category__know'
-	);
+
 	const BTN_NORMAL = document.querySelector(
 		'.words-new-select_word_category__normal'
 	);
@@ -64,7 +62,6 @@ function checkInput() {
 	);
 	INPUT_FIELD.blur();
 	BTN_CHECK.classList.add('hidden');
-	BTN_KNOW.classList.remove('hidden');
 	BTN_NORMAL.classList.remove('hidden');
 	BTN_HARD.classList.remove('hidden');
 	BTN_DELETE.classList.remove('hidden');
@@ -194,10 +191,9 @@ async function wordsNewStart() {
 		Выберите категорию для слова:
 		</div>
 		<div class="words-new-select_word_category__btns">
-			<button type="submit" class="btn btn-primary words-new-select_word_category__know hidden">Уже знаю</button>
 			<button type="submit" class="btn btn-primary words-new-select_word_category__normal hidden">Обычное</button>
 			<button type="submit" class="btn btn-primary words-new-select_word_category__hard hidden">Сложное</button>
-			<button type="submit" class="btn btn-primary words-new-select_word_category__delete hidden">Удалить</button>
+			<button type="submit" class="btn btn-primary words-new-select_word_category__delete hidden">Уже знаю/Удалить</button>
 
 		</div>
 		<div class="words-new-btn-check_answer">
@@ -224,9 +220,6 @@ async function wordsNewStart() {
 	}
 
 	const INPUT_FIELD = document.querySelector('#wordInput');
-	const BTN_KNOW = document.querySelector(
-		'.words-new-select_word_category__know'
-	);
 	const BTN_NORMAL = document.querySelector(
 		'.words-new-select_word_category__normal'
 	);
@@ -258,10 +251,6 @@ async function wordsNewStart() {
 		checkInput();
 	});
 
-	BTN_KNOW.addEventListener('click', async () => {
-		await wordUserCreate('know');
-		wordsNewPlay();
-	});
 	BTN_NORMAL.addEventListener('click', async () => {
 		await wordUserCreate('normal');
 		wordsNewPlay();
