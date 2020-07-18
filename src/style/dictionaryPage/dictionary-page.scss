@@ -1,0 +1,196 @@
+.dictionary-pages-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 70px;
+  width: 100vw;
+  background-color: white;
+
+  a {
+    &:hover {
+      color: #90ccf4;
+      transition: .2s;
+    }
+  }
+}
+
+.dictionary-pages-heading {
+  text-align: center;
+  margin: 20px 50px;
+  font-size: 36px;
+
+  @media screen and (max-width: $smTableWidth) {
+    font-size: 20px;
+  }
+}
+
+.dictionary-page-heading-menu {
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: $smTableWidth) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .burger-menu-link {
+    @media screen and (max-width: $smTableWidth) {
+      font-size: 15px;
+      margin: 10px;
+    }
+
+    a {
+      user-select: none;
+    }
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .dictionary-page-heading-menu-active {
+    text-decoration: underline;
+
+    &:hover {
+      color: #0d5bb4;
+      cursor: default;
+    };
+  }
+}
+
+.dictionary-page-card-words-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: inherit;
+
+  .dictionary-page-card-container {
+    margin: 20px;
+  }
+}
+
+.dictionary-page-card-container {
+  display: flex;
+  font-size: 20px;
+  @media screen and (max-width: $desktopWidth) {
+    font-size: 19px;
+  }
+  @media screen and (max-width: $smDesktopWidth) {
+    font-size: 18px;
+  }
+  @media screen and (max-width: $tableWidth) {
+    font-size: 17px;
+  }
+  @media screen and (max-width: $smTableWidth) {
+    font-size: 16px;
+  }
+  @media screen and (max-width: $phoneWidth) {
+    font-size: 15px;
+  }
+  @media screen and (max-width: $smPhoneWidth) {
+    font-size: 14px;
+  }
+
+  .btn, .btn-primary {
+    @media screen and (max-width: $desktopWidth) {
+      font-size: 19px;
+    }
+    @media screen and (max-width: $smDesktopWidth) {
+      font-size: 18px;
+    }
+    @media screen and (max-width: $tableWidth) {
+      font-size: 17px;
+    }
+    @media screen and (max-width: $smTableWidth) {
+      font-size: 16px;
+    }
+    @media screen and (max-width: $phoneWidth) {
+      font-size: 15px;
+    }
+    @media screen and (max-width: $smPhoneWidth) {
+      font-size: 14px;
+    }
+  }
+}
+
+.dictionary-page-card {
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  border: 1px solid #DCDFE6;
+  border-radius: 5px;
+}
+
+.dictionary-page-card-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @media screen and (max-width: $smTableWidth) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dictionary-page-card-audio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 20px;
+  }
+
+  .dictionary-page-card-audio-play {
+    position: relative;
+    right: -5px;
+    border: 10px solid transparent;
+    border-left: 20px solid black;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .dictionary-page-card-audio-stop {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  
+  .dictionary-page-card-word {
+    font-weight: bold;
+    color: #90ccf4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dictionary-page-card-word-translate {
+    font-weight: bold;
+    color: #0d5bb4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dictionary-page-card-audio, .dictionary-page-card-word, .dictionary-page-card-word-translate {
+    margin: 20px 20px 10px 20px;
+  }
+}
+
+.dictionary-page-card-date {
+  display: flex;
+  margin: 10px 20px 20px 20px;
+
+  .dictionary-page-card-date-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dictionary-page-card-restore-button {
+    margin-left: 10px;
+  }
+}
