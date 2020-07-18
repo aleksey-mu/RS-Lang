@@ -18,7 +18,7 @@ const settingsHTML = `
 
 		<div class="form-group">
 			<label for="wordsCountAll"
-				>Общее количество слов в день (новые + на изучении):</label
+				>Количество слов в день для тренировки:</label
 			>
 			<input
 				class="form-control"

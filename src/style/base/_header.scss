@@ -138,6 +138,7 @@ header {
 	align-items: center;
 	color: $color-logo;
 	margin-left: 45px;
+	cursor: pointer;
 	& h1 {
 		margin: 15px 0;
 	}
@@ -202,5 +203,4 @@ header {
 		transform: scale(1.2);
 		filter: brightness(0.7);
 	}
-
 }

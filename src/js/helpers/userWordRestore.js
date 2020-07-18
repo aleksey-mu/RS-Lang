@@ -4,7 +4,7 @@ import userWordGet from './userWordGet';
 
 export default async function userWordRestore() {
 	LoadingBar.show();
-	const wordId = appProperties.wordIdToRestore;
+	const wordId = appProperties.wordIdToGet;
 
 	const word = await userWordGet(wordId);
 	console.log('wordGet', word);

@@ -1,19 +1,13 @@
 import appProperties from '../appProperties';
-import LoadingBar from './loadingBar';
 
-export default async function userWordGet() {
-	LoadingBar.show();
-	const token = appProperties.userToken;
-	const { userId } = appProperties;
+export default async function getWordGetBy() {
 	const wordId = appProperties.wordIdToGet;
-
 	const rawResponse = await fetch(
-		`https://afternoon-falls-25894.herokuapp.com/users/${userId}/words/${wordId}`,
+		`https://afternoon-falls-25894.herokuapp.com/words/${wordId}?noAssets=true`,
 		{
 			method: 'GET',
 			withCredentials: true,
 			headers: {
-				Authorization: `Bearer ${token}`,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
@@ -22,8 +16,6 @@ export default async function userWordGet() {
 	const content = await rawResponse.json();
 
 	console.log(content);
-
-	LoadingBar.hide();
 
 	return content;
 }

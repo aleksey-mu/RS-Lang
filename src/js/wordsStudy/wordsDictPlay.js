@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 import LoadingBar from '../helpers/loadingBar';
-import getNewWord from '../helpers/getNewWord';
+import userWordUpdate from '../helpers/userWordUpdate';
+import wordsDictGetWord from './wordsDictGetWord';
 import appProperties from '../appProperties';
-import wordUserCreate from './wordUserCreate';
 
 function stopAudio() {
 	const AUDIO_WORD = document.querySelector('#audioWord');
@@ -37,6 +37,8 @@ function checkWord() {
 	const wordArray = word.split('');
 	const wordLength = word.length;
 
+	appProperties.answerIsCorrect = userInput === word;
+
 	let checkResult = '<div class="new-words-result-wrapper">';
 
 	for (let i = 0; i < wordLength; i += 1) {
@@ -47,32 +49,17 @@ function checkWord() {
 		}
 	}
 	checkResult += `</div>`;
-	console.log(checkResult);
+	console.log('Слово введено правильно?', appProperties.answerIsCorrect);
 	return checkResult;
 }
 
 function checkInput() {
 	const INPUT_WRAPPER = document.querySelector('.words-new-input-wrapper');
-
 	const BTN_CHECK = document.querySelector('.words-btn-check_answer');
+	const BTN_NEXT = document.querySelector('.words-dict-next__btn');
 
-	const BTN_NORMAL = document.querySelector(
-		'.words-new-select_word_category__normal'
-	);
-	const BTN_HARD = document.querySelector(
-		'.words-new-select_word_category__hard'
-	);
-	const BTN_DELETE = document.querySelector(
-		'.words-new-select_word_category__delete'
-	);
-	const SELECT_CATEGORY_TEXT = document.querySelector(
-		'.words-new-select_word_category__text'
-	);
 	BTN_CHECK.classList.add('hidden');
-	BTN_NORMAL.classList.remove('hidden');
-	BTN_HARD.classList.remove('hidden');
-	BTN_DELETE.classList.remove('hidden');
-	SELECT_CATEGORY_TEXT.classList.remove('hidden');
+	BTN_NEXT.classList.remove('hidden');
 
 	const checkWordHTML = checkWord();
 	INPUT_WRAPPER.innerHTML = checkWordHTML;
@@ -138,28 +125,31 @@ function wordHide(word) {
 	return placeHolder.repeat(wordLength);
 }
 
-async function wordsNewStart() {
+async function wordsDictStart() {
 	LoadingBar.show();
 	stopAudio();
+
 	const MAIN = document.querySelector('main');
-	const newWord = await getNewWord();
+	const dictWord = await wordsDictGetWord();
+	console.log('wordObj', dictWord);
 
-	appProperties.currentWordObject = newWord;
+	appProperties.currentWordObject = dictWord;
 
-	const { wordsCountNew } = appProperties;
-	const { wordsTodayLearned } = appProperties;
-	const todayNewProgress = Math.ceil((wordsTodayLearned / wordsCountNew) * 100);
+	const { wordsCountAll } = appProperties;
+	const { wordsTodayTrained } = appProperties;
+	const todayNewProgress = Math.ceil((wordsTodayTrained / wordsCountAll) * 100);
 
-	const wordEnglish = newWord.word;
+	const wordEnglish = dictWord.word;
 	const wordLength = wordEnglish.length;
-	const { textExample } = newWord;
-	const { wordTranslate } = newWord;
-	const { transcription } = newWord;
-	const { textMeaning } = newWord;
-	const { textExampleTranslate } = newWord;
-	const { textMeaningTranslate } = newWord;
+	const { textExample } = dictWord;
+	const { wordTranslate } = dictWord;
+	const { transcription } = dictWord;
+	const { textMeaning } = dictWord;
+	const { textExampleTranslate } = dictWord;
+	const { textMeaningTranslate } = dictWord;
+	const { currentWordStudyStage } = appProperties;
 
-	const wordImageUrl = newWord.image.replace('files/', '');
+	const wordImageUrl = dictWord.image.replace('files/', '');
 	const wordPlaceholder = wordHide(wordEnglish);
 
 	const textExamplePlaceholder = textExample.replace(
@@ -172,9 +162,21 @@ async function wordsNewStart() {
 	);
 
 	MAIN.innerHTML = `
+    <div class="words-dict-select-vocabulary__wrapper">
+	<div class="words-dict-select-vocabulary__text">
+		Выбор словаря:
+	</div>
+	<div class="words-dict-select-vocabulary__btns">
+			<button type="submit" class="btn btn-primary words-dict-select-vocabulary__btn-normal">😁Обычные</button>
+			<button type="submit" class="btn btn-primary words-dict-select-vocabulary__btn-hard">😈Сложные</button>
+	</div>
+</div>
+
+
 		<div class="words-new-wrapper">
 	<div class="words-new-area">
-		<div class="words-new-card">
+        <div class="words-new-card">
+            <div class="word-dict-study__stage-wrapper"><span class="word-dict-study__stage-text">Степень изучения слова:</span><span class="word-dict-study__stage">${currentWordStudyStage}/5</span></div>
 			<div class="words-new-image"><img class="card-img" src="https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordImageUrl}" alt="${wordEnglish}"></div>
 			<div class="input-group words-new-input-wrapper">
 	<input type="text" autocomplete="off" class="form-control" id="wordInput" name="wordInput" size="${wordLength}" maxlength="${wordLength}">
@@ -187,22 +189,13 @@ async function wordsNewStart() {
 
 			<div class="words-new-example hidden">${textExamplePlaceholder}</div>
 			<div class="words-new-example_translate hidden">${textExampleTranslate}</div>
-
-
-			
-			
 			
 		</div>
-		<div class="words-new-select_word_category__text hidden">
-		Выберите категорию для слова:
-		</div>
-		<div class="words-new-select_word_category__btns">
-			<button type="submit" class="btn btn-primary words-new-select_word_category__normal hidden">Обычное</button>
-			<button type="submit" class="btn btn-primary words-new-select_word_category__hard hidden">Сложное</button>
-			<button type="submit" class="btn btn-primary words-new-select_word_category__delete hidden">Уже знаю/Удалить</button>
 
+		<div class="words-dict-next__wrapper">
+			<button type="submit" class="btn btn-primary words-dict-next__btn hidden">Далее</button>
 		</div>
-		<div class="words-new-btn-check_answer">
+		<div class="words-dict-btn-check_answer">
 			<button type="submit" class="btn btn-primary words-btn-check_answer">🤔 Сдаюсь!</button>
 
 		</div>
@@ -216,24 +209,22 @@ async function wordsNewStart() {
             aria-valuenow="${todayNewProgress}"
             aria-valuemin="0"
             aria-valuemax="100"
-        >${wordsTodayLearned}/${wordsCountNew}</div>
+        >${wordsTodayTrained}/${wordsCountAll}</div>
         </div>
 
 		`;
 	const PROGRESS_BAR = document.querySelector('.words-new-progress');
-	if (appProperties.permissionToLearnMore) {
+	if (appProperties.permissionToTrainMore) {
 		PROGRESS_BAR.classList.add('hidden');
 	}
 
 	const INPUT_FIELD = document.querySelector('#wordInput');
+	const BTN_NEXT = document.querySelector('.words-dict-next__btn');
 	const BTN_NORMAL = document.querySelector(
-		'.words-new-select_word_category__normal'
+		'.words-dict-select-vocabulary__btn-normal'
 	);
 	const BTN_HARD = document.querySelector(
-		'.words-new-select_word_category__hard'
-	);
-	const BTN_DELETE = document.querySelector(
-		'.words-new-select_word_category__delete'
+		'.words-dict-select-vocabulary__btn-hard'
 	);
 
 	const wordImage = new Image();
@@ -253,35 +244,39 @@ async function wordsNewStart() {
 			checkInput();
 		}
 	});
+	if (appProperties.learnWordDictionary === 'normal') {
+		BTN_NORMAL.classList.add('active');
+	} else {
+		BTN_HARD.classList.add('active');
+	}
 	BTN_CHECK.addEventListener('click', () => {
 		checkInput();
 	});
-
-	BTN_NORMAL.addEventListener('click', async () => {
-		await wordUserCreate('normal');
-		wordsNewPlay();
+	BTN_NEXT.addEventListener('click', async () => {
+		await userWordUpdate();
+		wordsDictPlay();
 	});
-	BTN_HARD.addEventListener('click', async () => {
-		await wordUserCreate('hard');
-		wordsNewPlay();
+	BTN_NORMAL.addEventListener('click', () => {
+		appProperties.learnWordDictionary = 'normal';
+		wordsDictPlay();
 	});
-	BTN_DELETE.addEventListener('click', async () => {
-		await wordUserCreate('delete');
-		wordsNewPlay();
+	BTN_HARD.addEventListener('click', () => {
+		appProperties.learnWordDictionary = 'hard';
+		wordsDictPlay();
 	});
 
 	LoadingBar.hide();
 }
 
-export default function wordsNewPlay() {
+export default function wordsDictPlay() {
 	const MAIN = document.querySelector('main');
-	if (appProperties.wordsTodayLearned >= appProperties.wordsCountNew) {
-		if (appProperties.permissionToLearnMore) {
-			wordsNewStart();
+	if (appProperties.wordsTodayTrained >= appProperties.wordsCountAll) {
+		if (appProperties.permissionToTrainMore) {
+			wordsDictStart();
 		} else {
 			MAIN.innerHTML = `
 			<div class="study-info-wrapper">
-			На сегодня все слова изучены! Хотите еще? &#128512;
+			На сегодня все слова тренированы! Хотите еще? &#128512;
 			</div>
 			<div class="study-new-start-wrapper">
 			<button type="submit" class="btn btn-primary words-new-btn-start">
@@ -299,8 +294,8 @@ export default function wordsNewPlay() {
 
 			WORDS_NEW_MORE.addEventListener('click', (eventInside) => {
 				eventInside.preventDefault();
-				appProperties.permissionToLearnMore = true;
-				wordsNewStart();
+				appProperties.permissionToTrainMore = true;
+				wordsDictStart();
 			});
 
 			WORDS_NEW_GO_TO_MAIN_PAGE.addEventListener('click', (eventInside) => {
@@ -309,6 +304,6 @@ export default function wordsNewPlay() {
 			});
 		}
 	} else {
-		wordsNewStart();
+		wordsDictStart();
 	}
 }

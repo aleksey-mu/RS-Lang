@@ -1,9 +1,11 @@
 import wordsStudyRender from './wordsStudyRender';
 import wordsNewPlay from './wordsNewPlay';
+import wordsDictPlay from './wordsDictPlay';
 import LoadingBar from '../helpers/loadingBar';
 
 export default function wordsStudyInit() {
 	LoadingBar.show();
+	// window.location.hash = '/words/play/';
 	wordsStudyRender();
 
 	const WORDS_NEW_BTN = document.querySelector('.words-new-btn');
@@ -16,6 +18,7 @@ export default function wordsStudyInit() {
 
 	WORDS_DICT_BTN.addEventListener('click', (event) => {
 		event.preventDefault();
+		wordsDictPlay();
 	});
 	LoadingBar.hide();
 }

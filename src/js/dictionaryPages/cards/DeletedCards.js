@@ -31,7 +31,7 @@ class DeletedWords extends LearningCard {
 		);
 		this.restoreButton.innerText = 'Восстановить';
 		this.restoreButton.addEventListener('click', () => {
-			appProperties.wordIdToRestore = this.cardContainer.dataset.id;
+			appProperties.wordIdToGet = this.cardContainer.dataset.id;
 			this.asyncRestoreWordFunc().then(() => {
 				this.cardContainer.remove();
 			});

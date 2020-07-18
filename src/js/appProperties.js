@@ -15,16 +15,23 @@ const appProperties = {
 	isUserAuthorized: false,
 
 	wordsTodayLearned: 0,
+	wordsTodayTrained: 0,
 
 	newWordNumber: 0,
 
 	currentWordObject: null,
 
-	lastDateStudying: null,
+	lastDateStudying: 0,
+	lastDateTraining: 0,
 
 	permissionToLearnMore: false,
+	permissionToTrainMore: false,
 
-	wordIdToRestore: null,
+	wordIdToGet: null,
+
+	learnWordDictionary: 'normal',
+	answerIsCorrect: null,
+	currentWordStudyStage: null,
 };
 
 export default appProperties;

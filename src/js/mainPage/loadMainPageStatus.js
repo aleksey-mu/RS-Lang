@@ -17,6 +17,7 @@ export default async function loadMainPageStatus() {
 	const wordsStudyHTML = `
         <div class="main-status-wrapper">
 		<div class="today-learned">Сегодня изучено слов: ${appProperties.wordsTodayLearned}</div>
+		<div class="today-learned">Сегодня тренировано слов: ${appProperties.wordsTodayTrained}</div>
 		<div class="total-learned">Сейчас на изучении слов: ${userWordsStudying}</div>
 		<div class="total-learned">Всего изучено слов: ${userWordsLearned}/${overallWordsCount}</div>
         <div class="progress words-overall_progress">
@@ -30,7 +31,7 @@ export default async function loadMainPageStatus() {
         >${userProgress}%</div>
         </div>
         <div class="main-login-btn-wrapper">
-            <button type="submit" class="btn btn-primary main-learn-btn">📚 Изучать слова!</button>
+            <button type="submit" class="btn btn-primary main-learn-btn">📚 Изучать/тренировать слова!</button>
             <button type="submit" class="btn btn-primary main-train-btn">🎮 Тренировать в играх!</button>
         </div>
         </div>

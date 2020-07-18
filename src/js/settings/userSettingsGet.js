@@ -30,7 +30,9 @@ export default async function getSetting() {
 			content.optional.wordHelpTranscription;
 		appProperties.newWordNumber = content.optional.newWordNumber;
 		appProperties.lastDateStudying = content.optional.lastDateStudying;
+		appProperties.lastDateTraining = content.optional.lastDateTraining;
 		appProperties.wordsTodayLearned = content.optional.wordsTodayLearned;
+		appProperties.wordsTodayTrained = content.optional.wordsTodayTrained;
 
 		console.log(appProperties);
 	} catch (error) {

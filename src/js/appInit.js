@@ -25,9 +25,13 @@ export default async function appInit() {
 		await userGetSetting();
 
 		const { lastDateStudying } = appProperties;
+		const { lastDateTraining } = appProperties;
 		const dateToday = getDateToday();
 		if (lastDateStudying !== dateToday) {
 			appProperties.wordsTodayLearned = 0;
+		}
+		if (lastDateTraining !== dateToday) {
+			appProperties.wordsTodayTrained = 0;
 		}
 
 		console.log('hi');

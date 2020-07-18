@@ -37,7 +37,9 @@ export default async function sendSetting() {
 			wordHelpTranscription: appProperties.wordHelpTranscription,
 			newWordNumber: appProperties.newWordNumber,
 			lastDateStudying: appProperties.lastDateStudying,
+			lastDateTraining: appProperties.lastDateTraining,
 			wordsTodayLearned: appProperties.wordsTodayLearned,
+			wordsTodayTrained: appProperties.wordsTodayTrained,
 		},
 	});
 }

@@ -1,10 +1,13 @@
 import appProperties from '../appProperties';
 import LoadingBar from './loadingBar';
+import userWordGet from './userWordGet';
+import getDateToday from './getDateToday';
+import sendSetting from '../settings/userSettingsSave';
 
-export default async function userWordUpdate(answerIsCorrect) {
+export default async function userWordUpdate() {
 	LoadingBar.show();
-
-	const word = appProperties.currentWordObject;
+	const { answerIsCorrect } = appProperties;
+	const word = await userWordGet();
 	const { wordId } = word;
 	delete word.id;
 	delete word.wordId;
@@ -41,6 +44,10 @@ export default async function userWordUpdate(answerIsCorrect) {
 		console.log(content);
 	};
 	await updateUserWord(word);
+
+	appProperties.wordsTodayTrained += 1;
+	appProperties.lastDateTraining = getDateToday();
+	await sendSetting();
 
 	LoadingBar.hide();
 }
