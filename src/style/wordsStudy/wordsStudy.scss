@@ -1,9 +1,97 @@
 .words-btn-wrapper {
 	text-align: center;
-	margin: 5px 10px;
 }
 
 .words-overall_progress {
 	text-align: center;
-	margin: 5px 10px;
+}
+
+.words-new-card {
+	padding: 5px 10px;
+	box-shadow: 0 0 20px rgb(0, 0, 0);
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 15px;
+	background-image: linear-gradient(to top, #abc3f1 0%, #fffbe3 100%);
+	max-width: 700px;
+	margin: 10px auto;
+}
+
+.words-new-image img {
+	width: 175px;
+	height: 175px;
+	object-fit: cover;
+}
+
+.words-new-image {
+	margin: 10px auto;
+	width: 175px;
+	height: 175px;
+	border: 2px solid rgb(0, 0, 0);
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.words-new-input-wrapper {
+	margin: 10px auto;
+}
+
+#wordInput {
+	margin: 0 auto;
+	padding-right: 1px;
+	padding-left: 1px;
+	font-size: 2.6rem;
+	text-transform: uppercase;
+	border-radius: 5px;
+}
+
+.new-words-result-wrapper {
+	margin: 0 auto;
+	padding-right: 1px;
+	padding-left: 1px;
+	font-size: 2.6rem;
+	text-transform: uppercase;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 5px;
+	background: white;
+	box-shadow: 0 0 7px rgb(0, 0, 0);
+}
+
+.new-words-correct_letter {
+	color: #5ee759;
+}
+.new-words-incorrect_letter {
+	color: #e73232;
+}
+
+.words-new-translate {
+	border-bottom: 1px solid;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.words-new-select_word_category__btns,
+.words-new-btn-check_answer {
+	text-align: center;
+}
+
+.words-new-meaning_translate {
+	margin-bottom: 10px;
+}
+
+.words-new-transcription {
+	text-align: center;
+	margin-bottom: 10px;
+}
+.words-new-select_word_category__text {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.words-new-progress {
+	margin: 10px auto;
+	max-width: 700px;
+}
+
+.words-new-progress__scale {
+	font-size: 2rem;
 }

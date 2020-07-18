@@ -16,7 +16,13 @@ const appProperties = {
 
 	wordsTodayLearned: 0,
 
-	lastWordNumber: 0,
+	newWordNumber: 0,
+
+	currentWordObject: null,
+
+	lastDateStudying: null,
+
+	permissionToLearnMore: false,
 };
 
 export default appProperties;

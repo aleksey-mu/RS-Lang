@@ -1,5 +1,5 @@
 import wordsStudyRender from './wordsStudyRender';
-import wordsNewRender from './wordsNewRender';
+import wordsNewPlay from './wordsNewPlay';
 import LoadingBar from '../helpers/loadingBar';
 
 export default function wordsStudyInit() {
@@ -11,7 +11,7 @@ export default function wordsStudyInit() {
 
 	WORDS_NEW_BTN.addEventListener('click', (event) => {
 		event.preventDefault();
-		wordsNewRender();
+		wordsNewPlay();
 	});
 
 	WORDS_DICT_BTN.addEventListener('click', (event) => {

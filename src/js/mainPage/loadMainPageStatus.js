@@ -1,6 +1,8 @@
 import appProperties from '../appProperties';
+import LoadingBar from '../helpers/loadingBar';
 
 export default async function loadMainPageStatus() {
+	LoadingBar.show();
 	const MAIN = document.querySelector('main');
 
 	const token = appProperties.userToken;
@@ -19,6 +21,7 @@ export default async function loadMainPageStatus() {
 			}
 		);
 		const content = await rawResponse.json();
+		console.log(content);
 		const userWordsCount = content.length;
 		const overallWordsCount = 3600;
 		const userProgress = Number(
@@ -27,7 +30,8 @@ export default async function loadMainPageStatus() {
 
 		const wordsStudyHTML = `
         <div class="main-status-wrapper">
-        <div class="today-learned">Сегодня изучено слов: ${appProperties.wordsTodayLearned}</div>
+		<div class="today-learned">Сегодня изучено слов: ${appProperties.wordsTodayLearned}</div>
+		<div class="total-learned">Всего изучено слов: ${userWordsCount}/${overallWordsCount}</div>
         <div class="progress words-overall_progress">
         <div
             class="progress-bar"
@@ -39,25 +43,26 @@ export default async function loadMainPageStatus() {
         >${userProgress}%</div>
         </div>
         <div class="main-login-btn-wrapper">
-            <button type="submit" class="btn btn-primary main-learn-btn">Изучать слова!</button>
-            <button type="submit" class="btn btn-primary main-train-btn">Тренировать слова!</button>
+            <button type="submit" class="btn btn-primary main-learn-btn">📚 Изучать слова!</button>
+            <button type="submit" class="btn btn-primary main-train-btn">🎮 Тренировать в играх!</button>
         </div>
         </div>
 
 		`;
 		MAIN.innerHTML = wordsStudyHTML;
-	} catch (error) {
-		console.error('Ошибка доступа!');
-	}
 
-	const LEARN_BTN = document.querySelector('.main-learn-btn');
-	const TRAIN_BTN = document.querySelector('.main-train-btn');
-	LEARN_BTN.addEventListener('click', (event) => {
-		event.preventDefault();
-		window.location.hash = '/words/';
-	});
-	TRAIN_BTN.addEventListener('click', (event) => {
-		event.preventDefault();
-		window.location.hash = '/training/';
-	});
+		const LEARN_BTN = document.querySelector('.main-learn-btn');
+		const TRAIN_BTN = document.querySelector('.main-train-btn');
+		LEARN_BTN.addEventListener('click', (event) => {
+			event.preventDefault();
+			window.location.hash = '/words/';
+		});
+		TRAIN_BTN.addEventListener('click', (event) => {
+			event.preventDefault();
+			window.location.hash = '/training/';
+		});
+	} catch (error) {
+		console.log('Ошибка доступа!');
+	}
+	LoadingBar.hide();
 }

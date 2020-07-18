@@ -2,7 +2,6 @@ import appProperties from '../appProperties';
 
 export default async function sendSetting() {
 	const saveSettings = async (settings) => {
-		const INFO_FIELD = document.querySelector('.settings-info-field');
 		const token = appProperties.userToken;
 		const { userId } = appProperties;
 		console.log(userId, token);
@@ -23,18 +22,8 @@ export default async function sendSetting() {
 			const content = await rawResponse.json();
 
 			console.log(content);
-
-			INFO_FIELD.innerHTML = `
-        <div class="settings-info-field-success">
-            Сохранено!
-        </div>
-        `;
 		} catch (error) {
-			INFO_FIELD.innerHTML = `
-        <div class="settings-info-field-error">
-        ${error}
-        </div>
-        `;
+			console.log(error);
 		}
 	};
 
@@ -46,7 +35,9 @@ export default async function sendSetting() {
 			wordHelpTranslate: appProperties.wordHelpTranslate,
 			wordHelpExample: appProperties.wordHelpExample,
 			wordHelpTranscription: appProperties.wordHelpTranscription,
-			lastWordNumber: appProperties.lastWordNumber,
+			newWordNumber: appProperties.newWordNumber,
+			lastDateStudying: appProperties.lastDateStudying,
+			wordsTodayLearned: appProperties.wordsTodayLearned,
 		},
 	});
 }

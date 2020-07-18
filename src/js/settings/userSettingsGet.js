@@ -28,13 +28,17 @@ export default async function getSetting() {
 		appProperties.wordHelpExample = content.optional.wordHelpExample;
 		appProperties.wordHelpTranscription =
 			content.optional.wordHelpTranscription;
-		appProperties.lastWordNumber = content.optional.lastWordNumber;
+		appProperties.newWordNumber = content.optional.newWordNumber;
+		appProperties.lastDateStudying = content.optional.lastDateStudying;
+		appProperties.wordsTodayLearned = content.optional.wordsTodayLearned;
 
 		console.log(appProperties);
 	} catch (error) {
+		console.log('props', appProperties);
 		console.log(
 			'Настройки на сервере не найдены, будут применены настройки по умолчанию.'
 		);
+
 		await sendSetting();
 	}
 }
