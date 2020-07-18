@@ -37,8 +37,8 @@ export default async function wordUserCreate(wordCategory) {
 			difficulty: '-',
 			optional: {
 				category: wordCategory,
-				repeatTime: 1,
-				studyStage: 1,
+				repeatTime: 0,
+				studyStage: 0,
 				lastStudy,
 				wordTranslate,
 				audio,

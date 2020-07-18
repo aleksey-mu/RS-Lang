@@ -1,5 +1,13 @@
 class LearningWordCard {
-	constructor({ word, wordTranslate, lastStudy, audio, wordId }) {
+	constructor({
+		word,
+		wordTranslate,
+		lastStudy,
+		audio,
+		wordId,
+		studyStage,
+		repeatTime,
+	}) {
 		this.renderAudioButton(audio);
 		this.wordId = wordId;
 		this.word = document.createElement('div');
@@ -14,11 +22,15 @@ class LearningWordCard {
 		this.cardHeader.appendChild(this.word);
 		this.cardHeader.appendChild(this.wordTranslate);
 
+		this.renderStudyStage(studyStage);
+		this.renderTrainingTries(repeatTime);
 		this.renderDate(lastStudy);
 
 		this.card = document.createElement('div');
 		this.card.classList.add('dictionary-page-card');
 		this.card.appendChild(this.cardHeader);
+		this.card.appendChild(this.stage);
+		this.card.appendChild(this.repeat);
 		this.card.appendChild(this.date);
 
 		this.cardContainer = document.createElement('div');
@@ -41,7 +53,23 @@ class LearningWordCard {
 
 		this.date = document.createElement('div');
 		this.date.classList.add('dictionary-page-card-date');
-		this.date.innerHTML = `<div class="dictionary-page-card-date-description">дата последнего повторения: ${dataString}</div>`;
+		this.date.innerHTML = `<div class="dictionary-page-card-date-description">Дата последнего повторения: ${dataString}</div>`;
+	}
+
+	renderStudyStage(studyStage) {
+		const maxStage = 3;
+		const currentStage =
+			'●'.repeat(studyStage) + '○'.repeat(maxStage - studyStage);
+
+		this.stage = document.createElement('div');
+		this.stage.classList.add('dictionary-page-card-stage');
+		this.stage.innerHTML = `<div class="dictionary-page-card-stage-description">Степень изучения: ${currentStage}</div>`;
+	}
+
+	renderTrainingTries(repeatTime) {
+		this.repeat = document.createElement('div');
+		this.repeat.classList.add('dictionary-page-card-repeat');
+		this.repeat.innerHTML = `<div class="dictionary-page-card-repeat-description">Тренировок: ${repeatTime}</div>`;
 	}
 
 	renderAudioButton(audio) {

@@ -21,7 +21,7 @@ class DeletedWords extends LearningCard {
 
 		this.date = document.createElement('div');
 		this.date.classList.add('dictionary-page-card-date');
-		this.date.innerHTML = `<div class="dictionary-page-card-date-description">дата удаления: ${dataString}</div>`;
+		this.date.innerHTML = `<div class="dictionary-page-card-date-description">Дата удаления: ${dataString}</div>`;
 
 		this.restoreButton = document.createElement('div');
 		this.restoreButton.classList.add(

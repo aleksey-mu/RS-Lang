@@ -18,7 +18,7 @@ export default async function userWordUpdate() {
 		word.optional.studyStage += 1;
 	}
 
-	const maxStudyStage = 5;
+	const maxStudyStage = 3;
 	if (word.optional.studyStage === maxStudyStage) {
 		word.optional.category = 'delete';
 	}

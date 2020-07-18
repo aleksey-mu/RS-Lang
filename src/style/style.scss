@@ -26,6 +26,8 @@
 @import './settings/settings.scss';
 
 @import './dictionaryPage/dictionary-page';
+@import './PromoPage/PromoPage';
+@import './AboutUs/AboutUs';
 
 body {
 	font-size: 10px;
@@ -41,6 +43,4 @@ body {
 
 main {
 	font-size: 2rem;
-	margin-left: 15px;
-	margin-right: 15px;
 }

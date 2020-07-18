@@ -6,7 +6,8 @@ import SavannahGame from './games/savannah-game/game';
 import PageGameSprintComponent from './games/sprint/PageGameSprintComponent';
 import userWordsSortCategory from './helpers/userWordsSortCategory';
 import userWordRestore from './helpers/userWordRestore';
-
+import AboutUsPage from './AboutUs/AboutUs';
+import PromoPage from './promoPage/promoPage';
 import wordsStudyInit from './wordsStudy/wordsStudy';
 import settingsInit from './settings/settings';
 import mainPageInit from './mainPage/mainPage';
@@ -46,8 +47,8 @@ function settingsPage() {
 	}
 }
 function promoPage() {
-	MAIN_WRAPPER.innerHTML =
-		'<span style="font-size:100px;">&#129298; promo</span>';
+	const Promo = new PromoPage();
+	Promo.init();
 }
 function statPage() {
 	if (appProperties.isUserAuthorized) {
@@ -58,8 +59,8 @@ function statPage() {
 	}
 }
 function teamPage() {
-	MAIN_WRAPPER.innerHTML =
-		'<span style="font-size:100px;">&#129298; team</span>';
+	const AboutUs = new AboutUsPage();
+	AboutUs.init();
 }
 function wordsPage() {
 	if (appProperties.isUserAuthorized) {
