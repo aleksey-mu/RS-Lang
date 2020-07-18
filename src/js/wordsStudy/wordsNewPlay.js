@@ -4,6 +4,15 @@ import getNewWord from '../helpers/getNewWord';
 import appProperties from '../appProperties';
 import wordUserCreate from './wordUserCreate';
 
+function stopAudio() {
+	const AUDIO_WORD = document.querySelector('#audioWord');
+	const AUDIO_EXAMPLE = document.querySelector('#audioWordExample');
+	const AUDIO_MEANING = document.querySelector('#audioWordMeaning');
+	AUDIO_WORD.pause();
+	AUDIO_EXAMPLE.pause();
+	AUDIO_MEANING.pause();
+}
+
 function checkSettings() {
 	const TRANSLATE = document.querySelector('.words-new-translate');
 	const EXAMPLE = document.querySelector('.words-new-example');
@@ -83,27 +92,46 @@ function checkInput() {
 		''
 	);
 
-	const audioWord = new Audio(
-		`https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioUrl}`
-	);
-	const audioWordExample = new Audio(
-		`https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioExampleUrl}`
-	);
-	const audioWordMeaning = new Audio(
-		`https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioMeaningUrl}`
-	);
+	const AUDIO_WORD = document.querySelector('#audioWord');
+	const AUDIO_EXAMPLE = document.querySelector('#audioWordExample');
+	const AUDIO_MEANING = document.querySelector('#audioWordMeaning');
+	AUDIO_WORD.src = `https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioUrl}`;
+	AUDIO_EXAMPLE.src = `https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioExampleUrl}`;
+	AUDIO_MEANING.src = `https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioMeaningUrl}`;
 
-	audioWord.play();
-	audioWord.addEventListener('ended', () => {
+	AUDIO_WORD.play();
+	AUDIO_WORD.addEventListener('ended', () => {
 		if (appProperties.wordHelpMeaning) {
-			audioWordMeaning.play();
-		} else audioWordExample.play();
+			AUDIO_MEANING.play();
+		} else AUDIO_EXAMPLE.play();
 	});
-	audioWordMeaning.addEventListener('ended', () => {
+	AUDIO_MEANING.addEventListener('ended', () => {
 		if (appProperties.wordHelpExample) {
-			audioWordExample.play();
+			AUDIO_EXAMPLE.play();
 		}
 	});
+
+	// const audioWord = new Audio(
+	// 	`https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioUrl}`
+	// );
+	// const audioWordExample = new Audio(
+	// 	`https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioExampleUrl}`
+	// );
+	// const audioWordMeaning = new Audio(
+	// 	`https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordAudioMeaningUrl}`
+	// );
+
+	// audioWord.play();
+	// audioWord.addEventListener('ended', () => {
+	// 	if (appProperties.wordHelpMeaning) {
+	// 		audioWordMeaning.play();
+	// 	} else audioWordExample.play();
+	// });
+	// audioWordMeaning.addEventListener('ended', () => {
+	// 	if (appProperties.wordHelpExample) {
+	// 		audioWordExample.play();
+	// 	}
+	// });
 
 	const TRANSCRIPTION = document.querySelector('.words-new-transcription');
 	const EXAMPLE = document.querySelector('.words-new-example');
@@ -136,6 +164,7 @@ function wordHide(word) {
 
 async function wordsNewStart() {
 	LoadingBar.show();
+	stopAudio();
 	const MAIN = document.querySelector('main');
 	const newWord = await getNewWord();
 
@@ -182,6 +211,7 @@ async function wordsNewStart() {
 
 			<div class="words-new-example hidden">${textExamplePlaceholder}</div>
 			<div class="words-new-example_translate hidden">${textExampleTranslate}</div>
+
 
 			
 			

@@ -1,17 +1,24 @@
 import appProperties from '../appProperties';
 import LoadingBar from './loadingBar';
-import userWordGet from './userWordGet';
 
-export default async function userWordRestore() {
+export default async function userWordUpdate(answerIsCorrect) {
 	LoadingBar.show();
-	const wordId = appProperties.wordIdToRestore;
 
-	const word = await userWordGet(wordId);
-	console.log('wordGet', word);
+	const word = appProperties.currentWordObject;
+	const { wordId } = word;
 	delete word.id;
 	delete word.wordId;
-	word.optional.category = 'normal';
-	word.optional.studyStage = 1;
+	word.optional.repeatTime += 1;
+	word.optional.lastStudy = Date.now();
+
+	if (answerIsCorrect) {
+		word.optional.studyStage += 1;
+	}
+
+	const maxStudyStage = 5;
+	if (word.optional.studyStage === maxStudyStage) {
+		word.optional.category = 'delete';
+	}
 
 	const token = appProperties.userToken;
 	const { userId } = appProperties;

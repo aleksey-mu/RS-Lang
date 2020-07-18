@@ -38,6 +38,7 @@ export default async function wordUserCreate(wordCategory) {
 			optional: {
 				category: wordCategory,
 				repeatTime: 1,
+				studyStage: 1,
 				lastStudy,
 				wordTranslate,
 				audio,

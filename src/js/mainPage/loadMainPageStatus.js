@@ -1,42 +1,29 @@
 import appProperties from '../appProperties';
 import LoadingBar from '../helpers/loadingBar';
+import userWordsSortCategory from '../helpers/userWordsSortCategory';
 
 export default async function loadMainPageStatus() {
 	LoadingBar.show();
 	const MAIN = document.querySelector('main');
 
-	const token = appProperties.userToken;
-	const { userId } = appProperties;
-	try {
-		const rawResponse = await fetch(
-			`https://afternoon-falls-25894.herokuapp.com/users/${userId}/words`,
-			{
-				method: 'GET',
-				withCredentials: true,
-				headers: {
-					Authorization: `Bearer ${token}`,
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-			}
-		);
-		const content = await rawResponse.json();
-		console.log(content);
-		const userWordsCount = content.length;
-		const overallWordsCount = 3600;
-		const userProgress = Number(
-			((userWordsCount / overallWordsCount) * 100).toFixed(1)
-		);
+	const userWords = await userWordsSortCategory();
+	const userWordsStudying = userWords.normal.length + userWords.hard.length;
+	const userWordsLearned = userWords.delete.length;
+	const overallWordsCount = 3600;
+	const userProgress = Number(
+		((userWordsLearned / overallWordsCount) * 100).toFixed(1)
+	);
 
-		const wordsStudyHTML = `
+	const wordsStudyHTML = `
         <div class="main-status-wrapper">
 		<div class="today-learned">Сегодня изучено слов: ${appProperties.wordsTodayLearned}</div>
-		<div class="total-learned">Всего изучено слов: ${userWordsCount}/${overallWordsCount}</div>
+		<div class="total-learned">Сейчас на изучении слов: ${userWordsStudying}</div>
+		<div class="total-learned">Всего изучено слов: ${userWordsLearned}/${overallWordsCount}</div>
         <div class="progress words-overall_progress">
         <div
             class="progress-bar"
             role="progressbar"
-            style="width: ${userProgress}%; color: #e6b800;"
+            style="width: ${userProgress}%; color: #e6b800; font-size: 1.5rem;"
             aria-valuenow="${userProgress}"
             aria-valuemin="0"
             aria-valuemax="100"
@@ -49,20 +36,18 @@ export default async function loadMainPageStatus() {
         </div>
 
 		`;
-		MAIN.innerHTML = wordsStudyHTML;
+	MAIN.innerHTML = wordsStudyHTML;
 
-		const LEARN_BTN = document.querySelector('.main-learn-btn');
-		const TRAIN_BTN = document.querySelector('.main-train-btn');
-		LEARN_BTN.addEventListener('click', (event) => {
-			event.preventDefault();
-			window.location.hash = '/words/';
-		});
-		TRAIN_BTN.addEventListener('click', (event) => {
-			event.preventDefault();
-			window.location.hash = '/training/';
-		});
-	} catch (error) {
-		console.log('Ошибка доступа!');
-	}
+	const LEARN_BTN = document.querySelector('.main-learn-btn');
+	const TRAIN_BTN = document.querySelector('.main-train-btn');
+	LEARN_BTN.addEventListener('click', (event) => {
+		event.preventDefault();
+		window.location.hash = '/words/';
+	});
+	TRAIN_BTN.addEventListener('click', (event) => {
+		event.preventDefault();
+		window.location.hash = '/training/';
+	});
+
 	LoadingBar.hide();
 }
