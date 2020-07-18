@@ -7,6 +7,8 @@
 
 @import 'mainPage/mainPage.scss';
 
+@import 'wordsStudy/wordsStudy.scss';
+
 @import './games/speakIt/mainStyle';
 @import './games/speakIt/card';
 @import './games/speakIt/diffSelector';
@@ -15,9 +17,9 @@
 @import './games/speakIt/result';
 @import './games/speakIt/intro';
 
-@import "sprintGame/startScreen";
-@import "sprintGame/gameCard";
-@import "sprintGame/finishScreen";
+@import 'sprintGame/startScreen';
+@import 'sprintGame/gameCard';
+@import 'sprintGame/finishScreen';
 
 @import './games/savannah/savannah-game-style';
 
@@ -39,4 +41,6 @@ body {
 
 main {
 	font-size: 2rem;
+	margin-left: 15px;
+	margin-right: 15px;
 }
