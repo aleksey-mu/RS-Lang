@@ -82,7 +82,7 @@ class SavannahGameWordsContainer {
 
     const description = document.createElement('div');
     description.classList.add('savannah-description');
-    description.innerText = 'Тренировка Саванна проверяет словарный запас. \nПо умолчанию в игре используются изученные слова, но вы можете поменять это в настройках.';
+    description.innerText = 'Тренировка Саванна проверяет словарный запас. \nПо умолчанию в игре используются изучаемые слова, но вы можете поменять это в настройках.';
 
     const buttonContainer = document.createElement('div');
     buttonContainer.appendChild(settingsButton);

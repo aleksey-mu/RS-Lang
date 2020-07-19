@@ -17,7 +17,10 @@ export default (page, getDataForCardFunction, restoreWordFunc) => {
   loading.show();
 
   getDataForCardFunction()
-    .then((words) => words.map((word) => new CardClass(word, restoreWordFunc)))
+    .then((words) => {
+      console.log(words);
+      return words.map((word) => new CardClass(word, restoreWordFunc));
+    })
     .then((cards) => {
       dictionary.setPage(page);
       dictionary.setCards(cards);

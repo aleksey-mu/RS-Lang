@@ -15,6 +15,8 @@ import mainPageInit from './mainPage/mainPage';
 import appProperties from './appProperties';
 import initDictionaryPage from './dictionaryPages/initDictionaryPage';
 import {} from './helpers/loadingBar';
+import getWordsForGames from './helpers/getWordsForGames';
+import handleGameResult from './helpers/handleGameResult';
 
 const MAIN_WRAPPER = document.querySelector('main');
 
@@ -76,19 +78,33 @@ function trainingSprintGame() {
 }
 function trainingSavannahPage() {
 	if (appProperties.isUserAuthorized) {
-		const savannahGame = new SavannahGame('main', '#/training/savannah/');
+    getWordsForGames().then((words) => {
+      const savannahGame = new SavannahGame('main', '#/training/savannah/', words);
 
-		const toMainPage = () => {
-			window.location.hash = '/main/';
-		};
+      const toMainPage = () => {
+        window.location.hash = '/main/';
+      };
+  
+      const getStatistic = (statistic) => {
+        const correct = statistic.guessedWords;
+        const incorrect = statistic.notGuessedWords;
 
-		const getStatistic = (statistic) => {
-			console.log(statistic);
-		};
+        const correctNormalize = correct.map((word) => {
+          const { wordId, id } = word;
+          return { wordId: wordId || id, isCorrectGuessed: true };
+        });
+        const incorrectNormalize = incorrect.map((word) => {
+          const { wordId, id } = word;
+          return { wordId: wordId || id, isCorrectGuessed: false };
+        });
 
-		savannahGame.init();
-		savannahGame.onGameClose(toMainPage);
-		savannahGame.onGameEnd(getStatistic);
+        handleGameResult([...correctNormalize, ...incorrectNormalize]);
+      };
+  
+      savannahGame.init();
+      savannahGame.onGameClose(toMainPage);
+      savannahGame.onGameEnd(getStatistic);
+    })
 	} else {
 		mainPageInit();
 	}
