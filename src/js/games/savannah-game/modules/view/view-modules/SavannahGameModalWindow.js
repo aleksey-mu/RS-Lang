@@ -71,7 +71,7 @@ class SavannahGameModalWindow {
     });
     this.checkboxLabel = document.createElement('label');
     this.checkboxLabel.classList.add('savannah-modal-data-checkbox');
-    this.checkboxLabel.innerText = 'Использовать изученные слова';
+    this.checkboxLabel.innerText = 'Использовать изучаемые слова';
     this.checkboxLabel.prepend(this.checkbox);
     if (!settings.isLearnedWordsEnough) this.checkbox.setAttribute('disabled', '');
     if (settings.useLearnedWords) {
@@ -131,7 +131,7 @@ class SavannahGameModalWindow {
     if (!settings.isLearnedWordsEnough) {
       const modalDataAlert = document.createElement('div');
       modalDataAlert.classList.add('savannah-modal-data-alert');
-      modalDataAlert.innerText = 'Вам не хватает изученных слов для игры';
+      modalDataAlert.innerText = 'Вам не хватает изучаемых слов для игры';
       return [this.modalDataHeading, modalDataAlert, this.checkboxLabel, this.diffcultyLabel, this.roundLabel];
     }
 

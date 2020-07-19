@@ -5,6 +5,16 @@ class DeletedWords extends LearningCard {
 	constructor(wordObject, asyncRestoreWordFunc) {
 		super(wordObject);
 		this.asyncRestoreWordFunc = asyncRestoreWordFunc;
+  }
+
+  renderStudyStage() {
+    const maxStage = 3;
+		const currentStage =
+			'●'.repeat(maxStage);
+
+		this.stage = document.createElement('div');
+		this.stage.classList.add('dictionary-page-card-stage');
+		this.stage.innerHTML = `<div class="dictionary-page-card-stage-description">Степень изучения: ${currentStage}</div>`;
 	}
 
 	renderDate(lastStudy) {
