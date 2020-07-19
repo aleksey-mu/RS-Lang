@@ -116,6 +116,21 @@
 	}
 }
 
+.dictionary-page-card-image-wrapper {
+	border-radius: 5px;
+	border: 1px solid #b6b7b8;
+	overflow: hidden;
+	width: 75px;
+	height: 75px;
+	margin-top: 5px;
+}
+
+.dictionary-page-card-image-wrapper img {
+	object-fit: cover;
+	width: 75px;
+	height: 75px;
+}
+
 .dictionary-page-card {
 	display: flex;
 	flex-direction: column;
@@ -128,10 +143,10 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	align-items: center;
 	@media screen and (max-width: $smTableWidth) {
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
 	}
 
 	.dictionary-page-card-audio {
@@ -180,7 +195,7 @@
 	.dictionary-page-card-audio,
 	.dictionary-page-card-word,
 	.dictionary-page-card-word-translate {
-		margin: 20px 20px 10px 20px;
+		margin: 5px 10px 5px 20px;
 	}
 }
 .dictionary-page-card-stage,

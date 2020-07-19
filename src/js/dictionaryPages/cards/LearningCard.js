@@ -7,7 +7,9 @@ class LearningWordCard {
 		wordId,
 		studyStage,
 		repeatTime,
+		image,
 	}) {
+		this.renderImage(image);
 		this.renderAudioButton(audio);
 		this.wordId = wordId;
 		this.word = document.createElement('div');
@@ -19,6 +21,7 @@ class LearningWordCard {
 		this.cardHeader = document.createElement('div');
 		this.cardHeader.classList.add('dictionary-page-card-header');
 		this.cardHeader.appendChild(this.audio);
+		this.cardHeader.appendChild(this.image);
 		this.cardHeader.appendChild(this.word);
 		this.cardHeader.appendChild(this.wordTranslate);
 
@@ -64,6 +67,14 @@ class LearningWordCard {
 		this.stage = document.createElement('div');
 		this.stage.classList.add('dictionary-page-card-stage');
 		this.stage.innerHTML = `<div class="dictionary-page-card-stage-description">Степень изучения: ${currentStage}</div>`;
+	}
+
+	renderImage(imageSrc) {
+		const wordImagePath = imageSrc.replace('files/', '');
+		const wordImageSrc = `https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordImagePath}`;
+		this.image = document.createElement('div');
+		this.image.classList.add('dictionary-page-card-image');
+		this.image.innerHTML = `<div class="dictionary-page-card-image-wrapper"><img src="${wordImageSrc}" alt=""></div>`;
 	}
 
 	renderTrainingTries(repeatTime) {
