@@ -1,5 +1,6 @@
 import Helper from "./Helper";
 import FinishScreenComponent from "./FinishScreenComponent";
+import handleGameResult from '../../helpers/handleGameResult';
 
 export default class StartScreenComponent {
   constructor(learningLevel) {
@@ -14,6 +15,7 @@ export default class StartScreenComponent {
     this.rightAnswersCounter = 0;
     this.pointsStat = [];
     this.pageNumber = 1;
+    this.stats = [];
   }
 
   init() {
@@ -90,7 +92,7 @@ export default class StartScreenComponent {
           }, 800);
           this.rightAnswersCounter += 1;
           this.changeCurrentPoint();
-          this.saveStats(currentWord, currentTranslate, true);
+          this.saveStats(currentWord, currentTranslate, true, content.filter(el => el.word === currentWord)[0].id);
         }
         else if(content.filter((el) => el.word === currentWord)[0].wordTranslate !== currentTranslate && answer === 'danger') {
           this.root.querySelector('.card__container').classList.add('backlight-right-answer');
@@ -99,7 +101,7 @@ export default class StartScreenComponent {
           }, 800);
           this.rightAnswersCounter += 1;
           this.changeCurrentPoint();
-          this.saveStats(currentWord, currentTranslate, true);
+          this.saveStats(currentWord, currentTranslate, true, content.filter(el => el.word === currentWord)[0].id);
         }
         else {
           this.root.querySelector('.card__container').classList.add('backlight-wrong-answer');
@@ -108,7 +110,7 @@ export default class StartScreenComponent {
           }, 800);
           this.rightAnswersCounter = 0;
           this.changeCurrentPoint();
-          this.saveStats(currentWord, currentTranslate, false);
+          this.saveStats(currentWord, currentTranslate, false, content.filter(el => el.word === currentWord)[0].id);
         }
       })
       .catch((error) => {
@@ -141,10 +143,16 @@ export default class StartScreenComponent {
     }
   }
 
-  saveStats(currentWord, currentTranslate, answer) {
+  saveStats(currentWord, currentTranslate, answer, id) {
     this.words.push(currentWord);
     this.translates.push(currentTranslate);
     this.answers.push(answer);
+    this.stats.push(
+      {
+        wordID: id,
+        isCorrectGuessed: answer
+      }
+    );
   }
 
   changeCard() {
@@ -180,7 +188,7 @@ export default class StartScreenComponent {
           }
             break;
         default:
-            alert('down');
+            console.log('nothing');
             break;
       }
       if(num === 20) {
@@ -233,9 +241,14 @@ export default class StartScreenComponent {
       this.root.querySelector('.lp-countdown-counter').innerHTML = this.timeLeft;
     } else {
       clearInterval(timer);
+      this.sendGameResult();
       this.gameOver();
     }
     }, 1000);
+  }
+
+  async sendGameResult() {
+    await handleGameResult(this.stats);
   }
 
   gameOver() {
