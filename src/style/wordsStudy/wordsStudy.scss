@@ -5,6 +5,12 @@
 .words-overall_progress {
 	text-align: center;
 }
+.words-new-wrapper {
+	padding: 10px;
+	@media screen and (max-width: 321px) {
+		font-size: 1.6rem;
+	}
+}
 
 .words-new-card {
 	padding: 5px 10px;
@@ -17,9 +23,13 @@
 }
 
 .words-new-image img {
+	object-fit: cover;
 	width: 175px;
 	height: 175px;
-	object-fit: cover;
+	@media screen and (max-width: 321px) {
+		width: 100px;
+		height: 100px;
+	}
 }
 
 .words-new-image {
@@ -29,6 +39,10 @@
 	border: 2px solid rgb(0, 0, 0);
 	border-radius: 15px;
 	overflow: hidden;
+	@media screen and (max-width: 321px) {
+		width: 100px;
+		height: 100px;
+	}
 }
 
 .words-new-input-wrapper {

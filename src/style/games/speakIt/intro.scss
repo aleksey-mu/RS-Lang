@@ -3,6 +3,7 @@ $break-small: 374px;
 
 .intro-module {
 	position: fixed;
+	padding: 0 10px;
 	top: $size-header-height;
 	left: 0;
 	height: calc(100% - #{$size-header-height});

@@ -176,7 +176,7 @@ async function wordsDictStart() {
 		<div class="words-new-wrapper">
 	<div class="words-new-area">
         <div class="words-new-card">
-            <div class="word-dict-study__stage-wrapper"><span class="word-dict-study__stage-text">Степень изучения слова:</span><span class="word-dict-study__stage">${currentWordStudyStage}/5</span></div>
+            <div class="word-dict-study__stage-wrapper"><span class="word-dict-study__stage-text">Степень изучения слова:</span><span class="word-dict-study__stage">${currentWordStudyStage}/3</span></div>
 			<div class="words-new-image"><img class="card-img" src="https://raw.githubusercontent.com/aleksey-mu/rslang-data/master/data/${wordImageUrl}" alt="${wordEnglish}"></div>
 			<div class="input-group words-new-input-wrapper">
 	<input type="text" autocomplete="off" class="form-control" id="wordInput" name="wordInput" size="${wordLength}" maxlength="${wordLength}">

@@ -28,7 +28,9 @@ export default async function wordUserCreate(wordCategory) {
 	const lastStudy = Date.now();
 	const { wordTranslate } = appProperties.currentWordObject;
 	const { audio } = appProperties.currentWordObject;
+	const { transcription } = appProperties.currentWordObject;
 	const { word } = appProperties.currentWordObject;
+	const { image } = appProperties.currentWordObject;
 
 	await createUserWord({
 		userId: appProperties.userId,
@@ -42,6 +44,8 @@ export default async function wordUserCreate(wordCategory) {
 				lastStudy,
 				wordTranslate,
 				audio,
+				image,
+				transcription,
 				word,
 				wordId: appProperties.currentWordObject.id,
 			},

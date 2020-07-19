@@ -12,16 +12,53 @@ const gameHTML = `
 
 <div class="diff-selector-container">
 
-<div class="diff-selector-text">Выбор сложности:</div>
+<div class="diff-selector-text">Выберите источник слов:</div>
 
-<div class="diff-selectors btn-group btn-group-toggle" data-toggle="buttons">
-<button type="button" class="btn btn-primary active">1</button>
-<button type="button" class="btn btn-primary">2</button>
-<button type="button" class="btn btn-primary">3</button>
-<button type="button" class="btn btn-primary">4</button>
-<button type="button" class="btn btn-primary">5</button>
-<button type="button" class="btn btn-primary">6</button>
+<div class="diff-selector-dictionary">
+	<button type="button" class="btn btn-primary speakit-select-dict">📕 Мой словарь</button>
 </div>
+
+<div class="diff-selector-text">ИЛИ</div>
+
+<form action="" class="speakit-form-diff">
+	<div class="form-group form-group-speakit">
+		<label class="speakit-label" for="speakitDiff"
+		  >Сложность:</label
+		>
+    <input
+      required
+		  class="form-control speakit-select-group"
+		  type="number"
+		  id="speakitDiff"
+		  name="speakitDiff"
+		  placeholder="1-6"
+		  min="1"
+		  max="6"
+		/>
+		</div>
+		
+		
+		
+		<div class="form-group form-group-speakit">
+		<label class="speakit-label" for="speakitRound"
+		  >Раунд:</label
+		>
+    <input
+      required
+		  class="form-control speakit-select-round"
+		  type="number"
+		  id="speakitRound"
+		  name="speakitRound"
+		  placeholder="1-30"
+		  min="1"
+		  max="30"
+		/>
+		</div>
+	<button type="submit" class="btn btn-primary speakit-selectdiff-btn">✔</button>
+</form>
+
+
+
 
 
 
@@ -65,7 +102,7 @@ alt="blank"
 <button class="btn btn-primary">Старт</button>
 </div>
 <div class="result-btn hidden">
-<button class="btn btn-primary">Закончить</button>
+<button class="btn btn-primary">🏁 Закончить</button>
 </div>
 
 </div>

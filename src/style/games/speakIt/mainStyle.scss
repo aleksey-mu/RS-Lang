@@ -8,6 +8,21 @@
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+.game-speakit-main-wrapper {
+	padding: 5px 10px;
+}
+
+.speakit-label {
+	font-weight: 400;
+}
+
+.speakit-form-diff {
+	display: flex;
+	flex-wrap: wrap;
+}
+.form-group-speakit {
+	margin: 0 5px;
+}
 .word-image {
 	width: 100%;
 	height: 100%;
@@ -37,6 +52,7 @@
 
 .voice-answer-wrapper {
 	display: flex;
+	align-items: center;
 	justify-content: space-evenly;
 	max-width: 300px;
 	margin: auto;

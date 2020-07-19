@@ -41,9 +41,27 @@ export default async function mainPageInit() {
 
 		const REGISTER_BTN = document.querySelector('.main-register-btn');
 		const LOGIN_BTN = document.querySelector('.main-login-btn');
+		const PROMO_BTN = document.querySelector('.main-promo-btn');
 		const INPUT_EMAIL = document.querySelector('#loginEmail');
 		const INPUT_PASSWORD = document.querySelector('#loginPassword');
 		const INFO_FIELD = document.querySelector('.main-info-field');
+
+		PROMO_BTN.addEventListener('click', () => {
+			window.location.hash = '/promo/';
+		});
+
+		INPUT_EMAIL.addEventListener('keyup', function (event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				LOGIN_BTN.click();
+			}
+		});
+		INPUT_PASSWORD.addEventListener('keyup', function (event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				LOGIN_BTN.click();
+			}
+		});
 
 		REGISTER_BTN.addEventListener('click', async (event) => {
 			event.preventDefault();

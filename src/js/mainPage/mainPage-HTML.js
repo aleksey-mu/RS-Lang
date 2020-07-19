@@ -1,6 +1,10 @@
 const mainPageHTMLLogin = `
 
 <div class="main-page-wrapper">
+<div class="main-promo-btn-wrapper">
+	<button type="submit" class="btn btn-primary main-promo-btn">🎉 Промо-страница</button>
+
+</div>
 	<form>
 		<div class="form-group">
 			<label for="loginEmail">Email</label>
@@ -18,8 +22,8 @@ const mainPageHTMLLogin = `
 
 		</div>
 		<div class="main-login-btn-wrapper">
-			<button type="submit" class="btn btn-primary main-login-btn">Войти</button>
-			<button type="submit" class="btn btn-primary main-register-btn">Зарегистрироваться</button>
+			<button type="submit" class="btn btn-primary main-login-btn">🔑 Войти</button>
+			<button type="submit" class="btn btn-primary main-register-btn">🙋‍♂️ Зарегистрироваться</button>
 		</div>
 
 	</form>

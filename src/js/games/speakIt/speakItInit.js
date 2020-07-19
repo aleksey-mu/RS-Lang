@@ -1,16 +1,11 @@
 import gameHTML from './speakIt-html';
 import cardsGenerator from './generateCards';
 import sendGameResults from './sendGameResults';
-import appProperties from '../../appProperties';
 import gameProps from './gameProps';
 
 export default function gameInit() {
 	const MAIN = document.querySelector('main');
 	MAIN.innerHTML = gameHTML;
-
-	const DIFFICULTY_SELECTORS = document.querySelectorAll(
-		'.diff-selectors .btn-primary'
-	);
 
 	const DIFFICULTY_SELECTORS_CONTAINER = document.querySelectorAll(
 		'.diff-selector-container'
@@ -25,6 +20,10 @@ export default function gameInit() {
 	const INTRO_MODULE = document.querySelector('.intro-module');
 	const INTRO_CLOSE_BUTTON = document.querySelector('.intro-btn button');
 	const GAME_MAIN_SCREEN = document.querySelector('.game-speakit-main-wrapper');
+	const SELECT_DIFF_BTN = document.querySelector('.speakit-selectdiff-btn');
+	const SELECT_ROUND = document.querySelector('.speakit-select-round');
+	const SELECT_GROUP = document.querySelector('.speakit-select-group');
+	const SELECT_DICT = document.querySelector('.speakit-select-dict');
 
 	window.SpeechRecognition =
 		window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -33,22 +32,26 @@ export default function gameInit() {
 	recognition.interimResults = false;
 	recognition.lang = 'en-US';
 
-	function setEventListOnDiffSelector(element) {
-		DIFFICULTY_SELECTORS.forEach((selector) => {
-			selector.classList.remove('active');
+	const init = () => {
+		gameProps.isWordsFromDict = false;
+
+		SELECT_DICT.addEventListener('click', () => {
+			gameProps.isWordsFromDict = true;
+			cardsGenerator();
 		});
 
-		const activeDifficulty = element.target;
-		activeDifficulty.classList.add('active');
-		appProperties.difficulty = activeDifficulty.innerText;
-	}
-
-	const init = () => {
-		DIFFICULTY_SELECTORS.forEach((selector) => {
-			selector.addEventListener('click', (element) => {
-				setEventListOnDiffSelector(element);
-				cardsGenerator();
-			});
+		SELECT_DIFF_BTN.addEventListener('click', (event) => {
+			event.preventDefault();
+			gameProps.isWordsFromDict = false;
+			if (SELECT_GROUP.value <= 0 || SELECT_GROUP.value > 6) {
+				SELECT_GROUP.value = 1;
+			}
+			if (SELECT_ROUND.value <= 0 || SELECT_ROUND.value > 30) {
+				SELECT_ROUND.value = 1;
+			}
+			gameProps.wordGroup = SELECT_GROUP.value;
+			gameProps.wordRound = SELECT_ROUND.value;
+			cardsGenerator();
 		});
 		cardsGenerator();
 	};
@@ -59,6 +62,7 @@ export default function gameInit() {
 				.closest('.word-card')
 				.querySelector('.eng-transcription').innerText;
 			const wordText = card.innerText;
+			const wordId = card.dataset.id;
 
 			if (card.closest('.word-card').classList.contains('card-guessed')) {
 				CORRECT_STACK.insertAdjacentHTML(
@@ -69,8 +73,8 @@ export default function gameInit() {
 				);
 
 				gameProps.gameResults.push({
-					word: wordText,
-					firstTimeGuessed: true,
+					wordId,
+					isCorrectGuessed: true,
 				});
 			} else {
 				INCORRECT_STACK.insertAdjacentHTML(
@@ -81,8 +85,8 @@ export default function gameInit() {
 				);
 
 				gameProps.gameResults.push({
-					word: wordText,
-					firstTimeGuessed: false,
+					wordId,
+					isCorrectGuessed: false,
 				});
 			}
 		});
@@ -128,7 +132,9 @@ export default function gameInit() {
 			gameProps.turnMicOff = true;
 			recognition.abort();
 			RESULT_MODAL.classList.add('result-active');
+			GAME_MAIN_SCREEN.innerHTML = '';
 			resultChecking();
+			sendGameResults();
 		}
 	});
 

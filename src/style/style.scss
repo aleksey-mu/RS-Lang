@@ -22,6 +22,7 @@
 @import 'sprintGame/finishScreen';
 
 @import './games/savannah/savannah-game-style';
+@import './games/trainingPage';
 
 @import './settings/settings.scss';
 
@@ -35,6 +36,10 @@ body {
 
 .btn-primary {
 	font-size: 2rem;
+	margin: 7px;
+	@media screen and (max-width: 321px) {
+		font-size: 1.6rem;
+	}
 }
 
 .hidden {

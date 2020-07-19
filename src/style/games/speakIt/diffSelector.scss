@@ -4,6 +4,7 @@ $sand: #fceeb5;
 .diff-selector-container {
 	justify-content: center;
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 	margin-bottom: 30px;
 }
@@ -16,7 +17,7 @@ $sand: #fceeb5;
 .diff-selector-text {
 	font-family: Nunito Bold, Helvetica, sans-serif;
 	font-size: 2rem;
-	margin-right: 15px;
+	margin: auto;
 }
 
 .diff-selector {

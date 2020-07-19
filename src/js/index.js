@@ -3,6 +3,7 @@ import BurgerMenu from './header/burgerMenu';
 import Router from './router/router';
 import speakItInit from './games/speakIt/speakItInit';
 import SavannahGame from './games/savannah-game/game';
+import trainingPageInit from './games/trainingPage';
 import PageGameSprintComponent from './games/sprint/PageGameSprintComponent';
 import userWordsSortCategory from './helpers/userWordsSortCategory';
 import userWordRestore from './helpers/userWordRestore';
@@ -12,8 +13,8 @@ import wordsStudyInit from './wordsStudy/wordsStudy';
 import settingsInit from './settings/settings';
 import mainPageInit from './mainPage/mainPage';
 import appProperties from './appProperties';
-import {} from './helpers/loadingBar';
 import initDictionaryPage from './dictionaryPages/initDictionaryPage';
+import {} from './helpers/loadingBar';
 
 const MAIN_WRAPPER = document.querySelector('main');
 
@@ -25,11 +26,10 @@ function mainPage() {
 }
 
 function trainingPage() {
-	if (appProperties.isUserAuthorized) {
-		MAIN_WRAPPER.innerHTML =
-			'<span style="font-size:100px;">&#129298; training</span>';
-	} else {
+	if (!appProperties.isUserAuthorized) {
 		mainPageInit();
+	} else {
+		trainingPageInit();
 	}
 }
 function trainSpeakItPage() {
@@ -76,10 +76,7 @@ function trainingSprintGame() {
 }
 function trainingSavannahPage() {
 	if (appProperties.isUserAuthorized) {
-		const savannahGame = new SavannahGame(
-			'#savannah-game',
-			'#/training/savannah/'
-		);
+		const savannahGame = new SavannahGame('main', '#/training/savannah/');
 
 		const toMainPage = () => {
 			window.location.hash = '/main/';
@@ -98,12 +95,16 @@ function trainingSavannahPage() {
 }
 
 function dictionaryLearningWordsPage() {
-	const getLearningWords = async () => {
-		const data = await userWordsSortCategory();
-		return data.normal;
-	};
+	if (appProperties.isUserAuthorized) {
+		const getLearningWords = async () => {
+			const data = await userWordsSortCategory();
+			return data.normal;
+		};
 
-	initDictionaryPage('learningWords', getLearningWords);
+		initDictionaryPage('learningWords', getLearningWords);
+	} else {
+		mainPageInit();
+	}
 }
 
 function dictionaryComplexWordsPage() {
