@@ -1,0 +1,39 @@
+$break-large: 767px;
+$break-small: 374px;
+
+.result-wrapper {
+	padding-top: 15px;
+	position: fixed;
+	text-align: center;
+	top: -100%;
+	left: 0;
+	height: calc(100% - #{$size-header-height});
+	width: 100%;
+	font-size: 2.4rem;
+	background-image: linear-gradient(135deg, #fdfcfbd3 0%, #c3d8e2 100%);
+	z-index: 2;
+	transition: all 0.4s ease-out;
+
+	@media screen and (max-width: $break-large) {
+		font-size: 2rem;
+	}
+	@media screen and (max-width: $break-small) {
+		font-size: 1.8rem;
+	}
+}
+
+.correct-words__text,
+.incorrect-words__text {
+	font-size: 2.6rem;
+
+	@media screen and (max-width: $break-large) {
+		font-size: 2.2rem;
+	}
+	@media screen and (max-width: $break-small) {
+		font-size: 2rem;
+	}
+}
+
+.result-active {
+	top: $size-header-height;
+}

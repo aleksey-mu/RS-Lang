@@ -1,0 +1,57 @@
+$primary: #f38080;
+
+.voice-wrapper {
+	display: none;
+	height: 60px;
+	width: 60px;
+	position: relative;
+	margin: 0 auto;
+
+	.circle {
+		width: 30px;
+		height: 30px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border-radius: 50%;
+		background-color: $primary;
+		margin: auto;
+		transform: scale(1, 1);
+
+		&.pulse {
+			animation-timing-function: ease;
+			animation: pulse 1.5s infinite;
+			background-color: lighten($primary, 15%);
+		}
+	}
+
+	i {
+		padding-left: 8px;
+		padding-top: 5px;
+	}
+}
+
+.voice-wrapper-active {
+	display: block;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1, 1);
+	}
+	25% {
+		transform: scale(1, 1);
+	}
+	50% {
+		transform: scale(1.3, 1.3);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+.fa-microphone {
+	font-size: 2rem;
+}
